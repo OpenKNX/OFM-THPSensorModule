@@ -1,10 +1,8 @@
-#ifdef PMMODULE
+#ifdef THPSENSORMODULE
 #include "Helper.h"
 
 #include "IncludeManager.h"
 
-#include "Presence.h"
-#include "PresenceChannel.h"
 #include "Logic.h"
 #include "KnxHelper.h"
 
@@ -16,7 +14,7 @@ struct sRuntimeInfo
 
 sRuntimeInfo gRuntimeData;
 
-Presence gPresence;
+// Presence gPresence; TODO
 Logic gLogic;
 
 void ProcessHeartbeat()
@@ -38,7 +36,7 @@ void ProcessReadRequests() {
     static bool sCalledProcessReadRequests = false;
     if (!sCalledProcessReadRequests)
     {
-        gPresence.processReadRequests();
+        //TODO gPresence.processReadRequests();
         gLogic.processReadRequests();
         sCalledProcessReadRequests = true;
     }
@@ -64,7 +62,7 @@ bool processDiagnoseCommand()
     else
     {
         // let's check other modules for this command
-        lOutput = gPresence.processDiagnoseCommand(lBuffer);
+        //TODO lOutput = gPresence.processDiagnoseCommand(lBuffer);
         if (!lOutput) lOutput = gLogic.processDiagnoseCommand();
     }
     return lOutput;
@@ -98,7 +96,7 @@ void ProcessKoCallback(GroupObject &iKo)
     }
     else
     {
-        gPresence.processInputKo(iKo);
+        //TODO gPresence.processInputKo(iKo);
         // else dispatch to logicmodule
         gLogic.processInputKo(iKo);
     }
@@ -117,7 +115,7 @@ void appLoop()
     // we process heartbeat
     ProcessHeartbeat();
     ProcessReadRequests();
-    gPresence.loop();
+    //TODO gPresence.loop();
     gLogic.loop();
 }
 
@@ -144,7 +142,7 @@ void appSetup(bool iSaveSupported)
 
         gRuntimeData.startupDelay = millis();
         gRuntimeData.heartbeatDelay = 0;
-        gPresence.setup();  // presence has to be setup BEFORE logic
+        //TODO gPresence.setup();  // presence has to be setup BEFORE logic
         gLogic.setup(iSaveSupported);
     }
 }

@@ -1,6 +1,6 @@
-#ifdef PMMODULE
+#ifdef THPSENSORMODULE
 #include <OpenKNX.h>
-#include "PMmodul.h"
+#include "SEN-UP1-8xTH.h"
 #include <Logic.h>
 #include "HardwareDevices.h"
 #include "Sensor.h"
@@ -21,25 +21,7 @@ void setup()
     digitalWrite(PROG_LED_PIN, HIGH);
     delay(DEBUG_DELAY);
     digitalWrite(PROG_LED_PIN, LOW);
-#ifdef HF_POWER_PIN
-    Serial2.setRX(HF_UART_RX_PIN);
-    Serial2.setTX(HF_UART_TX_PIN);
-    Wire1.setSDA(I2C_SDA_PIN);
-    Wire1.setSCL(I2C_SCL_PIN);
-    Sensor::SetWire(Wire1);
-    pinMode(PRESENCE_LED_PIN, OUTPUT);
-    pinMode(MOVE_LED_PIN, OUTPUT);
-    pinMode(HF_S1_PIN, INPUT);
-    pinMode(HF_S2_PIN, INPUT);
-    pinMode(HF_POWER_PIN, OUTPUT);
-#endif
-    SERIAL_DEBUG.println("Startup called...");
-    ArduinoPlatform::SerialDebug = &SERIAL_DEBUG;
 
-#ifdef INFO_LED_PIN
-  pinMode(INFO_LED_PIN, OUTPUT);
-  ledInfo(true);
-#endif
 
   // pin or GPIO the programming led is connected to. Default is LED_BUILDIN
   knx.ledPin(PROG_LED_PIN);
@@ -66,7 +48,6 @@ void setup()
 
   // start the framework.
   knx.start();
-  ledInfo(false);
 }
 
 void loop()
@@ -74,29 +55,6 @@ void loop()
   // don't delay here to much. Otherwise you might lose packages or mess up the timing with ETS
   knx.loop();
 
-#ifdef HF_POWER_PIN
-  // only run the application code if the device was configured with ETS
-  if (knx.configured()) 
-  {
-    if (!mSerial2Active)
-    {
-      // we start HF communication as late as possible
-      mSerial2Active = true;
-      Serial2.begin(9600);
-    }
-    appLoop();
-  }
-  else
-  {
-    if (mSerial2Active) 
-    {
-        // during ETS programming, we stop HF communication
-        mSerial2Active = false;
-        Serial2.end();
-    }
-  }
-#else
   appLoop();
-#endif
 }
 #endif
