@@ -19,6 +19,8 @@ Sensors gSensors;
 HWSensors gHWSensors = HWSensors();
 Logic gLogic;
 
+bool _knx_configured = false;
+
 void ProcessHeartbeat()
 {
     // the first heartbeat is send directly after startup delay of the device
@@ -122,6 +124,10 @@ void appLoop()
 
 void appLoop_core1()
 {
+    int freq = 0;
+    uint32_t blink_core1_lastcall = 0;
+    bool blink_core1 = false;
+
     while(true)
     {
         if(_knx_configured)
@@ -171,14 +177,14 @@ void appSetup(bool iSaveSupported)
         gRuntimeData.heartbeatDelay = 0;
 
         const uint8_t pins[] = {
-            SNSCHANNEL_A_SCL,SNSCHANNEL_A_SDA,
-            SNSCHANNEL_B_SCL,SNSCHANNEL_B_SDA,
-            SNSCHANNEL_C_SCL,SNSCHANNEL_C_SDA,
-            SNSCHANNEL_D_SCL,SNSCHANNEL_D_SDA,
-            SNSCHANNEL_E_SCL,SNSCHANNEL_E_SDA,
-            SNSCHANNEL_F_SCL,SNSCHANNEL_F_SDA,
-            SNSCHANNEL_G_SCL,SNSCHANNEL_G_SDA,
-            SNSCHANNEL_H_SCL,SNSCHANNEL_H_SDA};
+            THPCHANNEL_A_SCL,THPCHANNEL_A_SDA,
+            THPCHANNEL_B_SCL,THPCHANNEL_B_SDA,
+            THPCHANNEL_C_SCL,THPCHANNEL_C_SDA,
+            THPCHANNEL_D_SCL,THPCHANNEL_D_SDA,
+            THPCHANNEL_E_SCL,THPCHANNEL_E_SDA,
+            THPCHANNEL_F_SCL,THPCHANNEL_F_SDA,
+            THPCHANNEL_G_SCL,THPCHANNEL_G_SDA,
+            THPCHANNEL_H_SCL,THPCHANNEL_H_SDA};
 
         uint8_t sensortypes[THP_ChannelCount];
         for(int i=0;i<THP_ChannelCount;i++)

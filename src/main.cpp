@@ -16,7 +16,41 @@ void setup()
 {
     Serial1.setRX(KNX_UART_RX_PIN);
     Serial1.setTX(KNX_UART_TX_PIN);
+
+    pinMode(DBGLED1, OUTPUT);
+    digitalWrite(DBGLED1, HIGH);
+    pinMode(DBGLED2, OUTPUT);
+    digitalWrite(DBGLED2, HIGH);
+
+
     SERIAL_DEBUG.begin(115200);
+
+    #if WAITFORSERIAL == 1
+    bool toggle = false;
+    while (!Serial)
+    {
+        digitalWrite(DBGLED2, toggle);
+        digitalWrite(DBGLED1, !toggle);
+        toggle = !toggle;
+        delay(100);     // will pause until serial console opens
+    }
+    digitalWrite(DBGLED1, HIGH);
+    digitalWrite(DBGLED2, HIGH);
+    delay(1000);
+    #elif WAITFORSERIAL == 2
+    pinMode(WAITFORSERIAL_PIN, INPUT_PULLUP);
+    bool toggle = false;
+    while (!Serial && digitalRead(WAITFORSERIAL_PIN))
+    {
+        digitalWrite(DBGLED2, toggle);
+        digitalWrite(DBGLED1, !toggle);
+        toggle = !toggle;
+        delay(100);     // will pause until serial console opens
+    }
+    digitalWrite(DBGLED1, HIGH);
+    digitalWrite(DBGLED2, HIGH);
+    delay(1000);
+    #endif
 
     
     pinMode(PROG_LED_PIN, OUTPUT);
