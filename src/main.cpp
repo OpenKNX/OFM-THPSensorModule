@@ -5,6 +5,8 @@
 #include "HardwareDevices.h"
 #include "Sensor.h"
 
+#pragma message "Pico Core Version: " ARDUINO_PICO_VERSION_STR 
+
 uint8_t mSerial2Active = false;
 
 void appSetup(bool iSaveSupported);
@@ -12,11 +14,11 @@ void appLoop();
 
 void setup()
 {
-#ifdef ARDUINO_ARCH_RP2040
     Serial1.setRX(KNX_UART_RX_PIN);
     Serial1.setTX(KNX_UART_TX_PIN);
-#endif
     SERIAL_DEBUG.begin(115200);
+
+    
     pinMode(PROG_LED_PIN, OUTPUT);
     digitalWrite(PROG_LED_PIN, HIGH);
     delay(DEBUG_DELAY);

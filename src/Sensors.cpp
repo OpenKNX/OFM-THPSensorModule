@@ -1,59 +1,5 @@
 #include "Sensors.h"
 
-/*
-HWSensors *Sensors::m_hwsensors;
-uint8_t Sensors::m_NoOfSensorchannels = 0;
-uint8_t Sensors::m_Sensorchannel_next = 0;
-Sensorchannel *Sensors::m_Sensorchannels[NO_OF_SENSORCHANNELS];
-
-
-void Sensors::Setup(const uint8_t outpins[], uint8_t num_channels, HWSensors *HWSensors)
-{
-    // Setup the channels here
-    Sensors::m_NoOfSensorchannels = num_channels;
-    Sensors::m_hwsensors = HWSensors;
-
-    for(int i = 0;i<Sensors::m_NoOfSensorchannels;i++)
-    {
-        Sensors::m_Sensorchannels[i] = new Sensorchannel();
-        Sensors::m_Sensorchannels[i]->Setup(outpins[i*2],outpins[(i*2)+1], i, Sensors::m_hwsensors);
-    }
-}
-
-void Sensors::Loop(uint8_t mode)
-{
-    //Serial.println("Sensors::Loop()");
-
-    if(mode == 1)
-    {
-        Sensors::m_Sensorchannels[Sensors::m_Sensorchannel_next]->Loop();
-        Sensors::m_Sensorchannel_next++;
-        if(Sensors::m_Sensorchannel_next == Sensors::m_NoOfSensorchannels)
-            Sensors::m_Sensorchannel_next = 0;
-    }
-    else
-        for(int i = 0;i<Sensors::m_NoOfSensorchannels;i++)
-            Sensors::m_Sensorchannels[i]->Loop();
-}
-
-void Sensors::LoopMax()
-{
-    for(int i = 0;i<Sensors::m_NoOfSensorchannels;i++)
-    {
-        Sensors::m_Sensorchannels[i]->LoopMax();
-    }
-}
-
-
-void Sensors::MinMaxResetKOCallback(GroupObject& ko)
-{
-    Serial.println(" Sensors::MinMaxResetKOCallback");
-    uint16_t channelnumber = (ko.asap() - THP_KoOffset ) / THP_KoBlockSize;     // calculated channelnumber is correct for all MinMaxResets
-    if(channelnumber < THP_ChannelCount)
-        if(m_Sensorchannels[channelnumber] != nullptr)
-            m_Sensorchannels[channelnumber]->MinMaxResetKOCallback(ko);
-}
-*/
 
 void Sensors::processReadRequests()
 {
@@ -111,4 +57,8 @@ void Sensors::setup(const uint8_t outpins[], HWSensors *HWSensors)
 void Sensors::loop()
 {
 
+    m_Sensorchannels[Sensors::m_Sensorchannel_next]->Loop();
+    m_Sensorchannel_next++;
+    if(m_Sensorchannel_next == THP_ChannelCount)
+        m_Sensorchannel_next = 0;
 }

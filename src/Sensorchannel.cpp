@@ -445,11 +445,6 @@ void Sensorchannel::Loop()
     }
 }
 
-void Sensorchannel::LoopMax()
-{
-    return;
-}
-
 void Sensorchannel::processInputKo(GroupObject& ko)
 {
     Serial.println("Sensorchannel::processInputKo");

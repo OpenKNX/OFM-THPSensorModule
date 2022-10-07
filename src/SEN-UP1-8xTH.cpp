@@ -120,16 +120,42 @@ void appLoop()
     gLogic.loop();
 }
 
+void appLoop_core1()
+{
+    while(true)
+    {
+        if(_knx_configured)
+        {
+            gHWSensors.Loop();
+
+            freq = 250;
+        }
+        else
+        {
+            freq = 100;
+        }
+
+        if(millis() > blink_core1_lastcall + freq)
+        {
+            digitalWrite(DBGLED2, blink_core1);
+            blink_core1 = !blink_core1;
+            blink_core1_lastcall = millis();
+        }
+    }
+}
+
 void appSetup(bool iSaveSupported)
 {
+    /*
     // try to get rid of occasional I2C lock...
     savePower();
     ledProg(true);
     ledInfo(true);
     delay(500);
     restorePower();
+    */
     // check hardware availability
-    boardCheck();
+    //boardCheck();
     ledInfo(false);
     ledProg(false);
 
