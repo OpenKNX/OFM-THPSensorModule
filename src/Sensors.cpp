@@ -98,7 +98,7 @@ void Sensors::debug()
     return;
 }
 
-void Sensors::setup(const uint8_t outpins[], uint8_t num_channels, HWSensors *HWSensors)
+void Sensors::setup(const uint8_t outpins[], HWSensors *HWSensors)
 {
     for(int i = 0;i<THP_ChannelCount;i++)
     {

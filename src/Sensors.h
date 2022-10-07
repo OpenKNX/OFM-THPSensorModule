@@ -19,6 +19,6 @@ class Sensors
         void processInputKo(GroupObject &iKo);
         bool processDiagnoseCommand(char *iBuffer);
         void debug();
-        void setup(const uint8_t outpins[], uint8_t num_channels, HWSensors *HWSensors);
+        void setup(const uint8_t outpins[], HWSensors *HWSensors);
         void loop();
 };

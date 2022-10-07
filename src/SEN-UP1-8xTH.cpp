@@ -159,7 +159,7 @@ void appSetup(bool iSaveSupported)
             sensortypes[i] = knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize*i+THP_Sensortype_);
 
         gHWSensors.Setup(pins, sensortypes);
-        gSensors.setup(pins, THP_ChannelCount, &gHWSensors); // ToDo iSaveSupported
+        gSensors.setup(pins, &gHWSensors); // ToDo iSaveSupported
         gLogic.setup(iSaveSupported);
     }
 }

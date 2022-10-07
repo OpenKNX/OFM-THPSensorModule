@@ -81,6 +81,20 @@
 #define ParamPressMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureMinMax_)
 #define ParamPressDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureSend_)
 
+// converts a relative (to the channel start) KO number to an absolute KO number of the device
+#define AbsKO(asap)    (THP_KoOffset + THP_KoBlockSize * m_channelnumber + asap)
+
+// converts a absolute KO number to a relative KO number (offset to the starting KO number of the channel)
+#define RelKO(asap)    (asap - THP_KoOffset - THP_KoBlockSize * m_channelnumber)
+
+
+#define TempKODPT       (Dpt(9,1))
+#define HumKODPT        (ParamHumDPT()==5?Dpt(5,1):Dpt(9,7))
+#define AbsHumKODPT     Dpt(9,29)
+#define DewPointKODPT   Dpt(9,1)
+#define PressKODPT      Dpt(9,6)
+
+
 class Sensorchannel
 {
     private:

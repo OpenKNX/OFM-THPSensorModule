@@ -2,7 +2,7 @@
 #include "Sensors.h"
 #include <knx.h>
 
-#define HumKODPT (ParamHumDPT()==5?Dpt(5,1):Dpt(9,7))
+
 
 Sensorchannel::Sensorchannel()
 {
@@ -452,16 +452,38 @@ void Sensorchannel::LoopMax()
 
 void Sensorchannel::processInputKo(GroupObject& ko)
 {
-    Serial.println("MinMaxResetKOCallback");
-    // based on the number of the reset KO the value KOs are calculated. This works only if KO-structure of all "subchannels" is identical
-    /* ToDo
-    if (ko.value())
+    Serial.println("Sensorchannel::processInputKo");
+
+    float setvalue = 0;
+
+    switch(RelKO(ko.asap()))
     {
-        float setvalue = knx.getGroupObject(ko.asap() - (THP_KoSensorTempMinMaxReset_ - THP_KoSensorTemp_)).value();
-        knx.getGroupObject(ko.asap() - (THP_KoSensorTempMinMaxReset_ - THP_KoSensorTempMaxValue_)).valueNoSend(setvalue);
-        knx.getGroupObject(ko.asap() - (THP_KoSensorTempMinMaxReset_ - THP_KoSensorTempMinValue_)).valueNoSend(setvalue);
+        case THP_KoSensorTempMinMaxReset_:
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorTemp_)).value(TempKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorTempMinValue_)).valueNoSend(setvalue, TempKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorTempMaxValue_)).valueNoSend(setvalue, TempKODPT);
+        break;
+        case THP_KoSensorHumMinMaxReset_:
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorHum_)).value(HumKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorHumMinValue_)).valueNoSend(setvalue, HumKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorHumMaxValue_)).valueNoSend(setvalue, HumKODPT);
+        break;
+        case THP_KoSensorAbsHumMinMaxReset_:
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorAbsHum_)).value(AbsHumKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorAbsHumMinValue_)).valueNoSend(setvalue, AbsHumKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorAbsHumMaxValue_)).valueNoSend(setvalue, AbsHumKODPT);
+        break;
+        case THP_KoSensorDewPointMinMaxReset_:
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorDewPoint_)).value(DewPointKODPT);
+            knx.getGroupObject(AbsKO( THP_KoSensorDewPointMinValue_)).valueNoSend(setvalue, DewPointKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorDewPointMaxValue_)).valueNoSend(setvalue, DewPointKODPT);
+        break;
+        case THP_KoSensorPressMinMaxReset_:
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorPress_)).value(PressKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorPressMinValue_)).valueNoSend(setvalue, PressKODPT);
+            knx.getGroupObject(AbsKO(THP_KoSensorPressMaxValue_)).valueNoSend(setvalue, PressKODPT);
+        break;
     }
-    */
 }
 
 
