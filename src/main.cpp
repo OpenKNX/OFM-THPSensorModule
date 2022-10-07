@@ -1,9 +1,6 @@
-#ifdef THPSENSORMODULE
 #include <OpenKNX.h>
 #include "SEN-UP1-8xTH.h"
 #include <Logic.h>
-#include "HardwareDevices.h"
-#include "Sensor.h"
 
 #pragma message "Pico Core Version: " ARDUINO_PICO_VERSION_STR 
 
@@ -93,4 +90,3 @@ void loop()
 
   appLoop();
 }
-#endif
