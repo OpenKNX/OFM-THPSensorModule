@@ -107,8 +107,16 @@ void ProcessKoCallback(GroupObject &iKo)
 
 void appLoop()
 {
-    if (!knx.configured())
+    if (knx.configured())
+    {
+        _knx_configured = true;
+    }
+    else
+    {
+        _knx_configured = false;
+        multicore_reset_core1();
         return;
+    }
 
     // handle KNX stuff
     if (startupDelay())
@@ -193,6 +201,8 @@ void appSetup(bool iSaveSupported)
         gHWSensors.Setup(pins, sensortypes);
         gSensors.setup(pins, &gHWSensors); // ToDo iSaveSupported
         gLogic.setup(iSaveSupported);
+
+        multicore_launch_core1(appLoop_core1);
     }
 }
 #endif
