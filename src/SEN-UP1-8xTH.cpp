@@ -1,7 +1,8 @@
 #ifdef THPSENSORMODULE
 #include "Helper.h"
 
-#include "IncludeManager.h"
+#include "Sensors.h"
+#include "HWSensors.h"
 
 #include "Logic.h"
 #include "KnxHelper.h"
@@ -14,7 +15,8 @@ struct sRuntimeInfo
 
 sRuntimeInfo gRuntimeData;
 
-// Presence gPresence; TODO
+Sensors gSensors;
+HWSensors gHWSensors = HWSensors();
 Logic gLogic;
 
 void ProcessHeartbeat()
@@ -26,7 +28,7 @@ void ProcessHeartbeat()
         knx.getGroupObject(LOG_KoHeartbeat).value(true, getDPT(VAL_DPT_1));
         gRuntimeData.heartbeatDelay = millis();
         // debug entry point
-        // gPresence.debug();
+        gSensors.debug();
         gLogic.debug();
     }
 }
@@ -36,7 +38,7 @@ void ProcessReadRequests() {
     static bool sCalledProcessReadRequests = false;
     if (!sCalledProcessReadRequests)
     {
-        //TODO gPresence.processReadRequests();
+        gSensors.processReadRequests();
         gLogic.processReadRequests();
         sCalledProcessReadRequests = true;
     }
@@ -62,7 +64,7 @@ bool processDiagnoseCommand()
     else
     {
         // let's check other modules for this command
-        //TODO lOutput = gPresence.processDiagnoseCommand(lBuffer);
+        lOutput = gSensors.processDiagnoseCommand(lBuffer);
         if (!lOutput) lOutput = gLogic.processDiagnoseCommand();
     }
     return lOutput;
@@ -96,8 +98,7 @@ void ProcessKoCallback(GroupObject &iKo)
     }
     else
     {
-        //TODO gPresence.processInputKo(iKo);
-        // else dispatch to logicmodule
+        gSensors.processInputKo(iKo);
         gLogic.processInputKo(iKo);
     }
 }
@@ -115,7 +116,7 @@ void appLoop()
     // we process heartbeat
     ProcessHeartbeat();
     ProcessReadRequests();
-    //TODO gPresence.loop();
+    gSensors.loop();
     gLogic.loop();
 }
 
@@ -142,7 +143,23 @@ void appSetup(bool iSaveSupported)
 
         gRuntimeData.startupDelay = millis();
         gRuntimeData.heartbeatDelay = 0;
-        //TODO gPresence.setup();  // presence has to be setup BEFORE logic
+
+        const uint8_t pins[] = {
+            SNSCHANNEL_A_SCL,SNSCHANNEL_A_SDA,
+            SNSCHANNEL_B_SCL,SNSCHANNEL_B_SDA,
+            SNSCHANNEL_C_SCL,SNSCHANNEL_C_SDA,
+            SNSCHANNEL_D_SCL,SNSCHANNEL_D_SDA,
+            SNSCHANNEL_E_SCL,SNSCHANNEL_E_SDA,
+            SNSCHANNEL_F_SCL,SNSCHANNEL_F_SDA,
+            SNSCHANNEL_G_SCL,SNSCHANNEL_G_SDA,
+            SNSCHANNEL_H_SCL,SNSCHANNEL_H_SDA};
+
+        uint8_t sensortypes[THP_ChannelCount];
+        for(int i=0;i<THP_ChannelCount;i++)
+            sensortypes[i] = knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize*i+THP_Sensortype_);
+
+        gHWSensors.Setup(pins, sensortypes);
+        gSensors.setup(pins, THP_ChannelCount, &gHWSensors); // ToDo iSaveSupported
         gLogic.setup(iSaveSupported);
     }
 }
