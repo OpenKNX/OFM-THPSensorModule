@@ -27,7 +27,7 @@ void setup()
 
     #if WAITFORSERIAL == 1
     bool toggle = false;
-    while (!Serial)
+    while (!SERIAL_DEBUG)
     {
         digitalWrite(DBGLED2, toggle);
         digitalWrite(DBGLED1, !toggle);
@@ -40,7 +40,7 @@ void setup()
     #elif WAITFORSERIAL == 2
     pinMode(WAITFORSERIAL_PIN, INPUT_PULLUP);
     bool toggle = false;
-    while (!Serial && digitalRead(WAITFORSERIAL_PIN))
+    while (!SERIAL_DEBUG && digitalRead(WAITFORSERIAL_PIN))
     {
         digitalWrite(DBGLED2, toggle);
         digitalWrite(DBGLED1, !toggle);

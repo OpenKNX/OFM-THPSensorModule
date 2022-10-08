@@ -21,6 +21,10 @@ Logic gLogic;
 
 bool _knx_configured = false;
 
+    int freq = 1000;
+    uint32_t blink_lastcall = millis();
+    bool blink = false;
+
 void ProcessHeartbeat()
 {
     // the first heartbeat is send directly after startup delay of the device
@@ -107,6 +111,15 @@ void ProcessKoCallback(GroupObject &iKo)
 
 void appLoop()
 {
+    if(millis() > blink_lastcall + freq)
+    {
+        digitalWrite(DBGLED1, blink);
+        blink = !blink;
+        blink_lastcall = millis();
+        SERIAL_DEBUG.println("blink appLoop");
+    }
+
+
     if (knx.configured())
     {
         _knx_configured = true;
@@ -154,6 +167,7 @@ void appLoop_core1()
             digitalWrite(DBGLED2, blink_core1);
             blink_core1 = !blink_core1;
             blink_core1_lastcall = millis();
+            SERIAL_DEBUG.println("blink appLoop_core1");
         }
     }
 }
