@@ -1,4 +1,3 @@
-#ifdef THPSENSORMODULE
 #include "Helper.h"
 
 #include "Sensors.h"
@@ -40,14 +39,8 @@ void ProcessHeartbeat()
 }
 
 void ProcessReadRequests() {
-    // this method is called after startup delay and executes read requests, which should just happen once after startup
-    static bool sCalledProcessReadRequests = false;
-    if (!sCalledProcessReadRequests)
-    {
-        gSensors.processReadRequests();
-        gLogic.processReadRequests();
-        sCalledProcessReadRequests = true;
-    }
+    gSensors.processReadRequests();
+    gLogic.processReadRequests();
 }
 
 // true solgange der Start des gesamten Moduls verzögert werden soll
@@ -219,4 +212,3 @@ void appSetup(bool iSaveSupported)
         multicore_launch_core1(appLoop_core1);
     }
 }
-#endif

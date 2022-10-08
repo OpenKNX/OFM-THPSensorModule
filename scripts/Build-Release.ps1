@@ -24,8 +24,8 @@
 
 
 # set product names, allows mapping of (devel) name in Project to a more consistent name in release
-$sourceName="PMmodul"
-$targetName="PresenceModule"
+$sourceName="SEN-UP1-8xTH"
+$targetName="SEN-UP1-8xTH"
 
 # Release indication, set according names for Release or Beta
 $releaseIndication = $args[0]
@@ -57,23 +57,7 @@ if (!$?) {
 Move-Item "src/$releaseName.debug.xml" "release/data/$targetName.xml"
 
 # build firmware based on generated headerfile for RP2040
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RP2040_devel firmware-DeveloperBoard uf2
-if (!$?) { exit 1 }
-
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_PiPico_BCU_Connector firmware-PiPico-BCU-Connector uf2
-if (!$?) { exit 1 }
-
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence uf2
-if (!$?) { exit 1 }
-
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_RP2040 firmware-Sensormodul-RP2040 uf2
-if (!$?) { exit 1 }
-
-# build firmware based on generated headerfile for SAMD
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v31 firmware-Sensormodul-v31 bin
-if (!$?) { exit 1 }
-
-../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_Sensormodul_SAMD_v30 firmware-Sensormodul-v30 bin
+../OGM-Common/setup-scripts/reusable/Build-Step.ps1 release_SEN-UP1-8xTH firmware-SEN-UP1-8xTH uf2
 if (!$?) { exit 1 }
 
 # add necessary scripts
