@@ -915,6 +915,6 @@
 #define THP_KoSensorPressMinMaxReset_ 29
 
 #define MAIN_OpenKnxId 0xA1
-#define MAIN_ApplicationNumber 1
-#define MAIN_ApplicationVersion 10
+#define MAIN_ApplicationNumber 2
+#define MAIN_ApplicationVersion 13
 #define MAIN_OrderNumber "SEN-UP1-8xTH"

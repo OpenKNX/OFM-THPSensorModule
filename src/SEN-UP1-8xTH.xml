@@ -13,7 +13,7 @@
         <!-- If you just want to have a BUGFIX-Update of the ETS-Appliation (without firmware), increase ApplicationVersion AND ApplicationRevision simultaneously -->
         <!-- To sync ETS-Application and firmware again, increase ApplicationVersion AND set ApplicationRevision to 0 -->
         <!-- ApplicationNumber 0xA100: A1 = SirSydom -->
-        <op:version OpenKnxId="0xA1" ApplicationNumber="1" ApplicationVersion="10" ReplacesVersions="0" ApplicationRevision="0" />
+        <op:version OpenKnxId="0xA1" ApplicationNumber="2" ApplicationVersion="13" ReplacesVersions="0" ApplicationRevision="0" />
         <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="SEN-UP1-8xTH" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
           <Static>
             <Code>
@@ -94,11 +94,18 @@
                 <op:include href="../../OAM-LogicModule/src/Logikmodul.parts.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Diagnose']/*" prefix="LOG" />
               </ParameterBlock>
             </ChannelIndependentBlock>
-            <Channel Id="%AID%_CH-4" Name="PMChannels" Number="4" Text="PM-Kanäle">
-              <!-- PM channel independent settings -->
-              <op:include href="THPSensor.share.xml" xpath="//Dynamic/Channel/*" prefix="THP" />
-              <!-- PM channel settings -->
-              <op:include href="THPSensor.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/*" type="template" prefix="THP" />
+            <Channel Id="%AID%_CH-4" Name="THPChannels" Number="4" Text="Sensor-Kanäle">
+              <!-- Sensor channel independent settings -->
+              <!--
+              <ParameterBlock Id="%AID%_PB-2" Name="Sensor-Kanäle" Text="Allgemeine Parameter">
+                <op:include href="THPSensor.share.xml" xpath="//ChannelIndependentBlock/*" prefix="THP" />
+                <op:include href="THPSensor.templ.xml" xpath="//ChannelIndependentBlock/ParameterBlock[@Name='General']/*" type="template" prefix="THP" />
+              </ParameterBlock>
+              -->
+              <!-- Sensor channel settings -->
+
+              <op:include href="THPSensor.templ.xml" xpath="//Dynamic/ParameterBlock" type="template" prefix="THP" />
+              
             </Channel>
             <Channel Name="Logikkanaele" Text="Logikkanäle" Number="5" Id="%AID%_CH-5">
               <!-- compose logicmodule channel from some static blocks... -->
