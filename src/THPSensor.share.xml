@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://knx.org/xml/project/14">
-  <ParameterTypes>
-    <ParameterType Id="%AID%_PT-TempCalibration" Name="TempCalibration">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="-5" maxInclusive="5" Increment="0.1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-TempOnChange" Name="TempOnChange">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.1" maxInclusive="3" Increment="0.1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-HumCalibration" Name="HumCalibration">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="-10" maxInclusive="10" Increment="0.1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-HumOnChange" Name="HumOnChange">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.1" maxInclusive="5" Increment="0.1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-AbsHumCalibration" Name="AbsHumCalibration">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="-2" maxInclusive="2" Increment="0.05" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-AbsHumOnChange" Name="AbsHumOnChange">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.05" maxInclusive="1" Increment="0.05" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-PressCalibration" Name="PressCalibration">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="-300" maxInclusive="+300" Increment="1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-PressOnChange" Name="PressOnChange">
-      <TypeFloat Encoding="IEEE-754 Single" minInclusive="1" maxInclusive="100" Increment="1" />
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-Sensortype" Name="Sensortype">
-      <TypeRestriction Base="Value" SizeInBit="8">
-        <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-Sensortype_EN-0" />
-        <Enumeration Text="SHT3x" Value="1" Id="%AID%_PT-Sensortype_EN-1" />
-        <Enumeration Text="SHT2x" Value="2" Id="%AID%_PT-Sensortype_EN-2" />
-        <Enumeration Text="BME280" Value="3" Id="%AID%_PT-Sensortype_EN-3" />
-        <Enumeration Text="DS18B20" Value="4" Id="%AID%_PT-Sensortype_EN-4" />
-      </TypeRestriction>
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-DptSelect" Name="DptSelect">
-      <TypeRestriction Base="Value" SizeInBit="8">
-        <Enumeration Text="DPT 5.001 (1 Byte, Prozentwert)" Value="5" Id="%AID%_PT-DptSelect_EN-0" />
-        <Enumeration Text="DPT 9.007 (2 Byte, Fließkommawert)" Value="9" Id="%AID%_PT-DptSelect_EN-1" />
-      </TypeRestriction>
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-AbsHumDptSelect" Name="AbsHumDptSelect">
-      <TypeRestriction Base="Value" SizeInBit="8">
-        <Enumeration Text="DPT 9.* (2 Byte, g/m³)" Value="5" Id="%AID%_PT-AbsHumDptSelect_EN-0" />
-        <Enumeration Text="DPT 9.029 (2 Byte, g/m³ (ab ETS 5.7))" Value="9" Id="%AID%_PT-AbsHumDptSelect_EN-1" />
-      </TypeRestriction>
-    </ParameterType>
-    <ParameterType Id="%AID%_PT-SendCycleSelection" Name="SendCycleSelection">
-      <TypeRestriction Base="Value" SizeInBit="8">
-        <Enumeration Text="nicht senden" Value="0" Id="%AID%_PT-SendCycleSelection_EN-0" />
-        <Enumeration Text="1 Minute" Value="1" Id="%AID%_PT-SendCycleSelection_EN-1" />
-        <Enumeration Text="2 Minuten" Value="2" Id="%AID%_PT-SendCycleSelection_EN-2" />
-        <Enumeration Text="3 Minuten" Value="3" Id="%AID%_PT-SendCycleSelection_EN-3" />
-        <Enumeration Text="4 Minuten" Value="4" Id="%AID%_PT-SendCycleSelection_EN-4" />
-        <Enumeration Text="5 Minuten" Value="5" Id="%AID%_PT-SendCycleSelection_EN-5" />
-        <Enumeration Text="10 Minuten" Value="10" Id="%AID%_PT-SendCycleSelection_EN-6" />
-        <Enumeration Text="15 Minuten" Value="15" Id="%AID%_PT-SendCycleSelection_EN-7" />
-        <Enumeration Text="20 Minuten" Value="20" Id="%AID%_PT-SendCycleSelection_EN-8" />
-        <Enumeration Text="30 Minuten" Value="30" Id="%AID%_PT-SendCycleSelection_EN-9" />
-        <Enumeration Text="40 Minuten" Value="40" Id="%AID%_PT-SendCycleSelection_EN-10" />
-        <Enumeration Text="50 Minuten" Value="50" Id="%AID%_PT-SendCycleSelection_EN-11" />
-        <Enumeration Text="60 Minuten" Value="60" Id="%AID%_PT-SendCycleSelection_EN-12" />
-      </TypeRestriction>
-    </ParameterType>
-  </ParameterTypes>
-  
-  
-  <Parameters>
-
-  </Parameters>
-  
-  <ParameterRefs>
-
-  </ParameterRefs>
-  
-  <ComObjectTable>
-
-  </ComObjectTable>
-  
-  <ComObjectRefs>
-
-  </ComObjectRefs>
-  
-  <ChannelIndependentBlock>
-
-  </ChannelIndependentBlock>
-  
-  <Dynamic>
-
-  </Dynamic>
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <ApplicationPrograms>
+        <ApplicationProgram Id="%AID%" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="WP-Presence-Logic-Develop" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="true" MinEtsVersion="4.0" ApplicationNumber="0" ApplicationVersion="0" ReplacesVersions="0">
+          <Static>  
+            <ParameterTypes>
+              <ParameterType Id="%AID%_PT-TempCalibration" Name="TempCalibration">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="-5" maxInclusive="5" Increment="0.1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-TempOnChange" Name="TempOnChange">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.1" maxInclusive="3" Increment="0.1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HumCalibration" Name="HumCalibration">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="-10" maxInclusive="10" Increment="0.1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-HumOnChange" Name="HumOnChange">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.1" maxInclusive="5" Increment="0.1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-AbsHumCalibration" Name="AbsHumCalibration">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="-2" maxInclusive="2" Increment="0.05" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-AbsHumOnChange" Name="AbsHumOnChange">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="0.05" maxInclusive="1" Increment="0.05" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-PressCalibration" Name="PressCalibration">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="-300" maxInclusive="+300" Increment="1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-PressOnChange" Name="PressOnChange">
+                <TypeFloat Encoding="IEEE-754 Single" minInclusive="1" maxInclusive="100" Increment="1" />
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-Sensortype" Name="Sensortype">
+                <TypeRestriction Base="Value" SizeInBit="8">
+                  <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-Sensortype_EN-0" />
+                  <Enumeration Text="SHT3x" Value="1" Id="%AID%_PT-Sensortype_EN-1" />
+                  <Enumeration Text="SHT2x" Value="2" Id="%AID%_PT-Sensortype_EN-2" />
+                  <Enumeration Text="BME280" Value="3" Id="%AID%_PT-Sensortype_EN-3" />
+                  <Enumeration Text="DS18B20" Value="4" Id="%AID%_PT-Sensortype_EN-4" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-DptSelect" Name="DptSelect">
+                <TypeRestriction Base="Value" SizeInBit="8">
+                  <Enumeration Text="DPT 5.001 (1 Byte, Prozentwert)" Value="5" Id="%AID%_PT-DptSelect_EN-0" />
+                  <Enumeration Text="DPT 9.007 (2 Byte, Fließkommawert)" Value="9" Id="%AID%_PT-DptSelect_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-AbsHumDptSelect" Name="AbsHumDptSelect">
+                <TypeRestriction Base="Value" SizeInBit="8">
+                  <Enumeration Text="DPT 9.* (2 Byte, g/m³)" Value="5" Id="%AID%_PT-AbsHumDptSelect_EN-0" />
+                  <Enumeration Text="DPT 9.029 (2 Byte, g/m³ (ab ETS 5.7))" Value="9" Id="%AID%_PT-AbsHumDptSelect_EN-1" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-SendCycleSelection" Name="SendCycleSelection">
+                <TypeRestriction Base="Value" SizeInBit="8">
+                  <Enumeration Text="nicht senden" Value="0" Id="%AID%_PT-SendCycleSelection_EN-0" />
+                  <Enumeration Text="1 Minute" Value="1" Id="%AID%_PT-SendCycleSelection_EN-1" />
+                  <Enumeration Text="2 Minuten" Value="2" Id="%AID%_PT-SendCycleSelection_EN-2" />
+                  <Enumeration Text="3 Minuten" Value="3" Id="%AID%_PT-SendCycleSelection_EN-3" />
+                  <Enumeration Text="4 Minuten" Value="4" Id="%AID%_PT-SendCycleSelection_EN-4" />
+                  <Enumeration Text="5 Minuten" Value="5" Id="%AID%_PT-SendCycleSelection_EN-5" />
+                  <Enumeration Text="10 Minuten" Value="10" Id="%AID%_PT-SendCycleSelection_EN-6" />
+                  <Enumeration Text="15 Minuten" Value="15" Id="%AID%_PT-SendCycleSelection_EN-7" />
+                  <Enumeration Text="20 Minuten" Value="20" Id="%AID%_PT-SendCycleSelection_EN-8" />
+                  <Enumeration Text="30 Minuten" Value="30" Id="%AID%_PT-SendCycleSelection_EN-9" />
+                  <Enumeration Text="40 Minuten" Value="40" Id="%AID%_PT-SendCycleSelection_EN-10" />
+                  <Enumeration Text="50 Minuten" Value="50" Id="%AID%_PT-SendCycleSelection_EN-11" />
+                  <Enumeration Text="60 Minuten" Value="60" Id="%AID%_PT-SendCycleSelection_EN-12" />
+                </TypeRestriction>
+              </ParameterType>
+            </ParameterTypes>
+            <Parameters>
+            </Parameters>
+            
+            <ParameterRefs>
+            </ParameterRefs>
+            
+            <ComObjectTable>
+            </ComObjectTable>
+            
+            <ComObjectRefs>
+            </ComObjectRefs>
+          </Static>
+          <Dynamic>
+            <ChannelIndependentBlock>
+            </ChannelIndependentBlock>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+    </Manufacturer>
+  </ManufacturerData>
 </KNX>
