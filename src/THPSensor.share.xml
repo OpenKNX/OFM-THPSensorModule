@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-model href="../../../../OpenKNX-Repos/Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://knx.org/xml/project/14">
   <ParameterTypes>
     <ParameterType Id="%AID%_PT-TempCalibration" Name="TempCalibration">
@@ -84,8 +84,7 @@
   </ComObjectRefs>
   
   <ChannelIndependentBlock>
-      <ParameterSeparator Id="%AID%_PS-" Text=" " />
-      <ParameterSeparator Id="%AID%_PS-" Text="Angeschlossene Sensoren:" />
+
   </ChannelIndependentBlock>
   
   <Dynamic>

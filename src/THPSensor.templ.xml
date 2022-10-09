@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-model href="../../../../OpenKNX-Repos/Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://knx.org/xml/project/14">
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
@@ -261,18 +261,9 @@
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-2" Name="General" Text="Allgemeine Parameter">
-                
-              </ParameterBlock>
-            </ChannelIndependentBlock>
-            
-            <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Sensor %ZZ%">
-              <!--<choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                <when test="!=0">-->
+              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
                 <ParameterRefRef RefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101" />
                 <ParameterRefRef RefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201" />
-                
-
                 <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                   <when test="1 2 3 4"><!-- Temperature -->
                     <ParameterSeparator Id="%AID%_PS-" Text=" " />
@@ -295,7 +286,6 @@
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%017_R-%T%%CCC%01701" />
                   </when>
                 </choose>
-
                 <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                   <when test="1 2 3"><!-- Humidity -->
                     <ParameterSeparator Id="%AID%_PS-" Text=" " />
@@ -316,75 +306,69 @@
                       </when>
                     </choose>
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%027_R-%T%%CCC%02701" />
-
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%029_R-%T%%CCC%02901" />
-
-                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                  <ParameterSeparator Id="%AID%_PS-" Text="Absolute Luftfeuchtigkeit" UIHint="Headline" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%030_R-%T%%CCC%03001" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%030_R-%T%%CCC%03001">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%031_R-%T%%CCC%03101" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%032_R-%T%%CCC%03201" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%033_R-%T%%CCC%03301" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%034_R-%T%%CCC%03401" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%034_R-%T%%CCC%03401">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%035_R-%T%%CCC%03501" />
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%036_R-%T%%CCC%03601" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%037_R-%T%%CCC%03701" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901" />
-
-                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                  <ParameterSeparator Id="%AID%_PS-" Text="Taupunkt" UIHint="Headline" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%041_R-%T%%CCC%04101" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%042_R-%T%%CCC%04201" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%043_R-%T%%CCC%04301" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%044_R-%T%%CCC%04401" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%044_R-%T%%CCC%04401">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%045_R-%T%%CCC%04501" />
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%046_R-%T%%CCC%04601" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%047_R-%T%%CCC%04701" />
-
-                </when>
-              </choose>
-
-              <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
-                <when test="3"><!-- Pressure -->
-                  <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                  <ParameterSeparator Id="%AID%_PS-" Text="Luftdruck" UIHint="Headline" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%050_R-%T%%CCC%05001" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%050_R-%T%%CCC%05001">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%051_R-%T%%CCC%05101" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%052_R-%T%%CCC%05201" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%053_R-%T%%CCC%05301" />
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%054_R-%T%%CCC%05401" />
-                  <choose ParamRefId="%AID%_P-%T%%CCC%054_R-%T%%CCC%05401">
-                    <when test="1">
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%055_R-%T%%CCC%05501" />
-                      <ParameterRefRef RefId="%AID%_P-%T%%CCC%056_R-%T%%CCC%05601" />
-                    </when>
-                  </choose>
-                  <ParameterRefRef RefId="%AID%_P-%T%%CCC%057_R-%T%%CCC%05701" />
-                </when>
-              </choose>
-
-                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%">
+                    <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Absolute Luftfeuchtigkeit" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%030_R-%T%%CCC%03001" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%030_R-%T%%CCC%03001">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%031_R-%T%%CCC%03101" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%032_R-%T%%CCC%03201" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%033_R-%T%%CCC%03301" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%034_R-%T%%CCC%03401" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%034_R-%T%%CCC%03401">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%035_R-%T%%CCC%03501" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%036_R-%T%%CCC%03601" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%037_R-%T%%CCC%03701" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901" />
+                    <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Taupunkt" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%041_R-%T%%CCC%04101" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%042_R-%T%%CCC%04201" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%043_R-%T%%CCC%04301" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%044_R-%T%%CCC%04401" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%044_R-%T%%CCC%04401">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%045_R-%T%%CCC%04501" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%046_R-%T%%CCC%04601" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%047_R-%T%%CCC%04701" />
+                  </when>
+                </choose>
+                <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                  <when test="3"><!-- Pressure -->
+                    <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Luftdruck" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%050_R-%T%%CCC%05001" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%050_R-%T%%CCC%05001">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%051_R-%T%%CCC%05101" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%052_R-%T%%CCC%05201" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%053_R-%T%%CCC%05301" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%054_R-%T%%CCC%05401" />
+                    <choose ParamRefId="%AID%_P-%T%%CCC%054_R-%T%%CCC%05401">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%055_R-%T%%CCC%05501" />
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%056_R-%T%%CCC%05601" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%057_R-%T%%CCC%05701" />
+                  </when>
+                </choose>
+                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
                     <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                       <when test="1 2 3 4"><!-- Temperature -->
                         <choose ParamRefId="%AID%_P-%T%%CCC%014_R-%T%%CCC%01401">
@@ -479,7 +463,6 @@
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%018_R-%T%%CCC%01801" />
                       </when>
                     </choose>
-
                     <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                       <when test="3"><!-- Pressure -->
                         <choose ParamRefId="%AID%_P-%T%%CCC%054_R-%T%%CCC%05401">
@@ -499,10 +482,8 @@
                       </when>
                     </choose>
                 </Channel>
-                <!--</when>
-              </choose>-->
-            </ParameterBlock>
-
+              </ParameterBlock>
+            </ChannelIndependentBlock>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
