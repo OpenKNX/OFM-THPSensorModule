@@ -43,7 +43,7 @@ bool HWSensorchannel_DS18B20::Loop()
             }
         break;
     }
-    Serial.println("endloop");
+    //Serial.println("endloop");
     return true;
 }
 
