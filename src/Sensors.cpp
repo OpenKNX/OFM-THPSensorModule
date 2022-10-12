@@ -56,8 +56,9 @@ void Sensors::setup(const uint8_t outpins[], HWSensors *HWSensors)
 
 void Sensors::loop()
 {
-
-    m_Sensorchannels[Sensors::m_Sensorchannel_next]->Loop();
+    //SERIAL_DEBUG.print("Sensors::loop(): ");
+    //SERIAL_DEBUG.println(m_Sensorchannel_next);
+    m_Sensorchannels[m_Sensorchannel_next]->Loop();
     m_Sensorchannel_next++;
     if(m_Sensorchannel_next == THP_ChannelCount)
         m_Sensorchannel_next = 0;

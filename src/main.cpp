@@ -47,12 +47,24 @@ void setup()
     digitalWrite(DBGLED1, HIGH);
     digitalWrite(DBGLED2, HIGH);
     delay(1000);
+    #elif WAITFORSERIAL == 3
+    bool toggle = false;
+    uint32_t serialmillis = millis();
+    while (!SERIAL_DEBUG && millis() < serialmillis + DEBUG_DELAY)
+    {
+        digitalWrite(DBGLED2, toggle);
+        digitalWrite(DBGLED1, !toggle);
+        toggle = !toggle;
+        delay(100);     // will pause until serial console opens
+    }
+    digitalWrite(DBGLED1, HIGH);
+    digitalWrite(DBGLED2, HIGH);
+    delay(1000);
     #endif
 
     
     pinMode(PROG_LED_PIN, OUTPUT);
     digitalWrite(PROG_LED_PIN, HIGH);
-    delay(DEBUG_DELAY);
     digitalWrite(PROG_LED_PIN, LOW);
 
 

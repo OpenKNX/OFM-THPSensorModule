@@ -15,10 +15,10 @@ void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1)
 
 bool HWSensorchannel_DS18B20::Loop()
 {
-    //Serial.print("HWSensorchannel_DS18B20::Loop ");
-    //Serial.print(m_pin0);
-    //Serial.print(" ");
-    //Serial.println(m_state);
+    Serial.print("HWSensorchannel_DS18B20::Loop ");
+    Serial.print(m_pin0);
+    Serial.print(" ");
+    Serial.println(m_state);
 
     switch(m_state)
     {
@@ -34,14 +34,16 @@ bool HWSensorchannel_DS18B20::Loop()
         case 1:
             if(millis() - m_lastexec > 750)
             {
+                Serial.print("step1: ");
                 float stemp = m_Wire->temperature(m_address);     // 10ms
+                Serial.println(stemp);
                 SetTemperature(stemp);
                 m_state = 0;
                 m_lastexec = millis();
             }
         break;
     }
-
+    Serial.println("endloop");
     return true;
 }
 

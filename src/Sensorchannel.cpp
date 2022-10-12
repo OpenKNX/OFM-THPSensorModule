@@ -118,14 +118,14 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
 void Sensorchannel::Loop()
 {
-    Serial.print("channel: ");
-    Serial.println(m_channelnumber);
+    //Serial.print("channel: ");
+    //Serial.println(m_channelnumber);
 
     float temperature = m_hwSensors->GetTemperature(m_channelnumber);
     if(!isnan(temperature))
     {
-        Serial.print("temp: ");
-        Serial.println(temperature);
+        //Serial.print("temp: ");
+        //Serial.println(temperature);
         uint8_t send_cycle = ParamTempSendCycle();
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
