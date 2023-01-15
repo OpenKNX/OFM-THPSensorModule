@@ -3,6 +3,7 @@
 #include "Sensorchannel.h"
 #include <knx.h>
 #include "HWSensors.h"
+#include "knxprod.h"
 
 
 class Sensors

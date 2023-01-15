@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HWSensorchannel.h"
+#include "knxprod.h"
 
 
 
