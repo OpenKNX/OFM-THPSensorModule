@@ -22,7 +22,6 @@ class HWSensorchannel
         HWSensorchannel();
         virtual void Setup(uint8_t pin0, uint8_t pin1);
 	    virtual bool Loop() = 0;
-        virtual void LoopMax() = 0;
 
         float GetTemperature();
         float GetHumidity();

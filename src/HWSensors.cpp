@@ -59,17 +59,6 @@ void HWSensors::Loop()
     }
 }
 
-void HWSensors::LoopMax()
-{
-    for(int i = 0;i<THP_ChannelCount;i++)
-    {
-        if(m_HWSensorchannels[i] != nullptr)
-        {
-            m_HWSensorchannels[i]->LoopMax();
-        }
-    }
-}
-
 float HWSensors::GetTemperature(uint8_t channel)
 {
     if(m_HWSensorchannels[channel] != nullptr)

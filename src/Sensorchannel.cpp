@@ -1,5 +1,4 @@
 #include "Sensorchannel.h"
-#include "Sensors.h"
 #include <knx.h>
 
 
@@ -116,7 +115,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     
 }
 
-void Sensorchannel::Loop()
+void Sensorchannel::loop()
 {
     //Serial.print("channel: ");
     //Serial.println(m_channelnumber);

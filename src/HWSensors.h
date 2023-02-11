@@ -20,8 +20,6 @@ class HWSensors
 	
 	public: void Loop();
 
-    public: void LoopMax();
-
     public: float GetTemperature(uint8_t channel);
     public: float GetHumidity(uint8_t channel);
     public: float GetPressure(uint8_t channel);

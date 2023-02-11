@@ -132,6 +132,6 @@ class Sensorchannel
     public:
         Sensorchannel();
         void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HWSensors *HWSensors);
-	    void Loop();
+	    void loop();
         void processInputKo(GroupObject& ko);
 };
