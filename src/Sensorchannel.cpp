@@ -10,83 +10,26 @@ Sensorchannel::Sensorchannel()
 
 void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HWSensors *HWSensors)
 {
-    m_channelnumber = channel_number;
+    _channelIndex = channel_number;
     m_hwSensors = HWSensors;
 
-    //GetTempKO().dataPointType(Dpt(9,1));
-    //GetTempAlarmLKO().dataPointType(Dpt(1,5));
-    //GetTempAlarmHKO().dataPointType(Dpt(1,5));
-    //GetTempMinValueKO().dataPointType(Dpt(9,1));
-    //GetTempMaxValueKO().dataPointType(Dpt(9,1));
-    //GetTempMinMaxResetKO().dataPointType(Dpt(1,3));
-    //GetTempMinMaxResetKO().callback(Sensors::MinMaxResetKOCallback);
     //Todo load from eeprom
-    GetTempMinValueKO().valueNoSend((float)1000, Dpt(9,1));
-    GetTempMaxValueKO().valueNoSend((float)-1000, Dpt(9,1));
-
-    //GetHumAlarmLKO().dataPointType(Dpt(1,5));
-    //GetHumAlarmHKO().dataPointType(Dpt(1,5));
-    //GetHumMinMaxResetKO().dataPointType(Dpt(1,3));
-    //GetHumMinMaxResetKO().callback(Sensors::MinMaxResetKOCallback);
-    //Todo load from eeprom
-    switch(ParamHumDPT())
-    {
-        case 5:
-            //GetHumKO().dataPointType(Dpt(5,1));
-            //GetHumMinValueKO().dataPointType(Dpt(5,1));
-            //GetHumMaxValueKO().dataPointType(Dpt(5,1));
-        break;
-        case 9:
-            //GetHumKO().dataPointType(Dpt(9,7));
-            //GetHumMinValueKO().dataPointType(Dpt(9,7));
-            //GetHumMaxValueKO().dataPointType(Dpt(9,7));
-        break;
-    }
-    GetHumMinValueKO().valueNoSend((float)1000, HumKODPT);
-    GetHumMaxValueKO().valueNoSend((float)-1000, HumKODPT);
-
-    //GetAbsHumKO().dataPointType(Dpt(9,29));
-    //GetAbsHumAlarmLKO().dataPointType(Dpt(1,5));
-    //GetAbsHumAlarmHKO().dataPointType(Dpt(1,5));
-    //GetAbsHumMinValueKO().dataPointType(Dpt(9,29));
-    //GetAbsHumMaxValueKO().dataPointType(Dpt(9,29));
-    //GetAbsHumMinMaxResetKO().dataPointType(Dpt(1,3));
-    //GetAbsHumMinMaxResetKO().callback(Sensors::MinMaxResetKOCallback);
-    //Todo load from eeprom
-    GetAbsHumMinValueKO().valueNoSend((float)1000, Dpt(9,29));
-    GetAbsHumMaxValueKO().valueNoSend((float)-1000, Dpt(9,29));
-
-    //GetDewPointKO().dataPointType(Dpt(9,1));
-    //GetDewPointAlarmLKO().dataPointType(Dpt(1,5));
-    //GetDewPointAlarmHKO().dataPointType(Dpt(1,5));
-    //GetDewPointMinValueKO().dataPointType(Dpt(9,1));
-    //GetDewPointMaxValueKO().dataPointType(Dpt(9,1));
-    //GetDewPointMinMaxResetKO().dataPointType(Dpt(1,3));
-    //GetDewPointMinMaxResetKO().callback(Sensors::MinMaxResetKOCallback);
-    //Todo load from eeprom
-    GetDewPointMinValueKO().valueNoSend((float)1000, Dpt(9,1));
-    GetDewPointMaxValueKO().valueNoSend((float)-1000, Dpt(9,1));
-
-    //GetPressKO().dataPointType(Dpt(9,6));
-    //GetPressAlarmLKO().dataPointType(Dpt(1,5));
-    //GetPressAlarmHKO().dataPointType(Dpt(1,5));
-    //GetPressMinValueKO().dataPointType(Dpt(9,6));
-    //GetPressMaxValueKO().dataPointType(Dpt(9,6));
-    //GetPressMinMaxResetKO().dataPointType(Dpt(1,3));
-    //GetPressMinMaxResetKO().callback(Sensors::MinMaxResetKOCallback);
-    //Todo load from eeprom
-    GetPressMinValueKO().valueNoSend((float)1000, Dpt(9,6));
-    GetPressMaxValueKO().valueNoSend((float)-1000, Dpt(9,6));
-
+    KoTHP_SensorTempMinValue_.valueNoSend((float)1000, Dpt(9,1));
+    KoTHP_SensorTempMaxValue_.valueNoSend((float)-1000, Dpt(9,1));
+    KoTHP_SensorHumMinValue_.valueNoSend((float)1000, HumKODPT);
+    KoTHP_SensorHumMaxValue_.valueNoSend((float)-1000, HumKODPT);
+    KoTHP_SensorAbsHumMinValue_.valueNoSend((float)1000, Dpt(9,29));
+    KoTHP_SensorAbsHumMaxValue_.valueNoSend((float)-1000, Dpt(9,29));
+    KoTHP_SensorDewPointMinValue_.valueNoSend((float)1000, Dpt(9,1));
+    KoTHP_SensorDewPointMaxValue_.valueNoSend((float)-1000, Dpt(9,1));
+    KoTHP_SensorPressMinValue_.valueNoSend((float)1000, Dpt(9,6));
+    KoTHP_SensorPressMaxValue_.valueNoSend((float)-1000, Dpt(9,6));
 
     
     // Debug
-    Serial.print("Sensorchannel::Setup() Channel: ");
-    Serial.print(m_channelnumber);
-    Serial.print(" ParamTempSendChangeAmount: ");
-    Serial.print(ParamTempSendChangeAmount());
-    Serial.print(" ParamTempSendCycle: ");
-    Serial.print(ParamTempSendCycle());
+    log("Param SensorTemperatureSendChangeAmount: %i", ParamTHP_SensorTemperatureSendChangeAmount_);
+    log("Param SensorTemperatureSendCycle: %i", ParamTHP_SensorTemperatureSendCycle_);
+
     Serial.print(" ParamTempAlign: ");
     Serial.print(ParamTempAlign());
     Serial.print(" ParamTempWarnL: ");
@@ -117,15 +60,12 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
 void Sensorchannel::loop()
 {
-    //Serial.print("channel: ");
-    //Serial.println(m_channelnumber);
-
-    float temperature = m_hwSensors->GetTemperature(m_channelnumber);
+    float temperature = m_hwSensors->GetTemperature(_channelIndex);
     if(!isnan(temperature))
     {
         //Serial.print("temp: ");
         //Serial.println(temperature);
-        uint8_t send_cycle = ParamTempSendCycle();
+        uint8_t send_cycle = ParamTHP_SensorTemperatureSendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
         if(send_cycle)
@@ -185,7 +125,7 @@ void Sensorchannel::loop()
         }
     }
 
-    float humidity = m_hwSensors->GetHumidity(m_channelnumber);
+    float humidity = m_hwSensors->GetHumidity(_channelIndex);
     if(!isnan(humidity))
     {
         //Serial.print("hum: ");
@@ -380,7 +320,7 @@ void Sensorchannel::loop()
         }
     }
 
-    float pressure = m_hwSensors->GetPressure(m_channelnumber);
+    float pressure = m_hwSensors->GetPressure(_channelIndex);
     uint32_t send_cycle = ParamPressSendCycle();
     uint32_t send_millis = send_cycle * 60000;
     bool sendnow = false;

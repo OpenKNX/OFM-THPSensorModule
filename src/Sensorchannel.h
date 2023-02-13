@@ -2,90 +2,90 @@
 
 #include <Arduino.h>
 #include "HWSensors.h"
-#include "knx.h"
+#include "OpenKNX.h"
 
-#define GetTempKO()  knx.getGroupObject(THP_KoSensorTemp_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetTempAlarmLKO()  knx.getGroupObject(THP_KoSensorTempAlarmL_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetTempAlarmHKO()  knx.getGroupObject(THP_KoSensorTempAlarmH_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetTempMinValueKO()  knx.getGroupObject(THP_KoSensorTempMinValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetTempMaxValueKO()  knx.getGroupObject(THP_KoSensorTempMaxValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetTempMinMaxResetKO()  knx.getGroupObject(THP_KoSensorTempMinMaxReset_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
+#define GetTempKO()  knx.getGroupObject(THP_KoSensorTemp_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetTempAlarmLKO()  knx.getGroupObject(THP_KoSensorTempAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetTempAlarmHKO()  knx.getGroupObject(THP_KoSensorTempAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetTempMinValueKO()  knx.getGroupObject(THP_KoSensorTempMinValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetTempMaxValueKO()  knx.getGroupObject(THP_KoSensorTempMaxValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetTempMinMaxResetKO()  knx.getGroupObject(THP_KoSensorTempMinMaxReset_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 
-#define GetHumKO()  knx.getGroupObject(THP_KoSensorHum_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetHumAlarmLKO()  knx.getGroupObject(THP_KoSensorHumAlarmL_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetHumAlarmHKO()  knx.getGroupObject(THP_KoSensorHumAlarmH_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetHumMinValueKO()  knx.getGroupObject(THP_KoSensorHumMinValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetHumMaxValueKO()  knx.getGroupObject(THP_KoSensorHumMaxValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetHumMinMaxResetKO()  knx.getGroupObject(THP_KoSensorHumMinMaxReset_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
+#define GetHumKO()  knx.getGroupObject(THP_KoSensorHum_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetHumAlarmLKO()  knx.getGroupObject(THP_KoSensorHumAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetHumAlarmHKO()  knx.getGroupObject(THP_KoSensorHumAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetHumMinValueKO()  knx.getGroupObject(THP_KoSensorHumMinValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetHumMaxValueKO()  knx.getGroupObject(THP_KoSensorHumMaxValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetHumMinMaxResetKO()  knx.getGroupObject(THP_KoSensorHumMinMaxReset_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 
-#define GetAbsHumKO()  knx.getGroupObject(THP_KoSensorAbsHum_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetAbsHumAlarmLKO()  knx.getGroupObject(THP_KoSensorAbsHumAlarmL_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetAbsHumAlarmHKO()  knx.getGroupObject(THP_KoSensorAbsHumAlarmH_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetAbsHumMinValueKO()  knx.getGroupObject(THP_KoSensorAbsHumMinValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetAbsHumMaxValueKO()  knx.getGroupObject(THP_KoSensorAbsHumMaxValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetAbsHumMinMaxResetKO()  knx.getGroupObject(THP_KoSensorAbsHumMinMaxReset_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
+#define GetAbsHumKO()  knx.getGroupObject(THP_KoSensorAbsHum_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetAbsHumAlarmLKO()  knx.getGroupObject(THP_KoSensorAbsHumAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetAbsHumAlarmHKO()  knx.getGroupObject(THP_KoSensorAbsHumAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetAbsHumMinValueKO()  knx.getGroupObject(THP_KoSensorAbsHumMinValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetAbsHumMaxValueKO()  knx.getGroupObject(THP_KoSensorAbsHumMaxValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetAbsHumMinMaxResetKO()  knx.getGroupObject(THP_KoSensorAbsHumMinMaxReset_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 
-#define GetDewPointKO()  knx.getGroupObject(THP_KoSensorDewPoint_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetDewPointAlarmLKO()  knx.getGroupObject(THP_KoSensorDewPointAlarmL_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetDewPointAlarmHKO()  knx.getGroupObject(THP_KoSensorDewPointAlarmH_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetDewPointMinValueKO()  knx.getGroupObject(THP_KoSensorDewPointMinValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetDewPointMaxValueKO()  knx.getGroupObject(THP_KoSensorDewPointMaxValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetDewPointMinMaxResetKO()  knx.getGroupObject(THP_KoSensorDewPointMinMaxReset_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
+#define GetDewPointKO()  knx.getGroupObject(THP_KoSensorDewPoint_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetDewPointAlarmLKO()  knx.getGroupObject(THP_KoSensorDewPointAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetDewPointAlarmHKO()  knx.getGroupObject(THP_KoSensorDewPointAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetDewPointMinValueKO()  knx.getGroupObject(THP_KoSensorDewPointMinValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetDewPointMaxValueKO()  knx.getGroupObject(THP_KoSensorDewPointMaxValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetDewPointMinMaxResetKO()  knx.getGroupObject(THP_KoSensorDewPointMinMaxReset_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 
-#define GetPressKO()  knx.getGroupObject(THP_KoSensorPress_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetPressAlarmLKO()  knx.getGroupObject(THP_KoSensorPressAlarmL_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetPressAlarmHKO()  knx.getGroupObject(THP_KoSensorPressAlarmH_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetPressMinValueKO()  knx.getGroupObject(THP_KoSensorPressMinValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetPressMaxValueKO()  knx.getGroupObject(THP_KoSensorPressMaxValue_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-#define GetPressMinMaxResetKO()  knx.getGroupObject(THP_KoSensorPressMinMaxReset_ + (THP_KoBlockSize * m_channelnumber) + THP_KoOffset)
-
-
+#define GetPressKO()  knx.getGroupObject(THP_KoSensorPress_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetPressAlarmLKO()  knx.getGroupObject(THP_KoSensorPressAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetPressAlarmHKO()  knx.getGroupObject(THP_KoSensorPressAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetPressMinValueKO()  knx.getGroupObject(THP_KoSensorPressMinValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetPressMaxValueKO()  knx.getGroupObject(THP_KoSensorPressMaxValue_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
+#define GetPressMinMaxResetKO()  knx.getGroupObject(THP_KoSensorPressMinMaxReset_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 
 
-#define ParamTempSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureSendChangeAmount_, Float_Enc_IEEE754Single)
-#define ParamTempSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureSendCycle_)
-#define ParamTempAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureAlign_, Float_Enc_IEEE754Single)
-#define ParamTempWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureWarnL_, Float_Enc_IEEE754Single)
-#define ParamTempWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureWarnH_, Float_Enc_IEEE754Single)
-#define ParamTempMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorTemperatureMinMax_)
 
-#define ParamHumSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumiditySendChangeAmount_, Float_Enc_IEEE754Single)
-#define ParamHumSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumiditySendCycle_)
-#define ParamHumAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumidityAlign_, Float_Enc_IEEE754Single)
-#define ParamHumWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumidityWarnL_, Float_Enc_IEEE754Single)
-#define ParamHumWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumidityWarnH_, Float_Enc_IEEE754Single)
-#define ParamHumMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumidityMinMax_)
-#define ParamHumDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorHumiditySend_)
 
-#define ParamAbsHumSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumiditySendChangeAmount_, Float_Enc_IEEE754Single)
-#define ParamAbsHumSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumiditySendCycle_)
-#define ParamAbsHumAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumidityAlign_, Float_Enc_IEEE754Single)
-#define ParamAbsHumWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumidityWarnL_, Float_Enc_IEEE754Single)
-#define ParamAbsHumWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumidityWarnH_, Float_Enc_IEEE754Single)
-#define ParamAbsHumMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumidityMinMax_)
-#define ParamAbsHumDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorAbsHumiditySend_)
+#define ParamTempSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureSendChangeAmount_, Float_Enc_IEEE754Single)
+#define ParamTempSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureSendCycle_)
+#define ParamTempAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureAlign_, Float_Enc_IEEE754Single)
+#define ParamTempWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureWarnL_, Float_Enc_IEEE754Single)
+#define ParamTempWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureWarnH_, Float_Enc_IEEE754Single)
+#define ParamTempMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorTemperatureMinMax_)
 
-#define ParamDewPointSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointSendChangeAmount_, Float_Enc_IEEE754Single)
-#define ParamDewPointSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointSendCycle_)
-#define ParamDewPointAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointAlign_, Float_Enc_IEEE754Single)
-#define ParamDewPointWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointWarnL_, Float_Enc_IEEE754Single)
-#define ParamDewPointWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointWarnH_, Float_Enc_IEEE754Single)
-#define ParamDewPointMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointMinMax_)
-#define ParamDewPointDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorDewPointSend_)
+#define ParamHumSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumiditySendChangeAmount_, Float_Enc_IEEE754Single)
+#define ParamHumSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumiditySendCycle_)
+#define ParamHumAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumidityAlign_, Float_Enc_IEEE754Single)
+#define ParamHumWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumidityWarnL_, Float_Enc_IEEE754Single)
+#define ParamHumWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumidityWarnH_, Float_Enc_IEEE754Single)
+#define ParamHumMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumidityMinMax_)
+#define ParamHumDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorHumiditySend_)
 
-#define ParamPressSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureSendChangeAmount_, Float_Enc_IEEE754Single)
-#define ParamPressSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureSendCycle_)
-#define ParamPressAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureAlign_, Float_Enc_IEEE754Single)
-#define ParamPressWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureWarnL_, Float_Enc_IEEE754Single)
-#define ParamPressWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureWarnH_, Float_Enc_IEEE754Single)
-#define ParamPressMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureMinMax_)
-#define ParamPressDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * m_channelnumber + THP_SensorPressureSend_)
+#define ParamAbsHumSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumiditySendChangeAmount_, Float_Enc_IEEE754Single)
+#define ParamAbsHumSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumiditySendCycle_)
+#define ParamAbsHumAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumidityAlign_, Float_Enc_IEEE754Single)
+#define ParamAbsHumWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumidityWarnL_, Float_Enc_IEEE754Single)
+#define ParamAbsHumWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumidityWarnH_, Float_Enc_IEEE754Single)
+#define ParamAbsHumMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumidityMinMax_)
+#define ParamAbsHumDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorAbsHumiditySend_)
+
+#define ParamDewPointSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointSendChangeAmount_, Float_Enc_IEEE754Single)
+#define ParamDewPointSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointSendCycle_)
+#define ParamDewPointAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointAlign_, Float_Enc_IEEE754Single)
+#define ParamDewPointWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointWarnL_, Float_Enc_IEEE754Single)
+#define ParamDewPointWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointWarnH_, Float_Enc_IEEE754Single)
+#define ParamDewPointMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointMinMax_)
+#define ParamDewPointDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorDewPointSend_)
+
+#define ParamPressSendChangeAmount() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureSendChangeAmount_, Float_Enc_IEEE754Single)
+#define ParamPressSendCycle() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureSendCycle_)
+#define ParamPressAlign() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureAlign_, Float_Enc_IEEE754Single)
+#define ParamPressWarnL() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureWarnL_, Float_Enc_IEEE754Single)
+#define ParamPressWarnH() knx.paramFloat(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureWarnH_, Float_Enc_IEEE754Single)
+#define ParamPressMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureMinMax_)
+#define ParamPressDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureSend_)
 
 // converts a relative (to the channel start) KO number to an absolute KO number of the device
-#define AbsKO(asap)    (THP_KoOffset + THP_KoBlockSize * m_channelnumber + asap)
+#define AbsKO(asap)    (THP_KoOffset + THP_KoBlockSize * _channelIndex + asap)
 
 // converts a absolute KO number to a relative KO number (offset to the starting KO number of the channel)
-#define RelKO(asap)    (asap - THP_KoOffset - THP_KoBlockSize * m_channelnumber)
+#define RelKO(asap)    (asap - THP_KoOffset - THP_KoBlockSize * _channelIndex)
 
 
 #define TempKODPT       (Dpt(9,1))
@@ -95,10 +95,10 @@
 #define PressKODPT      Dpt(9,6)
 
 
-class Sensorchannel
+class Sensorchannel : public OpenKNX::Channel
 {
     private:
-        uint8_t m_channelnumber;
+        uint8_t _channelIndex;
         HWSensors *m_hwSensors;
 
         uint32_t m_temperature_last_send_millis = 0;
