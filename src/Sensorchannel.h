@@ -101,6 +101,12 @@ class Sensorchannel : public OpenKNX::Channel
         uint8_t _channelIndex;
         HWSensors *m_hwSensors;
 
+        bool m_pin0 = 0;
+        bool m_pin1 = 0;
+
+        bool m_input0 = 0;
+        bool m_input1 = 0;
+
         uint32_t m_temperature_last_send_millis = 0;
         float m_temperature_last_send_value = -1000;
         uint32_t m_temperature_alarmH_last_send_millis = 0;

@@ -260,7 +260,7 @@
               <ComObjectRef Id="%AID%_O-%T%%CCC%027_R-%T%%CCC%02701" RefId="%AID%_O-%T%%CCC%027" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%028_R-%T%%CCC%02801" RefId="%AID%_O-%T%%CCC%028" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%029_R-%T%%CCC%02901" RefId="%AID%_O-%T%%CCC%029" />
-              <!-- pressure -->
+              <!-- binary input -->
               <ComObjectRef Id="%AID%_O-%T%%CCC%030_R-%T%%CCC%03001" RefId="%AID%_O-%T%%CCC%030" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%031_R-%T%%CCC%03101" RefId="%AID%_O-%T%%CCC%031" />
             </ComObjectRefs>
@@ -374,6 +374,13 @@
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%057_R-%T%%CCC%05701" />
                   </when>
                 </choose>
+                <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                  <when test="99"><!-- binary input -->
+                    <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Binäreingang" UIHint="Headline" />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Keine weiteren Einstellmöglichkeiten." />
+                  </when>
+                </choose>
                 <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">
                     <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                       <when test="1 2 3 4"><!-- Temperature -->
@@ -485,6 +492,12 @@
                           </when>
                         </choose>
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%024_R-%T%%CCC%02401" />
+                      </when>
+                    </choose>
+                    <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                      <when test="99"><!-- binary input -->
+                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%030_R-%T%%CCC%03001" />
+                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%031_R-%T%%CCC%03101" />
                       </when>
                     </choose>
                 </Channel>

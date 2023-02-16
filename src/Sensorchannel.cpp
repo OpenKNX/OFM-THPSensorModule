@@ -13,6 +13,15 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     _channelIndex = channel_number;
     m_hwSensors = HWSensors;
 
+    m_pin0 = pin0;
+    m_pin1 = pin1;
+
+    if(ParamTHP_Sensortype_ == 99)  // act as binary input
+    {
+        pinMode(m_pin0, INPUT_PULLUP);
+        pinMode(m_pin1, INPUT_PULLUP);
+    }
+
     //Todo load from eeprom
     KoTHP_SensorTempMinValue_.valueNoSend((float)1000, Dpt(9,1));
     KoTHP_SensorTempMaxValue_.valueNoSend((float)-1000, Dpt(9,1));
@@ -60,6 +69,26 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
 void Sensorchannel::loop()
 {
+    if(ParamTHP_Sensortype_ == 99)  // act as binary input
+    {
+        bool new_input0 = !digitalRead(m_pin0);
+        bool new_input1 = !digitalRead(m_pin1);
+
+        //ToDo Debouncing. quick hack
+
+        if(new_input0 != m_input0)
+        {
+            m_input0 = new_input0;
+            KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
+        }
+
+        if(new_input1 != m_input1)
+        {
+            m_input1 = new_input1;
+            KoTHP_InputSDA_.value(m_input1, Dpt(1,1));
+        }
+    }
+
     float temperature = m_hwSensors->GetTemperature(_channelIndex);
     if(!isnan(temperature))
     {
