@@ -213,6 +213,9 @@
               <ComObject Id="%AID%_O-%T%%CCC%027" Name="SensorPressMinValue_%C%" Text="Min. Luftdruck lesen" Number="%K27%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-6" />
               <ComObject Id="%AID%_O-%T%%CCC%028" Name="SensorPressMaxValue_%C%" Text="Max. Luftdruck lesen" Number="%K28%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-6" />
               <ComObject Id="%AID%_O-%T%%CCC%029" Name="SensorPressMinMaxReset_%C%" Text="Min/Max Luftdruck Reset" Number="%K29%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
+              <!-- binary input -->
+              <ComObject Id="%AID%_O-%T%%CCC%030" Name="InputSCL_%C%" Text="Binäreingang 1" Number="%K30%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%031" Name="InputSDA_%C%" Text="Binäreingang 2" Number="%K31%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
             </ComObjectTable>
             
             <ComObjectRefs>
@@ -257,6 +260,9 @@
               <ComObjectRef Id="%AID%_O-%T%%CCC%027_R-%T%%CCC%02701" RefId="%AID%_O-%T%%CCC%027" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%028_R-%T%%CCC%02801" RefId="%AID%_O-%T%%CCC%028" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%029_R-%T%%CCC%02901" RefId="%AID%_O-%T%%CCC%029" />
+              <!-- pressure -->
+              <ComObjectRef Id="%AID%_O-%T%%CCC%030_R-%T%%CCC%03001" RefId="%AID%_O-%T%%CCC%030" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%031_R-%T%%CCC%03101" RefId="%AID%_O-%T%%CCC%031" />
             </ComObjectRefs>
           </Static>
           <Dynamic>
