@@ -18,6 +18,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
     if(ParamTHP_Sensortype_ == 99)  // act as binary input
     {
+        log("Setting INPUT_PULLUP to %d", m_pin0); // DEBUG
         pinMode(m_pin0, INPUT_PULLUP);
         pinMode(m_pin1, INPUT_PULLUP);
     }
@@ -78,14 +79,29 @@ void Sensorchannel::loop()
 
         if(new_input0 != m_input0)
         {
-            m_input0 = new_input0;
-            KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
+            if(!m_input0_debounce_millis)
+            {
+                m_input0_debounce_millis = millis();
+            }
+            else
+            {
+                if(delayCheck(m_input0_debounce_millis, 20))
+                {
+                    m_input0 = new_input0;
+                    m_input0_debounce_millis = 0;
+                    log(m_input0 ? "P0=1" : "P0=0");
+                    //KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
+                }
+            }            
         }
+        else
+            m_input0_debounce_millis = 0;
 
         if(new_input1 != m_input1)
         {
             m_input1 = new_input1;
-            KoTHP_InputSDA_.value(m_input1, Dpt(1,1));
+            log(m_input1 ? "P1=1" : "P1=0");
+            //KoTHP_InputSDA_.value(m_input1, Dpt(1,1));
         }
     }
 
@@ -415,7 +431,7 @@ void Sensorchannel::loop()
 
 void Sensorchannel::processInputKo(GroupObject& ko)
 {
-    Serial.println("Sensorchannel::processInputKo");
+    log("Sensorchannel::processInputKo");
 
     float setvalue = 0;
 
@@ -480,4 +496,9 @@ float Sensorchannel::CalcAbsHumidity(float relative_humidity, float temperature)
 
     float value = (6.112 * pow(2.718, (17.67 * temperature)/(temperature+243.5)) * relative_humidity * 2.1674) / (273.15 + temperature);
     return value;
+}
+
+const std::string Sensorchannel::name()
+{
+    return "Sensorchannel";
 }

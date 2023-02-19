@@ -98,14 +98,16 @@
 class Sensorchannel : public OpenKNX::Channel
 {
     private:
-        uint8_t _channelIndex;
+        //uint8_t _channelIndex;
         HWSensors *m_hwSensors;
 
-        bool m_pin0 = 0;
-        bool m_pin1 = 0;
+        uint8_t m_pin0 = 0;
+        uint8_t m_pin1 = 0;
 
         bool m_input0 = 0;
         bool m_input1 = 0;
+        uint32_t m_input0_debounce_millis = 0;
+        uint32_t m_input1_debounce_millis = 0;
 
         uint32_t m_temperature_last_send_millis = 0;
         float m_temperature_last_send_value = -1000;
@@ -134,6 +136,8 @@ class Sensorchannel : public OpenKNX::Channel
 
         float CalcDewPoint(float relative_humidity, float temperature);
         float CalcAbsHumidity(float relative_humidity, float temperature);
+
+        const std::string name() override;
     
     public:
         Sensorchannel();
