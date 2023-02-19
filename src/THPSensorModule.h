@@ -14,13 +14,13 @@ class THPSensorModule : public OpenKNX::Module
     void loop() override;
     void loop2() override;
     void setup() override;
-    const char *name() override;
-    const char *version() override;
+    const std::string name() override;
+    const std::string version() override;
     void processBeforeRestart() override;
     void processBeforeTablesUnload() override;
     void savePower() override;
     bool restorePower() override;
-    bool usesSecCore() override;
+    bool usesDualCore() override;
     static THPSensorModule *instance();
 
   private:

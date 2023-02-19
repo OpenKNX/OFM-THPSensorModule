@@ -12,12 +12,12 @@ THPSensorModule *THPSensorModule::instance()
     return THPSensorModule::_instance;
 }
 
-const char *THPSensorModule::name()
+const std::string THPSensorModule::name()
 {
     return "THPSensor";
 }
 
-const char *THPSensorModule::version()
+const std::string THPSensorModule::version()
 {
     return "0.0dev";
 }
@@ -89,7 +89,6 @@ void THPSensorModule::loop2()
 {   
     // second core
     _HWSensors.Loop();
-    log("THPSensorModule::loop2()");
 }
 
 
@@ -126,7 +125,7 @@ bool THPSensorModule::restorePower()
     return true;
 }
 
-bool THPSensorModule::usesSecCore()
+bool THPSensorModule::usesDualCore()
 {
     return true;
 }
