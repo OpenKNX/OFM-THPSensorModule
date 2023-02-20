@@ -121,6 +121,32 @@
               <Parameter Id="%AID%_P-%T%%CCC%057" Name="SensorPressureMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="51" BitOffset="0" />
               </Parameter>
+              <!-- binary input 0 parameters-->              
+              <Parameter Id="%AID%_P-%T%%CCC%058" Name="Input0DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="53" BitOffset="0" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%059" Name="Input0ActionOpen_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geöffnet" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="0" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%060" Name="Input0ActionClosed_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geschlossen" Value="1" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="1" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%061" Name="Input0SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="55" BitOffset="0" />
+              </Parameter>
+              <!-- binary input 1 parameters-->    
+              <Parameter Id="%AID%_P-%T%%CCC%062" Name="Input1DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="57" BitOffset="0" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%063" Name="Input1ActionOpen_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geöffnet" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="2" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%064" Name="Input1ActionClosed_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geschlossen" Value="1" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="3" />
+              </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%065" Name="Input1SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="59" BitOffset="0" />
+              </Parameter>
             </Parameters>
             
             <ParameterRefs>
@@ -175,6 +201,16 @@
               <ParameterRef Id="%AID%_P-%T%%CCC%055_R-%T%%CCC%05501" RefId="%AID%_P-%T%%CCC%055" />
               <ParameterRef Id="%AID%_P-%T%%CCC%056_R-%T%%CCC%05601" RefId="%AID%_P-%T%%CCC%056" />
               <ParameterRef Id="%AID%_P-%T%%CCC%057_R-%T%%CCC%05701" RefId="%AID%_P-%T%%CCC%057" />
+              <!-- binary input 1 parameters-->
+              <ParameterRef Id="%AID%_P-%T%%CCC%058_R-%T%%CCC%05801" RefId="%AID%_P-%T%%CCC%058" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%059_R-%T%%CCC%05901" RefId="%AID%_P-%T%%CCC%059" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%060_R-%T%%CCC%06001" RefId="%AID%_P-%T%%CCC%060" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%061_R-%T%%CCC%06101" RefId="%AID%_P-%T%%CCC%061" />
+              <!-- binary input 1 parameters-->
+              <ParameterRef Id="%AID%_P-%T%%CCC%062_R-%T%%CCC%06201" RefId="%AID%_P-%T%%CCC%062" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%063_R-%T%%CCC%06301" RefId="%AID%_P-%T%%CCC%063" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%064_R-%T%%CCC%06401" RefId="%AID%_P-%T%%CCC%064" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%065_R-%T%%CCC%06501" RefId="%AID%_P-%T%%CCC%065" />
             </ParameterRefs>
 
             <ComObjectTable>
@@ -214,8 +250,8 @@
               <ComObject Id="%AID%_O-%T%%CCC%028" Name="SensorPressMaxValue_%C%" Text="Max. Luftdruck lesen" Number="%K28%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-6" />
               <ComObject Id="%AID%_O-%T%%CCC%029" Name="SensorPressMinMaxReset_%C%" Text="Min/Max Luftdruck Reset" Number="%K29%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
               <!-- binary input -->
-              <ComObject Id="%AID%_O-%T%%CCC%030" Name="InputSCL_%C%" Text="Binäreingang 1" Number="%K30%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
-              <ComObject Id="%AID%_O-%T%%CCC%031" Name="InputSDA_%C%" Text="Binäreingang 2" Number="%K31%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%030" Name="Input0_%C%" Text="Binäreingang 1" Number="%K30%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="%AID%_O-%T%%CCC%031" Name="Input1_%C%" Text="Binäreingang 2" Number="%K31%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
             </ComObjectTable>
             
             <ComObjectRefs>
@@ -377,8 +413,16 @@
                 <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
                   <when test="99"><!-- binary input -->
                     <ParameterSeparator Id="%AID%_PS-" Text=" " />
-                    <ParameterSeparator Id="%AID%_PS-" Text="Binäreingang" UIHint="Headline" />
-                    <ParameterSeparator Id="%AID%_PS-" Text="Keine weiteren Einstellmöglichkeiten." />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Binäreingang %ZZ%1 (SCL)" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%058_R-%T%%CCC%05801" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%059_R-%T%%CCC%05901" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%060_R-%T%%CCC%06001" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%061_R-%T%%CCC%06101" />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Binäreingang %ZZ%2 (SDA)" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%062_R-%T%%CCC%06201" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%063_R-%T%%CCC%06301" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%064_R-%T%%CCC%06401" />
+                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%065_R-%T%%CCC%06501" />
                   </when>
                 </choose>
                 <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%T%%CCC%002_R-%T%%CCC%00201">

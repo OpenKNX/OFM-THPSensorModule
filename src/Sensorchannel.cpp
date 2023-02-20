@@ -75,8 +75,6 @@ void Sensorchannel::loop()
         bool new_input0 = !digitalRead(m_pin0);
         bool new_input1 = !digitalRead(m_pin1);
 
-        //ToDo Debouncing. quick hack
-
         if(new_input0 != m_input0)
         {
             if(!m_input0_debounce_millis)
@@ -85,12 +83,12 @@ void Sensorchannel::loop()
             }
             else
             {
-                if(delayCheck(m_input0_debounce_millis, 20))
+                if(delayCheck(m_input0_debounce_millis, ParamTHP_Input0DebounceTime_))
                 {
                     m_input0 = new_input0;
                     m_input0_debounce_millis = 0;
-                    log(m_input0 ? "P0=1" : "P0=0");
-                    //KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
+                    logInfoP(m_input0 ? "P0=1" : "P0=0");
+                    KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
                 }
             }            
         }
