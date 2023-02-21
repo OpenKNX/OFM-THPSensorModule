@@ -61,27 +61,27 @@
                   <Enumeration Text="3 Minuten" Value="3" Id="%AID%_PT-SendCycleSelection_EN-3" />
                   <Enumeration Text="4 Minuten" Value="4" Id="%AID%_PT-SendCycleSelection_EN-4" />
                   <Enumeration Text="5 Minuten" Value="5" Id="%AID%_PT-SendCycleSelection_EN-5" />
-                  <Enumeration Text="10 Minuten" Value="10" Id="%AID%_PT-SendCycleSelection_EN-6" />
-                  <Enumeration Text="15 Minuten" Value="15" Id="%AID%_PT-SendCycleSelection_EN-7" />
-                  <Enumeration Text="20 Minuten" Value="20" Id="%AID%_PT-SendCycleSelection_EN-8" />
-                  <Enumeration Text="30 Minuten" Value="30" Id="%AID%_PT-SendCycleSelection_EN-9" />
-                  <Enumeration Text="40 Minuten" Value="40" Id="%AID%_PT-SendCycleSelection_EN-10" />
-                  <Enumeration Text="50 Minuten" Value="50" Id="%AID%_PT-SendCycleSelection_EN-11" />
-                  <Enumeration Text="60 Minuten" Value="60" Id="%AID%_PT-SendCycleSelection_EN-12" />
+                  <Enumeration Text="10 Minuten" Value="10" Id="%AID%_PT-SendCycleSelection_EN-10" />
+                  <Enumeration Text="15 Minuten" Value="15" Id="%AID%_PT-SendCycleSelection_EN-15" />
+                  <Enumeration Text="20 Minuten" Value="20" Id="%AID%_PT-SendCycleSelection_EN-20" />
+                  <Enumeration Text="30 Minuten" Value="30" Id="%AID%_PT-SendCycleSelection_EN-30" />
+                  <Enumeration Text="40 Minuten" Value="40" Id="%AID%_PT-SendCycleSelection_EN-40" />
+                  <Enumeration Text="50 Minuten" Value="50" Id="%AID%_PT-SendCycleSelection_EN-50" />
+                  <Enumeration Text="60 Minuten" Value="60" Id="%AID%_PT-SendCycleSelection_EN-60" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-DebounceTime" Name="DebounceTime">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="keine" Value="0" Id="%AID%_PT-DebounceTime-EN-0" />
-                  <Enumeration Text="10ms" Value="10" Id="%AID%_PT-DebounceTime-EN-1" />
-                  <Enumeration Text="20ms" Value="20" Id="%AID%_PT-DebounceTime-EN-2" />
-                  <Enumeration Text="30ms" Value="30" Id="%AID%_PT-DebounceTime-EN-3" />
-                  <Enumeration Text="40ms" Value="40" Id="%AID%_PT-DebounceTime-EN-4" />
-                  <Enumeration Text="50ms" Value="50" Id="%AID%_PT-DebounceTime-EN-5" />
-                  <Enumeration Text="60ms" Value="60" Id="%AID%_PT-DebounceTime-EN-6" />
-                  <Enumeration Text="70ms" Value="70" Id="%AID%_PT-DebounceTime-EN-7" />
-                  <Enumeration Text="80ms" Value="80" Id="%AID%_PT-DebounceTime-EN-8" />
-                  <Enumeration Text="90ms" Value="90" Id="%AID%_PT-DebounceTime-EN-9" />
+                  <Enumeration Text="keine" Value="0" Id="%AID%_PT-DebounceTime_EN-0" />
+                  <Enumeration Text="10ms" Value="10" Id="%AID%_PT-DebounceTime_EN-10" />
+                  <Enumeration Text="20ms" Value="20" Id="%AID%_PT-DebounceTime_EN-20" />
+                  <Enumeration Text="30ms" Value="30" Id="%AID%_PT-DebounceTime_EN-30" />
+                  <Enumeration Text="40ms" Value="40" Id="%AID%_PT-DebounceTime_EN-40" />
+                  <Enumeration Text="50ms" Value="50" Id="%AID%_PT-DebounceTime_EN-50" />
+                  <Enumeration Text="60ms" Value="60" Id="%AID%_PT-DebounceTime_EN-60" />
+                  <Enumeration Text="70ms" Value="70" Id="%AID%_PT-DebounceTime_EN-70" />
+                  <Enumeration Text="80ms" Value="80" Id="%AID%_PT-DebounceTime_EN-80" />
+                  <Enumeration Text="90ms" Value="90" Id="%AID%_PT-DebounceTime_EN-90" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>

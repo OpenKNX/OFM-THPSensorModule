@@ -18,134 +18,134 @@
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%012" Name="SensorTemperatureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="3" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="5" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%013" Name="SensorTemperatureAlign_%C%" ParameterType="%AID%_PT-TempCalibration" Text="Messwert kalibrieren" SuffixText="K" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="4" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%014" Name="SensorTemperatureWarn_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%015" Name="SensorTemperatureWarnL_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="°C" Value="5">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="6" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%016" Name="SensorTemperatureWarnH_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="°C" Value="30">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="8" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="14" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%017" Name="SensorTemperatureMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="10" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="0" />
               </Parameter>
               <!-- humidity parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%020" Name="SensorHumiditySendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%021" Name="SensorHumiditySendChangeAmount_%C%" ParameterType="%AID%_PT-HumOnChange" Text="     von mehr als" SuffixText="%" Value="0.5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="11" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="19" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%022" Name="SensorHumiditySendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="13" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="23" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%023" Name="SensorHumidityAlign_%C%" ParameterType="%AID%_PT-HumCalibration" Text="Messwert kalibrieren" SuffixText="%" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="14" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="24" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%024" Name="SensorHumidityWarn_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%025" Name="SensorHumidityWarnL_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="%" Value="30">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="16" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="28" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%026" Name="SensorHumidityWarnH_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="%" Value="80">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="32" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%027" Name="SensorHumidityMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="20" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="1" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%029" Name="SensorHumiditySend_%C%" ParameterType="%AID%_PT-DptSelect" Text="Wert senden als" Value="9">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="21" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="36" BitOffset="0" />
               </Parameter>
               <!-- absolute humidity parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%030" Name="SensorAbsHumiditySendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%031" Name="SensorAbsHumiditySendChangeAmount_%C%" ParameterType="%AID%_PT-AbsHumOnChange" Text="     von mehr als" SuffixText="g/m³" Value="0.5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="22" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="37" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%032" Name="SensorAbsHumiditySendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="24" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="41" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%033" Name="SensorAbsHumidityAlign_%C%" ParameterType="%AID%_PT-AbsHumCalibration" Text="Messwert kalibrieren" SuffixText="g/m³" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="25" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="42" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%034" Name="SensorAbsHumidityWarn_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%035" Name="SensorAbsHumidityWarnL_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="g/m³" Value="30">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="27" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="46" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%036" Name="SensorAbsHumidityWarnH_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="g/m³" Value="80">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="29" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="50" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%037" Name="SensorAbsHumidityMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="31" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="2" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%039" Name="SensorAbsHumiditySend_%C%" ParameterType="%AID%_PT-AbsHumDptSelect" Text="Wert senden als" Value="5" />
               <!-- dewpoint parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%040" Name="SensorDewPointSendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%041" Name="SensorDewPointSendChangeAmount_%C%" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="32" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="54" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%042" Name="SensorDewPointSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="34" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="58" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%043" Name="SensorDewPointAlign_%C%" ParameterType="%AID%_PT-TempCalibration" Text="Messwert kalibrieren" SuffixText="K" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="35" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="59" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%044" Name="SensorDewPointWarn_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%045" Name="SensorDewPointWarnL_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="°C" Value="-10">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="37" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="63" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%046" Name="SensorDewPointWarnH_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="°C" Value="15">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="39" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="67" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%047" Name="SensorDewPointMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="41" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="3" />
               </Parameter>
               <!-- pressure parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%050" Name="SensorPressureSendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%051" Name="SensorPressureSendChangeAmount_%C%" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="0.1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="42" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="71" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%052" Name="SensorPressureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="44" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="75" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%053" Name="SensorPressureAlign_%C%" ParameterType="%AID%_PT-PressCalibration" Text="Messwert kalibrieren" SuffixText="Pa" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="46" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="76" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%054" Name="SensorPressureWarn_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Alarme senden" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%055" Name="SensorPressureWarnL_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="Pa" Value="5">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="47" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="80" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%056" Name="SensorPressureWarnH_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="Pa" Value="30">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="49" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="84" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%057" Name="SensorPressureMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="51" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="4" />
               </Parameter>
-              <!-- binary input 0 parameters-->              
+              <!-- binary input 0 parameters -->
               <Parameter Id="%AID%_P-%T%%CCC%058" Name="Input0DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="53" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="89" BitOffset="0" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%059" Name="Input0ActionOpen_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geöffnet" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="0" />
+              <Parameter Id="%AID%_P-%T%%CCC%059" Name="Input0ActionOpen_%C%" ParameterType="%AID%_PT-OnOff" Text="Geöffnet" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="0" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%060" Name="Input0ActionClosed_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geschlossen" Value="1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="1" />
+              <Parameter Id="%AID%_P-%T%%CCC%060" Name="Input0ActionClosed_%C%" ParameterType="%AID%_PT-OnOff" Text="Geschlossen" Value="1" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="1" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%061" Name="Input0SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="55" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="90" BitOffset="0" />
               </Parameter>
-              <!-- binary input 1 parameters-->    
+              <!-- binary input 1 parameters -->
               <Parameter Id="%AID%_P-%T%%CCC%062" Name="Input1DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="57" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="91" BitOffset="0" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%063" Name="Input1ActionOpen_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geöffnet" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="2" />
+              <Parameter Id="%AID%_P-%T%%CCC%063" Name="Input1ActionOpen_%C%" ParameterType="%AID%_PT-OnOff" Text="Geöffnet" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="2" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%064" Name="Input1ActionClosed_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Geschlossen" Value="1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="52" BitOffset="3" />
+              <Parameter Id="%AID%_P-%T%%CCC%064" Name="Input1ActionClosed_%C%" ParameterType="%AID%_PT-OnOff" Text="Geschlossen" Value="1" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="3" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%065" Name="Input1SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="59" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="92" BitOffset="0" />
               </Parameter>
             </Parameters>
             
