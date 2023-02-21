@@ -88,12 +88,24 @@ void Sensorchannel::loop()
                     m_input0 = new_input0;
                     m_input0_debounce_millis = 0;
                     logInfoP(m_input0 ? "P0=1" : "P0=0");
-                    KoTHP_InputSCL_.value(m_input0, Dpt(1,1));
+
+                    if(m_input0) // new value = 1 (Geschlossen (Closed))
+                    {
+                        KoTHP_Input0_.value(ParamTHP_Input0ActionClosed_, Dpt(1,1));
+                        
+                    }
+                    else
+                    {
+                        KoTHP_Input0_.value(ParamTHP_Input0ActionOpen_, Dpt(1,1));
+                    }
                 }
             }            
         }
         else
             m_input0_debounce_millis = 0;
+
+        // ToDos:
+        // Send cyclic
 
         if(new_input1 != m_input1)
         {
