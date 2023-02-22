@@ -43,14 +43,8 @@
               </ParameterType>
               <ParameterType Id="%AID%_PT-DptSelect" Name="DptSelect">
                 <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="DPT 5.001 (1 Byte, Prozentwert)" Value="5" Id="%AID%_PT-DptSelect_EN-0" />
-                  <Enumeration Text="DPT 9.007 (2 Byte, Fließkommawert)" Value="9" Id="%AID%_PT-DptSelect_EN-1" />
-                </TypeRestriction>
-              </ParameterType>
-              <ParameterType Id="%AID%_PT-AbsHumDptSelect" Name="AbsHumDptSelect">
-                <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="DPT 9.* (2 Byte, g/m³)" Value="5" Id="%AID%_PT-AbsHumDptSelect_EN-0" />
-                  <Enumeration Text="DPT 9.029 (2 Byte, g/m³ (ab ETS 5.7))" Value="9" Id="%AID%_PT-AbsHumDptSelect_EN-1" />
+                  <Enumeration Text="DPT 5.001 (1 Byte, Prozentwert)" Value="5" Id="%AID%_PT-DptSelect_EN-5" />
+                  <Enumeration Text="DPT 9.007 (2 Byte, Fließkommawert)" Value="9" Id="%AID%_PT-DptSelect_EN-9" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-SendCycleSelection" Name="SendCycleSelection">

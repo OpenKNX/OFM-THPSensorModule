@@ -108,6 +108,8 @@ class Sensorchannel : public OpenKNX::Channel
         bool m_input1 = 0;
         uint32_t m_input0_debounce_millis = 0;
         uint32_t m_input1_debounce_millis = 0;
+        uint32_t m_input0_last_send_millis = 0;
+        uint32_t m_input1_last_send_millis = 0;
 
         uint32_t m_temperature_last_send_millis = 0;
         float m_temperature_last_send_value = -1000;

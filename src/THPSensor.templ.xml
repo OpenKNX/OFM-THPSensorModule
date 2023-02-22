@@ -78,11 +78,10 @@
               <Parameter Id="%AID%_P-%T%%CCC%037" Name="SensorAbsHumidityMinMax_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="18" BitOffset="2" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%039" Name="SensorAbsHumiditySend_%C%" ParameterType="%AID%_PT-AbsHumDptSelect" Text="Wert senden als" Value="5" />
               <!-- dewpoint parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%040" Name="SensorDewPointSendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%041" Name="SensorDewPointSendChangeAmount_%C%" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="54" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="54" BitOffset="0" /><!-- shared among dewpoint and binary input 0-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%042" Name="SensorDewPointSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="58" BitOffset="0" />
@@ -103,7 +102,7 @@
               <!-- pressure parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%050" Name="SensorPressureSendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
               <Parameter Id="%AID%_P-%T%%CCC%051" Name="SensorPressureSendChangeAmount_%C%" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="0.1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="71" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="71" BitOffset="0" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%052" Name="SensorPressureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="75" BitOffset="0" />
@@ -123,29 +122,29 @@
               </Parameter>
               <!-- binary input 0 parameters -->
               <Parameter Id="%AID%_P-%T%%CCC%058" Name="Input0DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="89" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="54" BitOffset="0" /><!-- shared among dewpoint and binary input 0-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%059" Name="Input0ActionOpen_%C%" ParameterType="%AID%_PT-OnOff" Text="Geöffnet" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="55" BitOffset="0" /><!-- shared among dewpoint and binary input 0-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%060" Name="Input0ActionClosed_%C%" ParameterType="%AID%_PT-OnOff" Text="Geschlossen" Value="1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="1" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="55" BitOffset="1" /><!-- shared among dewpoint and binary input 0-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%061" Name="Input0SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="90" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="56" BitOffset="0" /><!-- shared among dewpoint and binary input 0-->
               </Parameter>
               <!-- binary input 1 parameters -->
               <Parameter Id="%AID%_P-%T%%CCC%062" Name="Input1DebounceTime_%C%" ParameterType="%AID%_PT-DebounceTime" Text="Entprellung" Value="10" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="91" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="71" BitOffset="0" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%063" Name="Input1ActionOpen_%C%" ParameterType="%AID%_PT-OnOff" Text="Geöffnet" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="2" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="72" BitOffset="0" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%064" Name="Input1ActionClosed_%C%" ParameterType="%AID%_PT-OnOff" Text="Geschlossen" Value="1" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="3" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="72" BitOffset="1" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%065" Name="Input1SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="92" BitOffset="0" />
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="73" BitOffset="0" /><!-- shared among pressure and binary input 1-->
               </Parameter>
             </Parameters>
             
@@ -182,7 +181,6 @@
               <ParameterRef Id="%AID%_P-%T%%CCC%035_R-%T%%CCC%03501" RefId="%AID%_P-%T%%CCC%035" />
               <ParameterRef Id="%AID%_P-%T%%CCC%036_R-%T%%CCC%03601" RefId="%AID%_P-%T%%CCC%036" />
               <ParameterRef Id="%AID%_P-%T%%CCC%037_R-%T%%CCC%03701" RefId="%AID%_P-%T%%CCC%037" />
-              <ParameterRef Id="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901" RefId="%AID%_P-%T%%CCC%039" />
               <!-- dewpoint parameters-->
               <ParameterRef Id="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001" RefId="%AID%_P-%T%%CCC%040" />
               <ParameterRef Id="%AID%_P-%T%%CCC%041_R-%T%%CCC%04101" RefId="%AID%_P-%T%%CCC%041" />
@@ -229,11 +227,11 @@
               <ComObject Id="%AID%_O-%T%%CCC%010" Name="SensorHumMaxValue_%C%" Text="Max. Luftfeuchte lesen" Number="%K10%" FunctionText="Sensor %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1"/>
               <ComObject Id="%AID%_O-%T%%CCC%011" Name="SensorHumMinMaxReset_%C%" Text="Min/Max Luftfeuchte Reset" Number="%K11%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
               <!-- absolute humidity -->
-              <ComObject Id="%AID%_O-%T%%CCC%012" Name="SensorAbsHum_%C%" Text="Abs. Luftfeuchte" Number="%K12%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-9"/>
+              <ComObject Id="%AID%_O-%T%%CCC%012" Name="SensorAbsHum_%C%" Text="Abs. Luftfeuchte" Number="%K12%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-29"/>
               <ComObject Id="%AID%_O-%T%%CCC%013" Name="SensorAbsHumAlarmL_%C%" Text="Alarm Abs. Luftfeuchteunterschreitung" Number="%K13%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
               <ComObject Id="%AID%_O-%T%%CCC%014" Name="SensorAbsHumAlarmH_%C%" Text="Alarm Abs. Luftfeuchteüberschreitung" Number="%K14%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
-              <ComObject Id="%AID%_O-%T%%CCC%015" Name="SensorAbsHumMinValue_%C%" Text="Min. Abs. Luftfeuchte lesen" Number="%K15%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-9"/>
-              <ComObject Id="%AID%_O-%T%%CCC%016" Name="SensorAbsHumMaxValue_%C%" Text="Max. Abs. Luftfeuchte lesen" Number="%K16%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-9"/>
+              <ComObject Id="%AID%_O-%T%%CCC%015" Name="SensorAbsHumMinValue_%C%" Text="Min. Abs. Luftfeuchte lesen" Number="%K15%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-29"/>
+              <ComObject Id="%AID%_O-%T%%CCC%016" Name="SensorAbsHumMaxValue_%C%" Text="Max. Abs. Luftfeuchte lesen" Number="%K16%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-29"/>
               <ComObject Id="%AID%_O-%T%%CCC%017" Name="SensorAbsHumMinMaxReset_%C%" Text="Min/Max Abs. Luftfeuchte Reset" Number="%K17%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
               <!-- dewpoint -->
               <ComObject Id="%AID%_O-%T%%CCC%018" Name="SensorDewPoint_%C%" Text="Taupunkt" Number="%K18%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-1" />
@@ -274,13 +272,11 @@
               <ComObjectRef Id="%AID%_O-%T%%CCC%011_R-%T%%CCC%01101" RefId="%AID%_O-%T%%CCC%011" />
               <!-- absolute humidity -->
               <ComObjectRef Id="%AID%_O-%T%%CCC%012_R-%T%%CCC%01201" RefId="%AID%_O-%T%%CCC%012" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%012_R-%T%%CCC%01202" RefId="%AID%_O-%T%%CCC%012" ObjectSize="2 Bytes" DatapointType="DPST-9-29" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%013_R-%T%%CCC%01301" RefId="%AID%_O-%T%%CCC%013" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%014_R-%T%%CCC%01401" RefId="%AID%_O-%T%%CCC%014" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%015_R-%T%%CCC%01501" RefId="%AID%_O-%T%%CCC%015" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%015_R-%T%%CCC%01502" RefId="%AID%_O-%T%%CCC%015" ObjectSize="2 Bytes" DatapointType="DPST-9-29" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%016_R-%T%%CCC%01601" RefId="%AID%_O-%T%%CCC%016" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%016_R-%T%%CCC%01602" RefId="%AID%_O-%T%%CCC%016" ObjectSize="2 Bytes" DatapointType="DPST-9-29" />
+
               <ComObjectRef Id="%AID%_O-%T%%CCC%017_R-%T%%CCC%01701" RefId="%AID%_O-%T%%CCC%017" />
               <!-- dewpoint -->
               <ComObjectRef Id="%AID%_O-%T%%CCC%018_R-%T%%CCC%01801" RefId="%AID%_O-%T%%CCC%018" />
@@ -367,7 +363,7 @@
                       </when>
                     </choose>
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%037_R-%T%%CCC%03701" />
-                    <ParameterRefRef RefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901" />
+                    <!--<ParameterRefRef RefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901" />-->
                     <ParameterSeparator Id="%AID%_PS-" Text=" " />
                     <ParameterSeparator Id="%AID%_PS-" Text="Taupunkt" UIHint="Headline" />
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%040_R-%T%%CCC%04001" />
@@ -483,27 +479,12 @@
                         </choose>
                         <choose ParamRefId="%AID%_P-%T%%CCC%037_R-%T%%CCC%03701">
                           <when test="1">
-                            <choose ParamRefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901">
-                              <when test="5">
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%015_R-%T%%CCC%01501" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%016_R-%T%%CCC%01601" />
-                              </when>
-                              <when test="9">
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%015_R-%T%%CCC%01502" />
-                                <ComObjectRefRef RefId="%AID%_O-%T%%CCC%016_R-%T%%CCC%01602" />
-                              </when>
-                            </choose>
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%015_R-%T%%CCC%01501" />
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%016_R-%T%%CCC%01601" />
                             <ComObjectRefRef RefId="%AID%_O-%T%%CCC%017_R-%T%%CCC%01701" />
                           </when>
                         </choose>
-                        <choose ParamRefId="%AID%_P-%T%%CCC%039_R-%T%%CCC%03901">
-                          <when test="5">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%012_R-%T%%CCC%01201" />
-                          </when>
-                          <when test="9">
-                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%012_R-%T%%CCC%01202" />
-                          </when>
-                        </choose>
+                          <ComObjectRefRef RefId="%AID%_O-%T%%CCC%012_R-%T%%CCC%01201" />
                         <choose ParamRefId="%AID%_P-%T%%CCC%044_R-%T%%CCC%04401">
                           <when test="1">
                             <ComObjectRefRef RefId="%AID%_O-%T%%CCC%019_R-%T%%CCC%01901" />

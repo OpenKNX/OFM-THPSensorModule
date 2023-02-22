@@ -74,6 +74,7 @@ void Sensorchannel::loop()
     {
         bool new_input0 = !digitalRead(m_pin0);
         bool new_input1 = !digitalRead(m_pin1);
+        bool send = false;
 
         if(new_input0 != m_input0)
         {
@@ -88,30 +89,55 @@ void Sensorchannel::loop()
                     m_input0 = new_input0;
                     m_input0_debounce_millis = 0;
                     logInfoP(m_input0 ? "P0=1" : "P0=0");
-
-                    if(m_input0) // new value = 1 (Geschlossen (Closed))
-                    {
-                        KoTHP_Input0_.value(ParamTHP_Input0ActionClosed_, Dpt(1,1));
-                        
-                    }
-                    else
-                    {
-                        KoTHP_Input0_.value(ParamTHP_Input0ActionOpen_, Dpt(1,1));
-                    }
+                    send = true;
                 }
             }            
         }
         else
+        {
             m_input0_debounce_millis = 0;
 
-        // ToDos:
-        // Send cyclic
+            if(ParamTHP_Input0SendCycle_)
+                if(delayCheck(m_input0_last_send_millis, ParamTHP_Input0SendCycle_ * 60000) || m_input0_last_send_millis == 0)
+                    send = true;
+        }
+        if(send)
+        {
+            KoTHP_Input0_.value(m_input0 ? ParamTHP_Input0ActionClosed_ : ParamTHP_Input0ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+            m_input0_last_send_millis = millis();
+        }
 
+
+        send = false;
         if(new_input1 != m_input1)
         {
-            m_input1 = new_input1;
-            log(m_input1 ? "P1=1" : "P1=0");
-            //KoTHP_InputSDA_.value(m_input1, Dpt(1,1));
+            if(!m_input1_debounce_millis)
+            {
+                m_input1_debounce_millis = millis();
+            }
+            else
+            {
+                if(delayCheck(m_input1_debounce_millis, ParamTHP_Input1DebounceTime_))
+                {
+                    m_input1 = new_input1;
+                    m_input1_debounce_millis = 0;
+                    logInfoP(m_input1 ? "P1=1" : "P1=0");
+                    send = true;
+                }
+            }            
+        }
+        else
+        {
+            m_input1_debounce_millis = 0;
+
+            if(ParamTHP_Input1SendCycle_)
+                if(delayCheck(m_input1_last_send_millis, ParamTHP_Input1SendCycle_ * 60000) || m_input1_last_send_millis == 0)
+                    send = true;
+        }
+        if(send)
+        {
+            KoTHP_Input1_.value(m_input1 ? ParamTHP_Input1ActionClosed_ : ParamTHP_Input1ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+            m_input1_last_send_millis = millis();
         }
     }
 
