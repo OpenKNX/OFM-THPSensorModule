@@ -10,7 +10,7 @@ class THPSensorModule : public OpenKNX::Module
 {
 
   public:
-    THPSensorModule();
+    THPSensorModule(const uint8_t* gpioPins);
     void loop() override;
     void loop2() override;
     void setup() override;
@@ -27,6 +27,7 @@ class THPSensorModule : public OpenKNX::Module
     static THPSensorModule *_instance;
     void processInputKo(GroupObject &ko);
     uint8_t _curLoopChannel = 0;
+    const uint8_t* _gpioPins;
 
     HWSensors _HWSensors = HWSensors();
     Sensorchannel *_Sensorchannels[THP_ChannelCount];

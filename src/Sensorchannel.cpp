@@ -37,35 +37,31 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
     
     // Debug
-    log("Param SensorTemperatureSendChangeAmount: %i", ParamTHP_SensorTemperatureSendChangeAmount_);
-    log("Param SensorTemperatureSendCycle: %i", ParamTHP_SensorTemperatureSendCycle_);
-
-    Serial.print(" ParamTempAlign: ");
-    Serial.print(ParamTempAlign());
-    Serial.print(" ParamTempWarnL: ");
-    Serial.print(ParamTempWarnL());
-    Serial.print(" ParamTempWarnH: ");
-    Serial.print(ParamTempWarnH());
-    Serial.print(" ParamTempMinMax: ");
-    Serial.print(ParamTempMinMax());
-    Serial.println("");
-    Serial.print(" ParamHumSendChangeAmount: ");
-    Serial.print(ParamHumSendChangeAmount());
-    Serial.print(" ParamHumSendCycle: ");
-    Serial.print(ParamHumSendCycle());
-    Serial.print(" ParamHumAlign: ");
-    Serial.print(ParamHumAlign());
-    Serial.print(" ParamHumWarnL: ");
-    Serial.print(ParamHumWarnL());
-    Serial.print(" ParamHumWarnH: ");
-    Serial.print(ParamHumWarnH());
-    Serial.print(" ParamHumMinMax: ");
-    Serial.print(ParamHumMinMax());
-    Serial.print(" ParamHumDPT: ");
-    Serial.print(ParamHumDPT());
-    Serial.println("");
-
+    logDebugP("Setup");
+    logDebug("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
+    logDebug("ParamTHP_SensorTemperatureSendChangeAmount_: %i", ParamTHP_SensorTemperatureSendChangeAmount_);
+    logDebug("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
+    logDebug("ParamTHP_SensorTemperatureAlign_           : %i", ParamTHP_SensorTemperatureAlign_           );
+    logDebug("ParamTHP_SensorTemperatureWarnL_           : %i", ParamTHP_SensorTemperatureWarnL_           );
+    logDebug("ParamTHP_SensorTemperatureWarnH_           : %i", ParamTHP_SensorTemperatureWarnH_           );
+    logDebug("ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
     
+    logDebug("ParamTHP_SensorHumiditySendChangeAmount_   : %i", ParamTHP_SensorHumiditySendChangeAmount_   );
+    logDebug("ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
+    logDebug("ParamTHP_SensorHumidityAlign_              : %i", ParamTHP_SensorHumidityAlign_              );
+    logDebug("ParamTHP_SensorHumidityWarnL_              : %i", ParamTHP_SensorHumidityWarnL_              );
+    logDebug("ParamTHP_SensorHumidityWarnH_              : %i", ParamTHP_SensorHumidityWarnH_              );
+    logDebug("ParamTHP_SensorHumidityMinMax_             : %i", ParamTHP_SensorHumidityMinMax_             );
+    logDebug("ParamTHP_SensorHumiditySend_               : %i", ParamTHP_SensorHumiditySend_               );
+    
+    logDebug("ParamTHP_Input0DebounceTime_               : %i", ParamTHP_Input0DebounceTime_               );
+    logDebug("ParamTHP_Input0ActionOpen_                 : %i", ParamTHP_Input0ActionOpen_                 );
+    logDebug("ParamTHP_Input0ActionClosed_               : %i", ParamTHP_Input0ActionClosed_               );
+    logDebug("ParamTHP_Input0SendCycle_                  : %i", ParamTHP_Input0SendCycle_                  );
+    logDebug("ParamTHP_Input1DebounceTime_               : %i", ParamTHP_Input1DebounceTime_               );
+    logDebug("ParamTHP_Input1ActionOpen_                 : %i", ParamTHP_Input1ActionOpen_                 );
+    logDebug("ParamTHP_Input1ActionClosed_               : %i", ParamTHP_Input1ActionClosed_               );
+    logDebug("ParamTHP_Input1SendCycle_                  : %i", ParamTHP_Input1SendCycle_                  );
 }
 
 void Sensorchannel::loop()
@@ -144,8 +140,6 @@ void Sensorchannel::loop()
     float temperature = m_hwSensors->GetTemperature(_channelIndex);
     if(!isnan(temperature))
     {
-        //Serial.print("temp: ");
-        //Serial.println(temperature);
         uint8_t send_cycle = ParamTHP_SensorTemperatureSendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
@@ -155,7 +149,7 @@ void Sensorchannel::loop()
         }
         if(!sendnow)
         {
-            float SendTresh = ParamTempSendChangeAmount();
+            float SendTresh = ParamTHP_SensorTemperatureSendChangeAmount_;
             if(SendTresh != 0)
             {
                 float current_temp_diff = temperature - m_temperature_last_send_value;
@@ -165,42 +159,42 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            GetTempKO().value(temperature + ParamTempAlign(), Dpt(9,1));
+            KoTHP_SensorTemp_.value(temperature + ParamTHP_SensorTemperatureAlign_, Dpt(9,1));
             m_temperature_last_send_millis = millis();
             m_temperature_last_send_value = temperature;
         }
         else
         {
-            GetTempKO().valueNoSend(temperature + ParamTempAlign(), Dpt(9,1));
+            KoTHP_SensorTemp_.valueNoSend(temperature + ParamTHP_SensorTemperatureAlign_, Dpt(9,1));
         }
 
-        if(ParamTempMinMax())   // Min Max values enabled
+        if(ParamTHP_SensorTemperatureMinMax_)   // Min Max values enabled
         {
-            if(temperature + ParamTempAlign() > (float)GetTempMaxValueKO().value(Dpt(9,1)))
+            if(temperature + ParamTHP_SensorTemperatureAlign_ > (float)KoTHP_SensorTempMaxValue_.value(Dpt(9,1)))
             {
-                GetTempMaxValueKO().valueNoSend(temperature, Dpt(9,1));
+                KoTHP_SensorTempMaxValue_.valueNoSend(temperature, Dpt(9,1));
             }
-            if(temperature + ParamTempAlign() < (float)GetTempMinValueKO().value(Dpt(9,1)))
+            if(temperature + ParamTHP_SensorTemperatureAlign_ < (float)KoTHP_SensorTempMinValue_.value(Dpt(9,1)))
             {
-                GetTempMinValueKO().valueNoSend(temperature, Dpt(9,1));
+                KoTHP_SensorTempMinValue_.valueNoSend(temperature, Dpt(9,1));
             }
         }
 
-        if(!(ParamTempWarnL() == 0 && ParamTempWarnH() == 0))   // not both are 0 (=> feature disabled)
+        if(!(ParamTHP_SensorTemperatureWarnL_ == 0 && ParamTHP_SensorTemperatureWarnH_ == 0))   // not both are 0 (=> feature disabled)
         {
-            bool AlarmH = temperature + ParamTempAlign() > ParamTempWarnH();
-            if( (bool)GetTempAlarmHKO().value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+            bool AlarmH = temperature + ParamTHP_SensorTemperatureAlign_ > ParamTHP_SensorTemperatureWarnH_;
+            if( (bool)KoTHP_SensorTempAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
                 (AlarmH && millis() - m_temperature_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetTempAlarmHKO().value(AlarmH, Dpt(1,5));
+                KoTHP_SensorTempAlarmH_.value(AlarmH, Dpt(1,5));
                 m_temperature_alarmH_last_send_millis = millis();
             }
 
-            bool AlarmL = temperature + ParamTempAlign() < ParamTempWarnL();
-            if( (bool)GetTempAlarmLKO().value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+            bool AlarmL = temperature + ParamTHP_SensorTemperatureAlign_ < ParamTHP_SensorTemperatureWarnL_;
+            if( (bool)KoTHP_SensorTempAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
                 (AlarmL && millis() - m_temperature_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetTempAlarmLKO().value(AlarmL, Dpt(1,5));
+                KoTHP_SensorTempAlarmL_.value(AlarmL, Dpt(1,5));
                 m_temperature_alarmL_last_send_millis = millis();
             }
         }
@@ -209,11 +203,7 @@ void Sensorchannel::loop()
     float humidity = m_hwSensors->GetHumidity(_channelIndex);
     if(!isnan(humidity))
     {
-        //Serial.print("hum: ");
-        //Serial.println(humidity);
-        //Serial.print("hum+align: ");
-        //Serial.println(humidity + ParamHumAlign());
-        uint8_t send_cycle = ParamHumSendCycle();
+        uint8_t send_cycle = ParamTHP_SensorHumiditySendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
         if(send_cycle)
@@ -222,7 +212,7 @@ void Sensorchannel::loop()
         }
         if(!sendnow)
         {
-            float SendTresh = ParamHumSendChangeAmount();
+            float SendTresh = ParamTHP_SensorAbsHumiditySendChangeAmount_;
             if(SendTresh != 0)
             {
                 float current_diff = humidity - m_humidity_last_send_value;
@@ -232,42 +222,42 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            GetHumKO().value(humidity + ParamHumAlign(), HumKODPT);
+            KoTHP_SensorHum_.value(humidity + ParamTHP_SensorHumidityAlign_, HumKODPT);
             m_humidity_last_send_millis = millis();
             m_humidity_last_send_value = humidity;
         }
         else
         {
-            GetHumKO().valueNoSend(humidity + ParamHumAlign(), HumKODPT);
+            KoTHP_SensorHum_.valueNoSend(humidity + ParamTHP_SensorHumidityAlign_, HumKODPT);
         }
 
-        if(ParamHumMinMax())   // Min Max values enabled
+        if(ParamTHP_SensorHumidityMinMax_)   // Min Max values enabled
         {
-            if(humidity + ParamHumAlign() > (float)GetHumMaxValueKO().value(HumKODPT))
+            if(humidity + ParamTHP_SensorHumidityAlign_ > (float)KoTHP_SensorHumMaxValue_.value(HumKODPT))
             {
-                GetHumMaxValueKO().valueNoSend(humidity, HumKODPT);
+                KoTHP_SensorHumMaxValue_.valueNoSend(humidity, HumKODPT);
             }
-            if(humidity + ParamHumAlign() < (float)GetHumMinValueKO().value(HumKODPT))
+            if(humidity + ParamTHP_SensorHumidityAlign_ < (float)KoTHP_SensorHumMinValue_.value(HumKODPT))
             {
-                GetHumMinValueKO().valueNoSend(humidity, HumKODPT);
+                KoTHP_SensorHumMinValue_.valueNoSend(humidity, HumKODPT);
             }
         }
 
-        if(!(ParamHumWarnL() == 0 && ParamHumWarnH() == 0))   // not both are 0 (=> feature disabled)
+        if(!(ParamTHP_SensorHumidityWarnL_ == 0 && ParamTHP_SensorHumidityWarnH_ == 0))   // not both are 0 (=> feature disabled)
         {
-            bool AlarmH = humidity + ParamHumAlign() > ParamHumWarnH();
-            if( (bool)GetHumAlarmHKO().value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+            bool AlarmH = humidity + ParamTHP_SensorHumidityAlign_ > ParamTHP_SensorHumidityWarnH_;
+            if( (bool)KoTHP_SensorHumAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
                 (AlarmH && millis() - m_humidity_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetHumAlarmHKO().value(AlarmH, Dpt(1,5));
+                KoTHP_SensorHumAlarmH_.value(AlarmH, Dpt(1,5));
                 m_humidity_alarmH_last_send_millis = millis();
             }
 
-            bool AlarmL = humidity + ParamHumAlign() < ParamHumWarnL();
-            if( (bool)GetHumAlarmLKO().value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+            bool AlarmL = humidity + ParamTHP_SensorHumidityAlign_ < ParamTHP_SensorHumidityWarnL_;
+            if( (bool)KoTHP_SensorHumAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
                 (AlarmL && millis() - m_humidity_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetHumAlarmLKO().value(AlarmL, Dpt(1,5));
+                KoTHP_SensorHumAlarmL_.value(AlarmL, Dpt(1,5));
                 m_humidity_alarmL_last_send_millis = millis();
             }
         }
@@ -281,7 +271,7 @@ void Sensorchannel::loop()
         // Serial.print("abshumidity+align: ");
         // Serial.println(abshumidity + ParamAbsHumAlign());
 
-        uint8_t send_cycle = ParamAbsHumSendCycle();
+        uint8_t send_cycle = ParamTHP_SensorAbsHumiditySendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
         if(send_cycle)
@@ -290,7 +280,7 @@ void Sensorchannel::loop()
         }
         if(!sendnow)
         {
-            float SendTresh = ParamAbsHumSendChangeAmount();
+            float SendTresh = ParamTHP_SensorAbsHumiditySendChangeAmount_;
             if(SendTresh != 0)
             {
                 float current_diff = abshumidity - m_abshumidity_last_send_value;
@@ -300,42 +290,42 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            GetAbsHumKO().value(abshumidity + ParamAbsHumAlign(), Dpt(9,29));
+            KoTHP_SensorAbsHum_.value(abshumidity + ParamTHP_SensorAbsHumidityAlign_, Dpt(9,29));
             m_abshumidity_last_send_millis = millis();
             m_abshumidity_last_send_value = abshumidity;
         }
         else
         {
-            GetAbsHumKO().valueNoSend(abshumidity + ParamAbsHumAlign(), Dpt(9,29));
+            KoTHP_SensorAbsHum_.valueNoSend(abshumidity + ParamTHP_SensorAbsHumidityAlign_, Dpt(9,29));
         }
 
-        if(ParamAbsHumMinMax())   // Min Max values enabled
+        if(ParamTHP_SensorAbsHumidityMinMax_)   // Min Max values enabled
         {
-            if(abshumidity + ParamAbsHumAlign() > (float)GetAbsHumMaxValueKO().value(Dpt(9,29)))
+            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ > (float)KoTHP_SensorAbsHumMaxValue_.value(Dpt(9,29)))
             {
-                GetAbsHumMaxValueKO().valueNoSend(abshumidity, Dpt(9,29));
+                KoTHP_SensorAbsHumMaxValue_.valueNoSend(abshumidity, Dpt(9,29));
             }
-            if(abshumidity + ParamAbsHumAlign() < (float)GetAbsHumMinValueKO().value(Dpt(9,29)))
+            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ < (float)KoTHP_SensorAbsHumMinValue_.value(Dpt(9,29)))
             {
-                GetAbsHumMinValueKO().valueNoSend(abshumidity, Dpt(9,29));
+                KoTHP_SensorAbsHumMinValue_.valueNoSend(abshumidity, Dpt(9,29));
             }
         }
 
-        if(!(ParamAbsHumWarnL() == 0 && ParamAbsHumWarnH() == 0))   // not both are 0 (=> feature disabled)
+        if(!(ParamTHP_SensorAbsHumidityWarnL_ == 0 && ParamTHP_SensorAbsHumidityWarnH_ == 0))   // not both are 0 (=> feature disabled)
         {
-            bool AlarmH = abshumidity + ParamAbsHumAlign() > ParamAbsHumWarnH();
-            if( (bool)GetAbsHumAlarmHKO().value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+            bool AlarmH = abshumidity + ParamTHP_SensorAbsHumidityAlign_ > ParamTHP_SensorAbsHumidityWarnH_;
+            if( (bool)KoTHP_SensorAbsHumAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
                 (AlarmH && millis() - m_abshumidity_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetAbsHumAlarmHKO().value(AlarmH, Dpt(1,5));
+                KoTHP_SensorAbsHumAlarmH_.value(AlarmH, Dpt(1,5));
                 m_abshumidity_alarmH_last_send_millis = millis();
             }
 
-            bool AlarmL = abshumidity + ParamAbsHumAlign() < ParamAbsHumWarnL();
-            if( (bool)GetAbsHumAlarmLKO().value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+            bool AlarmL = abshumidity + ParamTHP_SensorAbsHumidityAlign_ < ParamTHP_SensorAbsHumidityWarnL_;
+            if( (bool)KoTHP_SensorAbsHumAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
                 (AlarmL && millis() - m_abshumidity_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetAbsHumAlarmLKO().value(AlarmL, Dpt(1,5));
+                KoTHP_SensorAbsHumAlarmL_.value(AlarmL, Dpt(1,5));
                 m_abshumidity_alarmL_last_send_millis = millis();
             }
         }

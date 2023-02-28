@@ -4,6 +4,8 @@
 #include "HWSensors.h"
 #include "OpenKNX.h"
 
+/*
+
 #define GetTempKO()  knx.getGroupObject(THP_KoSensorTemp_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 #define GetTempAlarmLKO()  knx.getGroupObject(THP_KoSensorTempAlarmL_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
 #define GetTempAlarmHKO()  knx.getGroupObject(THP_KoSensorTempAlarmH_ + (THP_KoBlockSize * _channelIndex) + THP_KoOffset)
@@ -81,6 +83,8 @@
 #define ParamPressMinMax() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureMinMax_)
 #define ParamPressDPT() knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize * _channelIndex + THP_SensorPressureSend_)
 
+*/
+
 // converts a relative (to the channel start) KO number to an absolute KO number of the device
 #define AbsKO(asap)    (THP_KoOffset + THP_KoBlockSize * _channelIndex + asap)
 
@@ -89,7 +93,7 @@
 
 
 #define TempKODPT       (Dpt(9,1))
-#define HumKODPT        (ParamHumDPT()==5?Dpt(5,1):Dpt(9,7))
+#define HumKODPT        (THP_SensorHumiditySend_==5?Dpt(5,1):Dpt(9,7))
 #define AbsHumKODPT     Dpt(9,29)
 #define DewPointKODPT   Dpt(9,1)
 #define PressKODPT      Dpt(9,6)

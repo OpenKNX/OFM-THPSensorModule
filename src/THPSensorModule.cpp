@@ -2,9 +2,10 @@
 
 THPSensorModule *THPSensorModule::_instance = nullptr;
 
-THPSensorModule::THPSensorModule()
+THPSensorModule::THPSensorModule(const uint8_t* gpioPins)
 {
     THPSensorModule::_instance = this;
+    _gpioPins = gpioPins;
 }
 
 THPSensorModule *THPSensorModule::instance()
@@ -19,40 +20,23 @@ const std::string THPSensorModule::name()
 
 const std::string THPSensorModule::version()
 {
-    return "0.0dev";
+    return "0.1dev";
 }
 
 void THPSensorModule::setup()
 {
-    // Debug
-    //log("paramScenes: %i", ParamSOM_Scenes);
-    //log("paramExternal: %i", ParamSOM_External);
-    //log("paramLock: %i", ParamSOM_Lock);
-    //log("paramDayNight: %i", ParamSOM_DayNight);
-    //log("paramVolumeDay: %i", ParamSOM_VolumeDay);
-    //log("paramVolumeNight: %i", ParamSOM_VolumeNight);
-    //log("paramVolumeDay: %i", ParamSOM_VolumeDay);
-
-    const uint8_t pins[] = {
-            THPCHANNEL_A_SCL,THPCHANNEL_A_SDA,
-            THPCHANNEL_B_SCL,THPCHANNEL_B_SDA,
-            THPCHANNEL_C_SCL,THPCHANNEL_C_SDA,
-            THPCHANNEL_D_SCL,THPCHANNEL_D_SDA,
-            THPCHANNEL_E_SCL,THPCHANNEL_E_SDA,
-            THPCHANNEL_F_SCL,THPCHANNEL_F_SDA,
-            THPCHANNEL_G_SCL,THPCHANNEL_G_SDA,
-            THPCHANNEL_H_SCL,THPCHANNEL_H_SDA};
+    logTraceP("setup");
 
     uint8_t sensortypes[THP_ChannelCount];
         for(int i=0;i<THP_ChannelCount;i++)
             sensortypes[i] = knx.paramByte(THP_ParamBlockOffset+THP_ParamBlockSize*i+THP_Sensortype_);
 
-    _HWSensors.Setup(pins, sensortypes);
+    _HWSensors.Setup(_gpioPins, sensortypes);
 
     for (uint8_t i = 0; i < THP_ChannelCount; i++)
     {
         _Sensorchannels[i] = new Sensorchannel();
-        _Sensorchannels[i]->Setup(pins[i*2], pins[(i*2)+1], i, &_HWSensors);
+        _Sensorchannels[i]->Setup(_gpioPins[i*2], _gpioPins[(i*2)+1], i, &_HWSensors);
     }
 }
 
