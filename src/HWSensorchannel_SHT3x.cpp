@@ -21,11 +21,6 @@ void HWSensorchannel_SHT3x::Setup(uint8_t pin0, uint8_t pin1)
 
 bool HWSensorchannel_SHT3x::Loop()
 {
-    //Serial.print("HWSensorchannel_SHT3x::Loop ");
-    //Serial.print(m_pin0);
-    //Serial.print(" ");
-    //Serial.println(m_state);
-
     switch(m_state)
     {
         case 0:

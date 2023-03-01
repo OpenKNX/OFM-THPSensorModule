@@ -2,6 +2,7 @@
 
 #include "HWSensorchannel.h"
 #include "knxprod.h"
+#include "OpenKNX.h"
 
 
 

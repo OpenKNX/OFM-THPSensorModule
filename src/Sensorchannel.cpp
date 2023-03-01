@@ -18,7 +18,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
     if(ParamTHP_Sensortype_ == 99)  // act as binary input
     {
-        log("Setting INPUT_PULLUP to %d", m_pin0); // DEBUG
+        logDebugP("Setting INPUT_PULLUP to %d", m_pin0);
         pinMode(m_pin0, INPUT_PULLUP);
         pinMode(m_pin1, INPUT_PULLUP);
     }
@@ -266,10 +266,6 @@ void Sensorchannel::loop()
     if(!isnan(humidity) &&!isnan(temperature))
     {
         float abshumidity = CalcAbsHumidity(humidity, temperature);
-        // Serial.print("abshumidity: ");
-        // Serial.println(abshumidity);
-        // Serial.print("abshumidity+align: ");
-        // Serial.println(abshumidity + ParamAbsHumAlign());
 
         uint8_t send_cycle = ParamTHP_SensorAbsHumiditySendCycle_;
         uint32_t send_millis = send_cycle * 60000;

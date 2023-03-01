@@ -42,17 +42,14 @@ HWSensorchannel* HWSensors::CreateHWSensorchannel(uint8_t sensortype)
 
 void HWSensors::Loop()
 {
-    //SERIAL_DEBUG.print("HWSensors::loop(): ");
     //query one sensor at a time
     bool nextsensor = true;
     if(m_HWSensorchannels[m_Loop_i] != nullptr)
     {
-        //SERIAL_DEBUG.println(m_Loop_i);
         nextsensor = m_HWSensorchannels[m_Loop_i]->Loop();
     }
     if(nextsensor)
     {
-        //SERIAL_DEBUG.println("HWSensors::loop(): next");
         m_Loop_i++;
         if(m_Loop_i >= THP_ChannelCount)
             m_Loop_i = 0;
