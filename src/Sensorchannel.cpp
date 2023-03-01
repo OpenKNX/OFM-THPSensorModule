@@ -331,7 +331,7 @@ void Sensorchannel::loop()
         }
 
         float dewpoint = CalcDewPoint(humidity, temperature);
-        send_cycle = ParamDewPointSendCycle();
+        send_cycle = ParamTHP_SensorDewPointSendCycle_;
         send_millis = send_cycle * 60000;
         sendnow = false;
         if(send_cycle)
@@ -340,7 +340,7 @@ void Sensorchannel::loop()
         }
         if(!sendnow)
         {
-            float SendTresh = ParamDewPointSendChangeAmount();
+            float SendTresh = ParamTHP_SensorDewPointSendChangeAmount_;
             if(SendTresh != 0)
             {
                 float current_diff = dewpoint - m_dewpoint_last_send_value;
@@ -350,49 +350,49 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            GetDewPointKO().value(dewpoint + ParamDewPointAlign(), Dpt(9,1));
+            KoTHP_SensorDewPoint_.value(dewpoint + ParamTHP_SensorDewPointAlign_, Dpt(9,1));
             m_dewpoint_last_send_millis = millis();
             m_dewpoint_last_send_value = dewpoint;
         }
         else
         {
-            GetDewPointKO().valueNoSend(dewpoint + ParamDewPointAlign(), Dpt(9,1));
+            KoTHP_SensorDewPoint_.valueNoSend(dewpoint + ParamTHP_SensorDewPointAlign_, Dpt(9,1));
         }
 
-        if(ParamDewPointMinMax())   // Min Max values enabled
+        if(ParamTHP_SensorDewPointMinMax_)   // Min Max values enabled
         {
-            if(dewpoint + ParamDewPointAlign() > (float)GetDewPointMaxValueKO().value(Dpt(9,1)))
+            if(dewpoint + ParamTHP_SensorDewPointAlign_ > (float)KoTHP_SensorDewPointMaxValue_.value(Dpt(9,1)))
             {
-                GetDewPointMaxValueKO().valueNoSend(dewpoint, Dpt(9,1));
+                KoTHP_SensorDewPointMaxValue_.valueNoSend(dewpoint, Dpt(9,1));
             }
-            if(dewpoint + ParamDewPointAlign() < (float)GetDewPointMinValueKO().value(Dpt(9,1)))
+            if(dewpoint + ParamTHP_SensorDewPointAlign_ < (float)KoTHP_SensorDewPointMinValue_.value(Dpt(9,1)))
             {
-                GetDewPointMinValueKO().valueNoSend(dewpoint, Dpt(9,1));
+                KoTHP_SensorDewPointMinValue_.valueNoSend(dewpoint, Dpt(9,1));
             }
         }
 
-        if(!(ParamDewPointWarnL() == 0 && ParamDewPointWarnH() == 0))   // not both are 0 (=> feature disabled)
+        if(!(ParamTHP_SensorDewPointWarnL_ == 0 && ParamTHP_SensorDewPointWarnH_ == 0))   // not both are 0 (=> feature disabled)
         {
-            bool AlarmH = dewpoint + ParamDewPointAlign() > ParamDewPointWarnH();
-            if( (bool)GetDewPointAlarmHKO().value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+            bool AlarmH = dewpoint + ParamTHP_SensorDewPointAlign_ > ParamTHP_SensorDewPointWarnH_;
+            if( (bool)KoTHP_SensorDewPointAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
                 (AlarmH && millis() - m_dewpoint_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetDewPointAlarmHKO().value(AlarmH, Dpt(1,5));
+                KoTHP_SensorDewPointAlarmH_.value(AlarmH, Dpt(1,5));
                 m_dewpoint_alarmH_last_send_millis = millis();
             }
 
-            bool AlarmL = dewpoint + ParamDewPointAlign() < ParamDewPointWarnL();
-            if( (bool)GetDewPointAlarmLKO().value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+            bool AlarmL = dewpoint + ParamTHP_SensorDewPointAlign_ < ParamTHP_SensorDewPointWarnL_;
+            if( (bool)KoTHP_SensorDewPointAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
                 (AlarmL && millis() - m_dewpoint_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetDewPointAlarmLKO().value(AlarmL, Dpt(1,5));
+                KoTHP_SensorDewPointAlarmL_.value(AlarmL, Dpt(1,5));
                 m_dewpoint_alarmL_last_send_millis = millis();
             }
         }
     }
 
     float pressure = m_hwSensors->GetPressure(_channelIndex);
-    uint32_t send_cycle = ParamPressSendCycle();
+    uint32_t send_cycle = ParamTHP_SensorPressureSendCycle_;
     uint32_t send_millis = send_cycle * 60000;
     bool sendnow = false;
     if(!isnan(pressure) )
@@ -403,7 +403,7 @@ void Sensorchannel::loop()
         }
         if(!sendnow)
         {
-            float SendTresh = ParamPressSendChangeAmount();
+            float SendTresh = ParamTHP_SensorPressureSendChangeAmount_;
             if(SendTresh != 0)
             {
                 float current_diff = pressure - m_pressure_last_send_value;
@@ -413,42 +413,42 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            GetPressKO().value(pressure + ParamPressAlign(), Dpt(9,6));
+            KoTHP_SensorPress_.value(pressure + ParamTHP_SensorPressureAlign_, Dpt(9,6));
             m_pressure_last_send_millis = millis();
             m_pressure_last_send_value = pressure;
         }
         else
         {
-            GetPressKO().valueNoSend(pressure + ParamPressAlign(), Dpt(9,6));
+            KoTHP_SensorPress_.valueNoSend(pressure + ParamTHP_SensorPressureAlign_, Dpt(9,6));
         }
 
-        if(ParamPressMinMax())   // Min Max values enabled
+        if(ParamTHP_SensorPressureMinMax_)   // Min Max values enabled
         {
-            if(pressure + ParamPressAlign() > (float)GetPressMaxValueKO().value(Dpt(9,6)))
+            if(pressure + ParamTHP_SensorPressureAlign_ > (float)KoTHP_SensorPressMaxValue_.value(Dpt(9,6)))
             {
-                GetPressMaxValueKO().valueNoSend(pressure, Dpt(9,6));
+                KoTHP_SensorPressMaxValue_.valueNoSend(pressure, Dpt(9,6));
             }
-            if(pressure + ParamPressAlign() < (float)GetPressMinValueKO().value(Dpt(9,6)))
+            if(pressure + ParamTHP_SensorPressureAlign_ < (float)KoTHP_SensorPressMinValue_.value(Dpt(9,6)))
             {
-                GetPressMinValueKO().valueNoSend(pressure, Dpt(9,6));
+                KoTHP_SensorPressMinValue_.valueNoSend(pressure, Dpt(9,6));
             }
         }
 
-        if(!(ParamPressWarnL() == 0 && ParamPressWarnH() == 0))   // not both are 0 (=> feature disabled)
+        if(!(ParamTHP_SensorPressureWarnL_ == 0 && ParamTHP_SensorPressureWarnH_ == 0))   // not both are 0 (=> feature disabled)
         {
-            bool AlarmH = pressure + ParamPressAlign() > ParamPressWarnH();
-            if( (bool)GetPressAlarmHKO().value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
+            bool AlarmH = pressure + ParamTHP_SensorPressureAlign_ > ParamTHP_SensorPressureWarnH_;
+            if( (bool)KoTHP_SensorPressAlarmH_.value(Dpt(1,5)) != AlarmH ||                                          // alarm value has changed
                 (AlarmH && millis() - m_pressure_alarmH_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetPressAlarmHKO().value(AlarmH, Dpt(1,5));
+                KoTHP_SensorPressAlarmH_.value(AlarmH, Dpt(1,5));
                 m_pressure_alarmH_last_send_millis = millis();
             }
 
-            bool AlarmL = pressure + ParamPressAlign() < ParamPressWarnL();
-            if( (bool)GetPressAlarmLKO().value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
+            bool AlarmL = pressure + ParamTHP_SensorPressureAlign_ < ParamTHP_SensorPressureWarnL_;
+            if( (bool)KoTHP_SensorPressAlarmL_.value(Dpt(1,5)) != AlarmL ||                                          // alarm value has changed
                 (AlarmL && millis() - m_pressure_alarmL_last_send_millis > send_millis))     // alarm is true and has not been sent for send_millis
             {
-                GetPressAlarmLKO().value(AlarmL, Dpt(1,5));
+                KoTHP_SensorPressAlarmL_.value(AlarmL, Dpt(1,5));
                 m_pressure_alarmL_last_send_millis = millis();
             }
         }
@@ -457,7 +457,7 @@ void Sensorchannel::loop()
 
 void Sensorchannel::processInputKo(GroupObject& ko)
 {
-    log("Sensorchannel::processInputKo");
+    logTraceP("processInputKo");
 
     float setvalue = 0;
 
