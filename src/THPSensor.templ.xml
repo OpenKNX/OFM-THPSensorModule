@@ -17,6 +17,9 @@
               <Parameter Id="%AID%_P-%T%%CCC%011" Name="SensorTemperatureSendChangeAmount_%C%" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
               </Parameter>
+              <Parameter Id="%AID%_P-%T%%CCC%018" Name="SensorTemperatureSendChangeAmountInactive_%C%" ParameterType="%AID%_PT-TempOnChange" Access="None" Text="" Value="0" >
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
+              </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%012" Name="SensorTemperatureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="5" BitOffset="0" />
               </Parameter>
@@ -162,6 +165,7 @@
               <ParameterRef Id="%AID%_P-%T%%CCC%015_R-%T%%CCC%01501" RefId="%AID%_P-%T%%CCC%015" />
               <ParameterRef Id="%AID%_P-%T%%CCC%016_R-%T%%CCC%01601" RefId="%AID%_P-%T%%CCC%016" />
               <ParameterRef Id="%AID%_P-%T%%CCC%017_R-%T%%CCC%01701" RefId="%AID%_P-%T%%CCC%017" />
+              <ParameterRef Id="%AID%_P-%T%%CCC%018_R-%T%%CCC%01801" RefId="%AID%_P-%T%%CCC%018" />
               <!-- humidity parameters-->
               <ParameterRef Id="%AID%_P-%T%%CCC%020_R-%T%%CCC%02001" RefId="%AID%_P-%T%%CCC%020" />
               <ParameterRef Id="%AID%_P-%T%%CCC%021_R-%T%%CCC%02101" RefId="%AID%_P-%T%%CCC%021" />
@@ -310,6 +314,9 @@
                     <choose ParamRefId="%AID%_P-%T%%CCC%010_R-%T%%CCC%01001">
                       <when test="1">
                         <ParameterRefRef RefId="%AID%_P-%T%%CCC%011_R-%T%%CCC%01101" />
+                      </when>
+                      <when test="0">
+                        <ParameterRefRef RefId="%AID%_P-%T%%CCC%018_R-%T%%CCC%01801" />
                       </when>
                     </choose>
                     <ParameterRefRef RefId="%AID%_P-%T%%CCC%012_R-%T%%CCC%01201" />
