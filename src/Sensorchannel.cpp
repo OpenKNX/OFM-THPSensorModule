@@ -38,30 +38,58 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     
     // Debug
     logDebugP("Setup");
-    logDebug("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
-    logDebug("ParamTHP_SensorTemperatureSendChangeAmount_: %i", ParamTHP_SensorTemperatureSendChangeAmount_);
-    logDebug("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
-    logDebug("ParamTHP_SensorTemperatureAlign_           : %i", ParamTHP_SensorTemperatureAlign_           );
-    logDebug("ParamTHP_SensorTemperatureWarnL_           : %i", ParamTHP_SensorTemperatureWarnL_           );
-    logDebug("ParamTHP_SensorTemperatureWarnH_           : %i", ParamTHP_SensorTemperatureWarnH_           );
-    logDebug("ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
-    
-    logDebug("ParamTHP_SensorHumiditySendChangeAmount_   : %i", ParamTHP_SensorHumiditySendChangeAmount_   );
-    logDebug("ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
-    logDebug("ParamTHP_SensorHumidityAlign_              : %i", ParamTHP_SensorHumidityAlign_              );
-    logDebug("ParamTHP_SensorHumidityWarnL_              : %i", ParamTHP_SensorHumidityWarnL_              );
-    logDebug("ParamTHP_SensorHumidityWarnH_              : %i", ParamTHP_SensorHumidityWarnH_              );
-    logDebug("ParamTHP_SensorHumidityMinMax_             : %i", ParamTHP_SensorHumidityMinMax_             );
-    logDebug("ParamTHP_SensorHumiditySend_               : %i", ParamTHP_SensorHumiditySend_               );
-    
-    logDebug("ParamTHP_Input0DebounceTime_               : %i", ParamTHP_Input0DebounceTime_               );
-    logDebug("ParamTHP_Input0ActionOpen_                 : %i", ParamTHP_Input0ActionOpen_                 );
-    logDebug("ParamTHP_Input0ActionClosed_               : %i", ParamTHP_Input0ActionClosed_               );
-    logDebug("ParamTHP_Input0SendCycle_                  : %i", ParamTHP_Input0SendCycle_                  );
-    logDebug("ParamTHP_Input1DebounceTime_               : %i", ParamTHP_Input1DebounceTime_               );
-    logDebug("ParamTHP_Input1ActionOpen_                 : %i", ParamTHP_Input1ActionOpen_                 );
-    logDebug("ParamTHP_Input1ActionClosed_               : %i", ParamTHP_Input1ActionClosed_               );
-    logDebug("ParamTHP_Input1SendCycle_                  : %i", ParamTHP_Input1SendCycle_                  );
+    /*
+    logIndentUp();
+    logDebug("", "ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
+    logDebug("", "ParamTHP_SensorTemperatureSendChangeAmount_: %i", ParamTHP_SensorTemperatureSendChangeAmount_);
+    logDebug("", "ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
+    logDebug("", "ParamTHP_SensorTemperatureAlign_           : %i", ParamTHP_SensorTemperatureAlign_           );
+    logDebug("", "ParamTHP_SensorTemperatureWarnL_           : %i", ParamTHP_SensorTemperatureWarnL_           );
+    logDebug("", "ParamTHP_SensorTemperatureWarnH_           : %i", ParamTHP_SensorTemperatureWarnH_           );
+    logDebug("", "ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
+			 "", 
+    logDebug("", "ParamTHP_SensorHumiditySendChangeAmount_   : %i", ParamTHP_SensorHumiditySendChangeAmount_   );
+    logDebug("", "ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
+    logDebug("", "ParamTHP_SensorHumidityAlign_              : %i", ParamTHP_SensorHumidityAlign_              );
+    logDebug("", "ParamTHP_SensorHumidityWarnL_              : %i", ParamTHP_SensorHumidityWarnL_              );
+    logDebug("", "ParamTHP_SensorHumidityWarnH_              : %i", ParamTHP_SensorHumidityWarnH_              );
+    logDebug("", "ParamTHP_SensorHumidityMinMax_             : %i", ParamTHP_SensorHumidityMinMax_             );
+    logDebug("", "ParamTHP_SensorHumiditySend_               : %i", ParamTHP_SensorHumiditySend_               );
+			 "", 
+    logDebug("", "ParamTHP_Input0DebounceTime_               : %i", ParamTHP_Input0DebounceTime_               );
+    logDebug("", "ParamTHP_Input0ActionOpen_                 : %i", ParamTHP_Input0ActionOpen_                 );
+    logDebug("", "ParamTHP_Input0ActionClosed_               : %i", ParamTHP_Input0ActionClosed_               );
+    logDebug("", "ParamTHP_Input0SendCycle_                  : %i", ParamTHP_Input0SendCycle_                  );
+    logDebug("", "ParamTHP_Input1DebounceTime_               : %i", ParamTHP_Input1DebounceTime_               );
+    logDebug("", "ParamTHP_Input1ActionOpen_                 : %i", ParamTHP_Input1ActionOpen_                 );
+    logDebug("", "ParamTHP_Input1ActionClosed_               : %i", ParamTHP_Input1ActionClosed_               );
+    logDebug("", "ParamTHP_Input1SendCycle_                  : %i", ParamTHP_Input1SendCycle_                  );
+    logIndentDown();*/
+    logDebugP("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
+    logDebugP("Temperature Parameters:");
+    logDebugP("ParamTHP_SensorTemperatureSendChangeAmount_: %f", ParamTHP_SensorTemperatureSendChangeAmount_);
+    logDebugP("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
+    logDebugP("ParamTHP_SensorTemperatureAlign_           : %f", ParamTHP_SensorTemperatureAlign_           );
+    logDebugP("ParamTHP_SensorTemperatureWarnL_           : %f", ParamTHP_SensorTemperatureWarnL_           );
+    logDebugP("ParamTHP_SensorTemperatureWarnH_           : %f", ParamTHP_SensorTemperatureWarnH_           );
+    logDebugP("ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
+	logDebugP("Humidity Parameters:");
+    logDebugP("ParamTHP_SensorHumiditySendChangeAmount_   : %f", ParamTHP_SensorHumiditySendChangeAmount_   );
+    logDebugP("ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
+    logDebugP("ParamTHP_SensorHumidityAlign_              : %f", ParamTHP_SensorHumidityAlign_              );
+    logDebugP("ParamTHP_SensorHumidityWarnL_              : %f", ParamTHP_SensorHumidityWarnL_              );
+    logDebugP("ParamTHP_SensorHumidityWarnH_              : %f", ParamTHP_SensorHumidityWarnH_              );
+    logDebugP("ParamTHP_SensorHumidityMinMax_             : %i", ParamTHP_SensorHumidityMinMax_             );
+    logDebugP("ParamTHP_SensorHumiditySend_               : %i", ParamTHP_SensorHumiditySend_               );
+	logDebugP("Binary Input Parameters:");
+    logDebugP("ParamTHP_Input0DebounceTime_               : %i", ParamTHP_Input0DebounceTime_               );
+    logDebugP("ParamTHP_Input0ActionOpen_                 : %i", ParamTHP_Input0ActionOpen_                 );
+    logDebugP("ParamTHP_Input0ActionClosed_               : %i", ParamTHP_Input0ActionClosed_               );
+    logDebugP("ParamTHP_Input0SendCycle_                  : %i", ParamTHP_Input0SendCycle_                  );
+    logDebugP("ParamTHP_Input1DebounceTime_               : %i", ParamTHP_Input1DebounceTime_               );
+    logDebugP("ParamTHP_Input1ActionOpen_                 : %i", ParamTHP_Input1ActionOpen_                 );
+    logDebugP("ParamTHP_Input1ActionClosed_               : %i", ParamTHP_Input1ActionClosed_               );
+    logDebugP("ParamTHP_Input1SendCycle_                  : %i", ParamTHP_Input1SendCycle_                  );
 }
 
 void Sensorchannel::loop()

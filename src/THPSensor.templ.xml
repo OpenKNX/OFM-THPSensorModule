@@ -101,7 +101,7 @@
               </Parameter>
               <!-- pressure parameters-->
               <Parameter Id="%AID%_P-%T%%CCC%050" Name="SensorPressureSendChange_%C%" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
-              <Parameter Id="%AID%_P-%T%%CCC%051" Name="SensorPressureSendChangeAmount_%C%" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="0.1" >
+              <Parameter Id="%AID%_P-%T%%CCC%051" Name="SensorPressureSendChangeAmount_%C%" ParameterType="%AID%_PT-PressOnChange" Text="     von mehr als" SuffixText="Pa" Value="5" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="71" BitOffset="0" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%052" Name="SensorPressureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
@@ -144,7 +144,7 @@
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="72" BitOffset="1" /><!-- shared among pressure and binary input 1-->
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%065" Name="Input1SendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="0" >
-                <Memory CodeSegment="%AID%_RS-04-00000" Offset="73" BitOffset="0" /><!-- shared among pressure and binary input 1-->
+                <Memory CodeSegment="%AID%_RS-04-00000" Offset="88" BitOffset="0" /><!-- shared among pressure and binary input 1 (88 as work around for op, back to 73 after fix -->
               </Parameter>
             </Parameters>
             
