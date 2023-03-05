@@ -17,7 +17,7 @@
               <Parameter Id="%AID%_P-%T%%CCC%011" Name="SensorTemperatureSendChangeAmount_%C%" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
               </Parameter>
-              <Parameter Id="%AID%_P-%T%%CCC%018" Name="SensorTemperatureSendChangeAmountInactive_%C%" ParameterType="%AID%_PT-ValueDpt9" Access="None" Text="" Value="0" >
+              <Parameter Id="%AID%_P-%T%%CCC%018" Name="SensorTemperatureSendChangeAmountInactive_%C%" ParameterType="%AID%_PT-ValueDpt9" Text="INAKTIV" Value="0" >
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="1" BitOffset="0" />
               </Parameter>
               <Parameter Id="%AID%_P-%T%%CCC%012" Name="SensorTemperatureSendCycle_%C%" ParameterType="%AID%_PT-SendCycleSelection" Text="Zyklisch senden alle" Value="5" >
