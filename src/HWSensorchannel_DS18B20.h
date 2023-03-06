@@ -11,9 +11,13 @@ class HWSensorchannel_DS18B20 : public HWSensorchannel
 {
     private:
         One_wire *m_Wire;
+        One_wire *m_Wire2;
         rom_address_t m_address{};
+        rom_address_t m_address2{};
         uint8_t m_state = 0;
+        uint8_t m_state2 = 0;
         uint32_t m_lastexec = 0;
+        uint32_t m_lastexec2 = 0;
 
     public:
         HWSensorchannel_DS18B20();
