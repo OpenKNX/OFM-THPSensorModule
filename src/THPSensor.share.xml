@@ -37,7 +37,7 @@
                   <Enumeration Text="SHT3x" Value="1" Id="%AID%_PT-Sensortype_EN-1" />
                   <Enumeration Text="SHT2x" Value="2" Id="%AID%_PT-Sensortype_EN-2" />
                   <Enumeration Text="BME280" Value="3" Id="%AID%_PT-Sensortype_EN-3" />
-                  <Enumeration Text="DS18B20" Value="4" Id="%AID%_PT-Sensortype_EN-4" />
+                  <Enumeration Text="2x DS18B20" Value="4" Id="%AID%_PT-Sensortype_EN-4" />
                   <Enumeration Text="2x Binäreingang" Value="99" Id="%AID%_PT-Sensortype_EN-99" />
                 </TypeRestriction>
               </ParameterType>

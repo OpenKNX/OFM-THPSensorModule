@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-model href="../../Organization/knxprod-support/knx_project_14/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://knx.org/xml/project/14">
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
@@ -181,11 +181,11 @@
               <ComObject Id="%AID%_O-%T%%CCC%004" Name="SensorTempMaxValue_%C%" Text="Max. Temperatur lesen" Number="%K4%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-1" />
               <ComObject Id="%AID%_O-%T%%CCC%005" Name="SensorTempMinMaxReset_%C%" Text="Min/Max Temperatur Reset" Number="%K5%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
               <!-- humidity -->
-              <ComObject Id="%AID%_O-%T%%CCC%006" Name="SensorHum_%C%" Text="Luftfeuchte" Number="%K6%" FunctionText="Sensor %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1"/>
-              <ComObject Id="%AID%_O-%T%%CCC%007" Name="SensorHumAlarmL_%C%" Text="Alarm Luftfeuchteunterschreitung" Number="%K7%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
+              <ComObject Id="%AID%_O-%T%%CCC%006" Name="SensorHum_%C%" Text="Luftfeuchte" Number="%K6%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1"/>
+              <ComObject Id="%AID%_O-%T%%CCC%007" Name="SensorHumAlarmL_%C%" Text="Alarm Luftfeuchteunterschreitung" Number="%K7%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-7" />
               <ComObject Id="%AID%_O-%T%%CCC%008" Name="SensorHumAlarmH_%C%" Text="Alarm Luftfeuchteüberschreitung" Number="%K8%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-5" />
-              <ComObject Id="%AID%_O-%T%%CCC%009" Name="SensorHumMinValue_%C%" Text="Min. Luftfeuchte lesen" Number="%K9%" FunctionText="Sensor %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1"/>
-              <ComObject Id="%AID%_O-%T%%CCC%010" Name="SensorHumMaxValue_%C%" Text="Max. Luftfeuchte lesen" Number="%K10%" FunctionText="Sensor %Z%" ObjectSize="1 Byte" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-5-1"/>
+              <ComObject Id="%AID%_O-%T%%CCC%009" Name="SensorHumMinValue_%C%" Text="Min. Luftfeuchte lesen" Number="%K9%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-7"/>
+              <ComObject Id="%AID%_O-%T%%CCC%010" Name="SensorHumMaxValue_%C%" Text="Max. Luftfeuchte lesen" Number="%K10%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-7"/>
               <ComObject Id="%AID%_O-%T%%CCC%011" Name="SensorHumMinMaxReset_%C%" Text="Min/Max Luftfeuchte Reset" Number="%K11%" FunctionText="Sensor %Z%" ObjectSize="1 Bit" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-3" />
               <!-- absolute humidity -->
               <ComObject Id="%AID%_O-%T%%CCC%012" Name="SensorAbsHum_%C%" Text="Abs. Luftfeuchte" Number="%K12%" FunctionText="Sensor %Z%" ObjectSize="2 Bytes" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-9-29"/>
@@ -222,15 +222,23 @@
               <ComObjectRef Id="%AID%_O-%T%%CCC%004_R-%T%%CCC%00401" RefId="%AID%_O-%T%%CCC%004" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%005_R-%T%%CCC%00501" RefId="%AID%_O-%T%%CCC%005" />
               <!-- humidity -->
-              <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00601" RefId="%AID%_O-%T%%CCC%006" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00601" RefId="%AID%_O-%T%%CCC%006" ObjectSize="1 Byte" DatapointType="DPST-5-1"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00602" RefId="%AID%_O-%T%%CCC%006" ObjectSize="2 Bytes" DatapointType="DPST-9-7" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%007_R-%T%%CCC%00701" RefId="%AID%_O-%T%%CCC%007" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%008_R-%T%%CCC%00801" RefId="%AID%_O-%T%%CCC%008" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00901" RefId="%AID%_O-%T%%CCC%009" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00901" RefId="%AID%_O-%T%%CCC%009" ObjectSize="1 Byte" DatapointType="DPST-5-1"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00902" RefId="%AID%_O-%T%%CCC%009" ObjectSize="2 Bytes" DatapointType="DPST-9-7" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01001" RefId="%AID%_O-%T%%CCC%010" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01001" RefId="%AID%_O-%T%%CCC%010" ObjectSize="1 Byte" DatapointType="DPST-5-1"/>
               <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01002" RefId="%AID%_O-%T%%CCC%010" ObjectSize="2 Bytes" DatapointType="DPST-9-7" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%011_R-%T%%CCC%01101" RefId="%AID%_O-%T%%CCC%011" />
+
+              <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00603" RefId="%AID%_O-%T%%CCC%006" Text="Temperatur 2"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%007_R-%T%%CCC%00703" RefId="%AID%_O-%T%%CCC%007" Text="Alarm Temperaturunterschreitung 2" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%008_R-%T%%CCC%00803" RefId="%AID%_O-%T%%CCC%008" Text="Alarm Temperaturüberschreitung 2" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00903" RefId="%AID%_O-%T%%CCC%009" Text="Min. Temperatur 2 lesen" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01003" RefId="%AID%_O-%T%%CCC%010" Text="Max. Temperatur 2 lesen" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%011_R-%T%%CCC%01103" RefId="%AID%_O-%T%%CCC%011" Text="Min/Max Temperatur 2 Reset" />
+
               <!-- absolute humidity -->
               <ComObjectRef Id="%AID%_O-%T%%CCC%012_R-%T%%CCC%01201" RefId="%AID%_O-%T%%CCC%012" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%013_R-%T%%CCC%01301" RefId="%AID%_O-%T%%CCC%013" />
@@ -283,6 +291,28 @@
                       </when>
                     </choose>
                     <ParameterRefRef RefId="%AID%_UP-%T%%CCC%017_R-%T%%CCC%01701" />
+                  </when>
+                </choose>
+                <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                  <when test="4"><!-- Temperature 2 -->
+                    <ParameterSeparator Id="%AID%_PS-" Text=" " />
+                    <ParameterSeparator Id="%AID%_PS-" Text="Temperatur 2" UIHint="Headline" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601" />
+                    <choose ParamRefId="%AID%_UP-%T%%CCC%066_R-%T%%CCC%06601">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%067_R-%T%%CCC%06701" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%068_R-%T%%CCC%06801" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%069_R-%T%%CCC%06901" />
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001" />
+                    <choose ParamRefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001">
+                      <when test="1">
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%071_R-%T%%CCC%07101" />
+                        <ParameterRefRef RefId="%AID%_UP-%T%%CCC%072_R-%T%%CCC%07201" />
+                      </when>
+                    </choose>
+                    <ParameterRefRef RefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07301" />
                   </when>
                 </choose>
                 <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
@@ -398,6 +428,24 @@
                           </when>
                         </choose>
                         <ComObjectRefRef RefId="%AID%_O-%T%%CCC%000_R-%T%%CCC%00001" />
+                      </when>
+                    </choose>
+                    <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
+                      <when test="4"><!-- Temperature 2 -->
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%070_R-%T%%CCC%07001">
+                          <when test="1">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%007_R-%T%%CCC%00703" />
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%008_R-%T%%CCC%00803" />
+                          </when>
+                        </choose>
+                        <choose ParamRefId="%AID%_UP-%T%%CCC%073_R-%T%%CCC%07301">
+                          <when test="1">
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%009_R-%T%%CCC%00903" />
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%010_R-%T%%CCC%01003" />
+                            <ComObjectRefRef RefId="%AID%_O-%T%%CCC%011_R-%T%%CCC%01103" />
+                          </when>
+                        </choose>
+                        <ComObjectRefRef RefId="%AID%_O-%T%%CCC%006_R-%T%%CCC%00603" />
                       </when>
                     </choose>
                     <choose ParamRefId="%AID%_P-%T%%CCC%001_R-%T%%CCC%00101">
