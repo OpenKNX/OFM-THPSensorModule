@@ -23,7 +23,6 @@ class HWSensorchannel_DS18B20 : public HWSensorchannel
         HWSensorchannel_DS18B20();
         void Setup(uint8_t pin0, uint8_t pin1);
         bool Loop();
-        void LoopMax();
 
     private:
         void init(void);

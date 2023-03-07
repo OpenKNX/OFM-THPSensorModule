@@ -48,16 +48,9 @@ void THPSensorModule::loop()
     if(!openknx.afterStartupDelay())
         return;
 
-    if (knx.configured())
-    {
-        //_knx_configured = true;
-    }
-    else
-    {
-        //_knx_configured = false;
-        multicore_reset_core1();
+    // do nothing when not parameterized
+    if (!knx.configured())
         return;
-    }
 
     uint8_t loopedChannels = 0;
     while(openknx.freeLoopTime() && loopedChannels < THP_ChannelCount)
@@ -112,4 +105,38 @@ bool THPSensorModule::restorePower()
 bool THPSensorModule::usesDualCore()
 {
     return true;
+}
+
+uint16_t THPSensorModule::flashSize()
+{
+    // Version + Data (Channel * Inputs * (Dpt + Value))
+    return 1 + (THP_ChannelCount * 2 * 4);
+}
+
+void THPSensorModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)
+{
+    if (iSize == 0) // first call - without data
+        return;
+
+    uint8_t lVersion = openknx.flash.readByte();
+    if (lVersion != 1) // version unknown
+    {
+        logDebugP("Wrong version of flash data (%i)", lVersion);
+        return;
+    }
+
+    logDebugP("Reading channel data from flash (%i)", THP_ChannelCount);
+    for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
+    {
+        //_Sensorchannels[lIndex]->restore(); ToDo
+    }
+}
+
+void THPSensorModule::writeFlash()
+{
+    openknx.flash.writeByte(1); // Version
+    for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
+    {
+        //_Sensorchannels[lIndex]->save(); ToDo
+    }
 }
