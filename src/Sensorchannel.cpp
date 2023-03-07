@@ -185,12 +185,17 @@ void Sensorchannel::loop()
             {
                 float current_temp_diff = temperature - m_temperature_last_send_value;
                 sendnow = current_temp_diff >= SendTresh || 0 - current_temp_diff >= SendTresh;
+                if(sendnow)
+                {
+                    logDebugP("Send TempKO Diff: %f", current_temp_diff);
+                }
             }
         }
         
         if(sendnow)
         {
             KoTHP_SensorTemp_.value(temperature + ParamTHP_SensorTemperatureAlign_, Dpt(9,1));
+            logDebugP("Send TempKO: %f", temperature + ParamTHP_SensorTemperatureAlign_);
             m_temperature_last_send_millis = millis();
             m_temperature_last_send_value = temperature;
         }

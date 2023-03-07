@@ -232,11 +232,11 @@
               <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01002" RefId="%AID%_O-%T%%CCC%010" ObjectSize="2 Bytes" DatapointType="DPST-9-7" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%011_R-%T%%CCC%01101" RefId="%AID%_O-%T%%CCC%011" />
 
-              <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00603" RefId="%AID%_O-%T%%CCC%006" Text="Temperatur 2"/>
+              <ComObjectRef Id="%AID%_O-%T%%CCC%006_R-%T%%CCC%00603" RefId="%AID%_O-%T%%CCC%006" Text="Temperatur 2" DatapointType="DPST-9-1" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%007_R-%T%%CCC%00703" RefId="%AID%_O-%T%%CCC%007" Text="Alarm Temperaturunterschreitung 2" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%008_R-%T%%CCC%00803" RefId="%AID%_O-%T%%CCC%008" Text="Alarm Temperaturüberschreitung 2" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00903" RefId="%AID%_O-%T%%CCC%009" Text="Min. Temperatur 2 lesen" />
-              <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01003" RefId="%AID%_O-%T%%CCC%010" Text="Max. Temperatur 2 lesen" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%009_R-%T%%CCC%00903" RefId="%AID%_O-%T%%CCC%009" Text="Min. Temperatur 2 lesen" DatapointType="DPST-9-1" />
+              <ComObjectRef Id="%AID%_O-%T%%CCC%010_R-%T%%CCC%01003" RefId="%AID%_O-%T%%CCC%010" Text="Max. Temperatur 2 lesen" DatapointType="DPST-9-1" />
               <ComObjectRef Id="%AID%_O-%T%%CCC%011_R-%T%%CCC%01103" RefId="%AID%_O-%T%%CCC%011" Text="Min/Max Temperatur 2 Reset" />
 
               <!-- absolute humidity -->
