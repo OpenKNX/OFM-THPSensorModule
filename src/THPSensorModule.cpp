@@ -62,7 +62,7 @@ void THPSensorModule::loop()
     }
 }
 
-void THPSensorModule::loop2()
+void THPSensorModule::loop1()
 {   
     // second core
     _HWSensors.Loop();
