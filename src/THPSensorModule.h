@@ -1,7 +1,5 @@
 #pragma once
 #include "OpenKNX.h"
-#include "Helper.h"
-#include "KnxHelper.h"
 #include "Sensorchannel.h"
 #include "HWSensors.h"
 
