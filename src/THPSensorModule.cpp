@@ -128,7 +128,7 @@ void THPSensorModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)
     logDebugP("Reading channel data from flash (%i)", THP_ChannelCount);
     for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
     {
-        //_Sensorchannels[lIndex]->restore();
+        _Sensorchannels[lIndex]->restore();
     }
 }
 
@@ -137,6 +137,6 @@ void THPSensorModule::writeFlash()
     openknx.flash.writeByte(1); // Version
     for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
     {
-        //_Sensorchannels[lIndex]->save();
+        _Sensorchannels[lIndex]->save();
     }
 }
