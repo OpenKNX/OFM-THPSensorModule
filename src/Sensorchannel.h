@@ -71,4 +71,6 @@ class Sensorchannel : public OpenKNX::Channel
         void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HWSensors *HWSensors);
 	    void loop();
         void processInputKo(GroupObject& ko);
+        void save();
+        void restore();
 };

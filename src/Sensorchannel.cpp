@@ -23,17 +23,18 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
         pinMode(m_pin1, INPUT_PULLUP);
     }
 
-    //Todo load from eeprom
-    KoTHP_SensorTempMinValue_.valueNoSend((float)1000, Dpt(9,1));
-    KoTHP_SensorTempMaxValue_.valueNoSend((float)-1000, Dpt(9,1));
+    // Initialize Min/Max Ko
+    // if save data are in flash, this will be overwritten
+    KoTHP_SensorTempMinValue_.valueNoSend((float)1000, TempKODPT);
+    KoTHP_SensorTempMaxValue_.valueNoSend((float)-1000, TempKODPT);
     KoTHP_SensorHumMinValue_.valueNoSend((float)1000, HumKODPT);
     KoTHP_SensorHumMaxValue_.valueNoSend((float)-1000, HumKODPT);
-    KoTHP_SensorAbsHumMinValue_.valueNoSend((float)1000, Dpt(9,29));
-    KoTHP_SensorAbsHumMaxValue_.valueNoSend((float)-1000, Dpt(9,29));
-    KoTHP_SensorDewPointMinValue_.valueNoSend((float)1000, Dpt(9,1));
-    KoTHP_SensorDewPointMaxValue_.valueNoSend((float)-1000, Dpt(9,1));
-    KoTHP_SensorPressMinValue_.valueNoSend((float)1000, Dpt(9,6));
-    KoTHP_SensorPressMaxValue_.valueNoSend((float)-1000, Dpt(9,6));
+    KoTHP_SensorAbsHumMinValue_.valueNoSend((float)1000, AbsHumKODPT);
+    KoTHP_SensorAbsHumMaxValue_.valueNoSend((float)-1000, AbsHumKODPT);
+    KoTHP_SensorDewPointMinValue_.valueNoSend((float)1000, DewPointKODPT);
+    KoTHP_SensorDewPointMaxValue_.valueNoSend((float)-1000, DewPointKODPT);
+    KoTHP_SensorPressMinValue_.valueNoSend((float)1000, PressKODPT);
+    KoTHP_SensorPressMaxValue_.valueNoSend((float)-1000, PressKODPT);
 
     
     // Debug
@@ -194,25 +195,25 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            KoTHP_SensorTemp_.value(temperature + ParamTHP_SensorTemperatureAlign_, Dpt(9,1));
+            KoTHP_SensorTemp_.value(temperature + ParamTHP_SensorTemperatureAlign_, TempKODPT);
             logDebugP("Send TempKO: %f", temperature + ParamTHP_SensorTemperatureAlign_);
             m_temperature_last_send_millis = millis();
             m_temperature_last_send_value = temperature;
         }
         else
         {
-            KoTHP_SensorTemp_.valueNoSend(temperature + ParamTHP_SensorTemperatureAlign_, Dpt(9,1));
+            KoTHP_SensorTemp_.valueNoSend(temperature + ParamTHP_SensorTemperatureAlign_, TempKODPT);
         }
 
         if(ParamTHP_SensorTemperatureMinMax_)   // Min Max values enabled
         {
-            if(temperature + ParamTHP_SensorTemperatureAlign_ > (float)KoTHP_SensorTempMaxValue_.value(Dpt(9,1)))
+            if(temperature + ParamTHP_SensorTemperatureAlign_ > (float)KoTHP_SensorTempMaxValue_.value(TempKODPT))
             {
-                KoTHP_SensorTempMaxValue_.valueNoSend(temperature, Dpt(9,1));
+                KoTHP_SensorTempMaxValue_.valueNoSend(temperature, TempKODPT);
             }
-            if(temperature + ParamTHP_SensorTemperatureAlign_ < (float)KoTHP_SensorTempMinValue_.value(Dpt(9,1)))
+            if(temperature + ParamTHP_SensorTemperatureAlign_ < (float)KoTHP_SensorTempMinValue_.value(TempKODPT))
             {
-                KoTHP_SensorTempMinValue_.valueNoSend(temperature, Dpt(9,1));
+                KoTHP_SensorTempMinValue_.valueNoSend(temperature, TempKODPT);
             }
         }
 
@@ -322,24 +323,24 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            KoTHP_SensorAbsHum_.value(abshumidity + ParamTHP_SensorAbsHumidityAlign_, Dpt(9,29));
+            KoTHP_SensorAbsHum_.value(abshumidity + ParamTHP_SensorAbsHumidityAlign_, AbsHumKODPT);
             m_abshumidity_last_send_millis = millis();
             m_abshumidity_last_send_value = abshumidity;
         }
         else
         {
-            KoTHP_SensorAbsHum_.valueNoSend(abshumidity + ParamTHP_SensorAbsHumidityAlign_, Dpt(9,29));
+            KoTHP_SensorAbsHum_.valueNoSend(abshumidity + ParamTHP_SensorAbsHumidityAlign_, AbsHumKODPT);
         }
 
         if(ParamTHP_SensorAbsHumidityMinMax_)   // Min Max values enabled
         {
-            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ > (float)KoTHP_SensorAbsHumMaxValue_.value(Dpt(9,29)))
+            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ > (float)KoTHP_SensorAbsHumMaxValue_.value(AbsHumKODPT))
             {
-                KoTHP_SensorAbsHumMaxValue_.valueNoSend(abshumidity, Dpt(9,29));
+                KoTHP_SensorAbsHumMaxValue_.valueNoSend(abshumidity, AbsHumKODPT);
             }
-            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ < (float)KoTHP_SensorAbsHumMinValue_.value(Dpt(9,29)))
+            if(abshumidity + ParamTHP_SensorAbsHumidityAlign_ < (float)KoTHP_SensorAbsHumMinValue_.value(AbsHumKODPT))
             {
-                KoTHP_SensorAbsHumMinValue_.valueNoSend(abshumidity, Dpt(9,29));
+                KoTHP_SensorAbsHumMinValue_.valueNoSend(abshumidity, AbsHumKODPT);
             }
         }
 
@@ -382,24 +383,24 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            KoTHP_SensorDewPoint_.value(dewpoint + ParamTHP_SensorDewPointAlign_, Dpt(9,1));
+            KoTHP_SensorDewPoint_.value(dewpoint + ParamTHP_SensorDewPointAlign_, DewPointKODPT);
             m_dewpoint_last_send_millis = millis();
             m_dewpoint_last_send_value = dewpoint;
         }
         else
         {
-            KoTHP_SensorDewPoint_.valueNoSend(dewpoint + ParamTHP_SensorDewPointAlign_, Dpt(9,1));
+            KoTHP_SensorDewPoint_.valueNoSend(dewpoint + ParamTHP_SensorDewPointAlign_, DewPointKODPT);
         }
 
         if(ParamTHP_SensorDewPointMinMax_)   // Min Max values enabled
         {
-            if(dewpoint + ParamTHP_SensorDewPointAlign_ > (float)KoTHP_SensorDewPointMaxValue_.value(Dpt(9,1)))
+            if(dewpoint + ParamTHP_SensorDewPointAlign_ > (float)KoTHP_SensorDewPointMaxValue_.value(DewPointKODPT))
             {
-                KoTHP_SensorDewPointMaxValue_.valueNoSend(dewpoint, Dpt(9,1));
+                KoTHP_SensorDewPointMaxValue_.valueNoSend(dewpoint, DewPointKODPT);
             }
-            if(dewpoint + ParamTHP_SensorDewPointAlign_ < (float)KoTHP_SensorDewPointMinValue_.value(Dpt(9,1)))
+            if(dewpoint + ParamTHP_SensorDewPointAlign_ < (float)KoTHP_SensorDewPointMinValue_.value(DewPointKODPT))
             {
-                KoTHP_SensorDewPointMinValue_.valueNoSend(dewpoint, Dpt(9,1));
+                KoTHP_SensorDewPointMinValue_.valueNoSend(dewpoint, DewPointKODPT);
             }
         }
 
@@ -445,24 +446,24 @@ void Sensorchannel::loop()
         
         if(sendnow)
         {
-            KoTHP_SensorPress_.value(pressure + ParamTHP_SensorPressureAlign_, Dpt(9,6));
+            KoTHP_SensorPress_.value(pressure + ParamTHP_SensorPressureAlign_, PressKODPT);
             m_pressure_last_send_millis = millis();
             m_pressure_last_send_value = pressure;
         }
         else
         {
-            KoTHP_SensorPress_.valueNoSend(pressure + ParamTHP_SensorPressureAlign_, Dpt(9,6));
+            KoTHP_SensorPress_.valueNoSend(pressure + ParamTHP_SensorPressureAlign_, PressKODPT);
         }
 
         if(ParamTHP_SensorPressureMinMax_)   // Min Max values enabled
         {
-            if(pressure + ParamTHP_SensorPressureAlign_ > (float)KoTHP_SensorPressMaxValue_.value(Dpt(9,6)))
+            if(pressure + ParamTHP_SensorPressureAlign_ > (float)KoTHP_SensorPressMaxValue_.value(PressKODPT))
             {
-                KoTHP_SensorPressMaxValue_.valueNoSend(pressure, Dpt(9,6));
+                KoTHP_SensorPressMaxValue_.valueNoSend(pressure, PressKODPT);
             }
-            if(pressure + ParamTHP_SensorPressureAlign_ < (float)KoTHP_SensorPressMinValue_.value(Dpt(9,6)))
+            if(pressure + ParamTHP_SensorPressureAlign_ < (float)KoTHP_SensorPressMinValue_.value(PressKODPT))
             {
-                KoTHP_SensorPressMinValue_.valueNoSend(pressure, Dpt(9,6));
+                KoTHP_SensorPressMinValue_.valueNoSend(pressure, PressKODPT);
             }
         }
 
@@ -496,9 +497,9 @@ void Sensorchannel::processInputKo(GroupObject& ko)
     switch(RelKO(ko.asap()))
     {
         case THP_KoSensorTempMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorTemp_)).value(TempKODPT);
-            knx.getGroupObject(AbsKO(THP_KoSensorTempMinValue_)).valueNoSend(setvalue, TempKODPT);
-            knx.getGroupObject(AbsKO(THP_KoSensorTempMaxValue_)).valueNoSend(setvalue, TempKODPT);
+            setvalue = KoTHP_SensorTemp_.value(TempKODPT);
+            KoTHP_SensorTempMaxValue_.valueNoSend(setvalue, TempKODPT);
+            KoTHP_SensorTempMinValue_.valueNoSend(setvalue, TempKODPT);
         break;
         case THP_KoSensorHumMinMaxReset_:
             setvalue = knx.getGroupObject(AbsKO(THP_KoSensorHum_)).value(HumKODPT);
@@ -559,4 +560,40 @@ float Sensorchannel::CalcAbsHumidity(float relative_humidity, float temperature)
 const std::string Sensorchannel::name()
 {
     return "Sensorchannel";
+}
+
+void Sensorchannel::save()
+{
+    openknx.flash.writeFloat((float)KoTHP_SensorTempMaxValue_.value(TempKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorTempMinValue_.value(TempKODPT));
+
+    openknx.flash.writeFloat((float)KoTHP_SensorHumMaxValue_.value(HumKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorHumMinValue_.value(HumKODPT));
+
+    openknx.flash.writeFloat((float)KoTHP_SensorAbsHumMaxValue_.value(AbsHumKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorAbsHumMinValue_.value(AbsHumKODPT));
+
+    openknx.flash.writeFloat((float)KoTHP_SensorDewPointMaxValue_.value(DewPointKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorDewPointMinValue_.value(DewPointKODPT));
+
+    openknx.flash.writeFloat((float)KoTHP_SensorPressMaxValue_.value(PressKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorPressMinValue_.value(PressKODPT));
+}
+
+void Sensorchannel::restore()
+{
+    KoTHP_SensorTempMaxValue_.valueNoSend(openknx.flash.readFloat(), TempKODPT);
+    KoTHP_SensorTempMinValue_.valueNoSend(openknx.flash.readFloat(), TempKODPT);
+
+    KoTHP_SensorHumMaxValue_.valueNoSend(openknx.flash.readFloat(), HumKODPT);
+    KoTHP_SensorHumMinValue_.valueNoSend(openknx.flash.readFloat(), HumKODPT);
+
+    KoTHP_SensorAbsHumMaxValue_.valueNoSend(openknx.flash.readFloat(), AbsHumKODPT);
+    KoTHP_SensorAbsHumMinValue_.valueNoSend(openknx.flash.readFloat(), AbsHumKODPT);
+
+    KoTHP_SensorDewPointMaxValue_.valueNoSend(openknx.flash.readFloat(), DewPointKODPT);
+    KoTHP_SensorDewPointMinValue_.valueNoSend(openknx.flash.readFloat(), DewPointKODPT);
+
+    KoTHP_SensorPressMaxValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
+    KoTHP_SensorPressMinValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
 }

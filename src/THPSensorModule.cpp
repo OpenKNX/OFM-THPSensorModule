@@ -20,7 +20,7 @@ const std::string THPSensorModule::name()
 
 const std::string THPSensorModule::version()
 {
-    return "0.1dev";
+    return "0.2dev";
 }
 
 void THPSensorModule::setup()
@@ -110,7 +110,7 @@ bool THPSensorModule::usesDualCore()
 uint16_t THPSensorModule::flashSize()
 {
     // Version + Data (Channel * Inputs * (Dpt + Value))
-    return 1 + (THP_ChannelCount * 2 * 4);
+    return 1 + (THP_ChannelCount * 2 * 5 * 4);
 }
 
 void THPSensorModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)
@@ -128,7 +128,7 @@ void THPSensorModule::readFlash(const uint8_t *iBuffer, const uint16_t iSize)
     logDebugP("Reading channel data from flash (%i)", THP_ChannelCount);
     for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
     {
-        //_Sensorchannels[lIndex]->restore(); ToDo
+        //_Sensorchannels[lIndex]->restore();
     }
 }
 
@@ -137,6 +137,6 @@ void THPSensorModule::writeFlash()
     openknx.flash.writeByte(1); // Version
     for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
     {
-        //_Sensorchannels[lIndex]->save(); ToDo
+        //_Sensorchannels[lIndex]->save();
     }
 }
