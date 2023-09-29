@@ -3,6 +3,10 @@
 #include "Sensorchannel.h"
 #include "HWSensors.h"
 
+#ifndef OPENKNX_DUALCORE
+#pragma warn "THPSensorModule needs OPENKNX_DUALCORE"
+#endif
+
 
 class THPSensorModule : public OpenKNX::Module
 {
