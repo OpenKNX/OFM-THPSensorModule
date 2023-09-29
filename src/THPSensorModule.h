@@ -4,7 +4,7 @@
 #include "HWSensors.h"
 
 #ifndef OPENKNX_DUALCORE
-#pragma warn "THPSensorModule needs OPENKNX_DUALCORE"
+#pragma message "THPSensorModule needs OPENKNX_DUALCORE"
 #endif
 
 
@@ -14,7 +14,9 @@ class THPSensorModule : public OpenKNX::Module
   public:
     THPSensorModule(const uint8_t* gpioPins);
     void loop() override;
+    #ifdef OPENKNX_DUALCORE
     void loop1() override;
+    #endif
     void setup() override;
     const std::string name() override;
     const std::string version() override;

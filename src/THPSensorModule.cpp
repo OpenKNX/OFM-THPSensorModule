@@ -1,5 +1,7 @@
 #include "THPSensorModule.h"
 
+#include "ModuleVersion.h"
+
 THPSensorModule *THPSensorModule::_instance = nullptr;
 
 THPSensorModule::THPSensorModule(const uint8_t* gpioPins)
@@ -62,12 +64,13 @@ void THPSensorModule::loop()
     }
 }
 
+#ifdef OPENKNX_DUALCORE
 void THPSensorModule::loop1()
 {   
     // second core
-    //_HWSensors.Loop();
+    _HWSensors.Loop();
 }
-
+#endif
 
 
 void THPSensorModule::processInputKo(GroupObject &ko)
