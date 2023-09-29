@@ -102,11 +102,6 @@ bool THPSensorModule::restorePower()
     return true;
 }
 
-bool THPSensorModule::usesDualCore()
-{
-    return true;
-}
-
 uint16_t THPSensorModule::flashSize()
 {
     // Version + Data (Channel * Inputs * (Dpt + Value))

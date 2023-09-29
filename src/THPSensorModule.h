@@ -18,7 +18,6 @@ class THPSensorModule : public OpenKNX::Module
     void processBeforeTablesUnload() override;
     void savePower() override;
     bool restorePower() override;
-    bool usesDualCore() override;
     void readFlash(const uint8_t* iBuffer, const uint16_t iSize) override;
     void writeFlash() override;
     uint16_t flashSize() override;
