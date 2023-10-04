@@ -6,9 +6,9 @@ HWSensorchannel_SHT3x::HWSensorchannel_SHT3x()
     
 }
 
-void HWSensorchannel_SHT3x::Setup(uint8_t pin0, uint8_t pin1)
+void HWSensorchannel_SHT3x::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number)
 {
-    HWSensorchannel::Setup(pin0, pin1);
+    HWSensorchannel::Setup(pin0, pin1, channel_number);
     if(m_pin0 == 13 || m_pin0 == 17 || m_pin0 == 21 || m_pin0 == 25 || m_pin0 == 29)
     {
         m_Wire = &Wire;

@@ -23,7 +23,6 @@
 class Sensorchannel : public OpenKNX::Channel
 {
     private:
-        //uint8_t _channelIndex;
         HWSensors *m_hwSensors;
 
         uint8_t m_pin0 = 0;

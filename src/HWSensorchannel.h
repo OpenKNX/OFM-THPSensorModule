@@ -2,10 +2,11 @@
 
 #include <Arduino.h>
 #include <pico/sync.h>
+#include "OpenKNX.h"
 
 
 
-class HWSensorchannel
+class HWSensorchannel: public OpenKNX::Channel
 {
     protected:
         uint8_t m_pin0 = 0;
@@ -20,7 +21,7 @@ class HWSensorchannel
 
     public:
         HWSensorchannel();
-        virtual void Setup(uint8_t pin0, uint8_t pin1);
+        virtual void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number);
 	    virtual bool Loop() = 0;
 
         float GetTemperature();
@@ -30,4 +31,6 @@ class HWSensorchannel
         void SetTemperature(float temperature);
         void SetHumidity(float humidity);
         void SetPressure(float pressure);
+
+        const std::string name() override;
 };

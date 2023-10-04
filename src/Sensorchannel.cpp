@@ -41,7 +41,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
     logDebugP("Setup");
     logDebugP("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
-    /*
+    
     logDebugP("Temperature Parameters:");
     logDebugP("ParamTHP_SensorTemperatureSendChangeAmount_: %f", ParamTHP_SensorTemperatureSendChangeAmount_);
     logDebugP("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
@@ -49,7 +49,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     logDebugP("ParamTHP_SensorTemperatureWarnL_           : %f", ParamTHP_SensorTemperatureWarnL_           );
     logDebugP("ParamTHP_SensorTemperatureWarnH_           : %f", ParamTHP_SensorTemperatureWarnH_           );
     logDebugP("ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
-	logDebugP("Humidity Parameters:");
+	/*logDebugP("Humidity Parameters:");
     logDebugP("ParamTHP_SensorHumiditySendChangeAmount_   : %f", ParamTHP_SensorHumiditySendChangeAmount_   );
     logDebugP("ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
     logDebugP("ParamTHP_SensorHumidityAlign_              : %f", ParamTHP_SensorHumidityAlign_              );
@@ -115,9 +115,10 @@ void Sensorchannel::loop()
 
         loop_temperature(temperature);
         loop_humidity(humidity);
-        loop_abshumidity(abshumidity);
-        loop_dewpoint(dewpoint);
-        loop_pressure(pressure);
+        //loop_abshumidity(abshumidity);
+        //loop_dewpoint(dewpoint);
+        //loop_pressure(pressure);
+        
     }
 }
 
@@ -594,7 +595,7 @@ float Sensorchannel::CalcAbsHumidity(float relative_humidity, float temperature)
 
 const std::string Sensorchannel::name()
 {
-    return "Sensorchannel";
+    return "Sensor";
 }
 
 void Sensorchannel::save()

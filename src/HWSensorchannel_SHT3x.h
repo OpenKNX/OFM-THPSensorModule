@@ -31,7 +31,7 @@ class HWSensorchannel_SHT3x : public HWSensorchannel
 
     public:
         HWSensorchannel_SHT3x();
-        void Setup(uint8_t pin0, uint8_t pin1);
+        void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number);
         bool Loop();
         void LoopMax();
 

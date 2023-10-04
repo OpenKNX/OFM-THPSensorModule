@@ -6,9 +6,9 @@ HWSensorchannel_DS18B20::HWSensorchannel_DS18B20()
     
 }
 
-void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1)
+void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number)
 {
-    HWSensorchannel::Setup(pin0, pin1);
+    HWSensorchannel::Setup(pin0, pin1, channel_number);
     m_Wire = new One_wire(pin0);
     m_Wire2 = new One_wire(pin1);
     init();
@@ -17,7 +17,7 @@ void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1)
 bool HWSensorchannel_DS18B20::Loop()
 {
     // proceed with the "older" one
-    if(m_lastexec < m_lastexec2)
+    if(true || m_lastexec < m_lastexec2)
     {
         // sensor 1
         switch(m_state)
@@ -25,6 +25,7 @@ bool HWSensorchannel_DS18B20::Loop()
             case 0:
                 if(millis() - m_lastexec > POLL_INTERVALL)
                 {
+                    logDebugP("s0");
                     m_Wire->convert_temperature(m_address, false, false);   // ~6ms
                     m_state = 1;
                     m_lastexec = millis();
@@ -34,6 +35,7 @@ bool HWSensorchannel_DS18B20::Loop()
             case 1:
                 if(millis() - m_lastexec > 750)
                 {
+                    logDebugP("s1");
                     float stemp = m_Wire->temperature(m_address);     // 10ms
                     SetTemperature(stemp);
                     m_state = 0;
@@ -43,7 +45,7 @@ bool HWSensorchannel_DS18B20::Loop()
         }
     }
     else
-    {
+    {/*
         // sensor 2
         switch(m_state2)
         {
@@ -65,7 +67,7 @@ bool HWSensorchannel_DS18B20::Loop()
                     m_lastexec2 = millis();
                 }
             break;
-        }
+        }*/
     }
 
 

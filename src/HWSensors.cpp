@@ -17,7 +17,7 @@ void HWSensors::Setup(const uint8_t outpins[], uint8_t sensortypes[])
         m_HWSensorchannels[i] = CreateHWSensorchannel(sensortypes[i]);
 
         if(m_HWSensorchannels[i] != nullptr)
-            m_HWSensorchannels[i]->Setup(outpins[i*2],outpins[(i*2)+1]);
+            m_HWSensorchannels[i]->Setup(outpins[i*2],outpins[(i*2)+1], i);
     }
 }
 
