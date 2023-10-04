@@ -38,8 +38,10 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
 
     
     // Debug
+
     logDebugP("Setup");
     logDebugP("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
+    /*
     logDebugP("Temperature Parameters:");
     logDebugP("ParamTHP_SensorTemperatureSendChangeAmount_: %f", ParamTHP_SensorTemperatureSendChangeAmount_);
     logDebugP("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
@@ -93,6 +95,7 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     logDebugP("ParamTHP_SensorTemperature2WarnL_          : %f", ParamTHP_SensorTemperature2WarnL_           );
     logDebugP("ParamTHP_SensorTemperature2WarnH_          : %f", ParamTHP_SensorTemperature2WarnH_           );
     logDebugP("ParamTHP_SensorTemperature2MinMax_         : %i", ParamTHP_SensorTemperature2MinMax_          );
+    */
     logDebugP("-------------------------------------------");
 }
 
@@ -100,76 +103,98 @@ void Sensorchannel::loop()
 {
     if(ParamTHP_Sensortype_ == 99)  // act as binary input
     {
-        bool new_input0 = !digitalRead(m_pin0);
-        bool new_input1 = !digitalRead(m_pin1);
-        bool send = false;
+        loop_binaryinput();
+    }
+    else
+    {
+        float temperature = m_hwSensors->GetTemperature(_channelIndex);
+        float humidity = m_hwSensors->GetHumidity(_channelIndex);
+        float abshumidity = CalcAbsHumidity(humidity, temperature);
+        float dewpoint = CalcDewPoint(humidity, temperature);
+        float pressure = m_hwSensors->GetPressure(_channelIndex);
 
-        if(new_input0 != m_input0)
+        loop_temperature(temperature);
+        loop_humidity(humidity);
+        loop_abshumidity(abshumidity);
+        loop_dewpoint(dewpoint);
+        loop_pressure(pressure);
+    }
+}
+
+
+void Sensorchannel::loop_binaryinput()
+{
+    bool new_input0 = !digitalRead(m_pin0);
+    bool new_input1 = !digitalRead(m_pin1);
+    bool send = false;
+
+    if(new_input0 != m_input0)
+    {
+        if(!m_input0_debounce_millis)
         {
-            if(!m_input0_debounce_millis)
-            {
-                m_input0_debounce_millis = millis();
-            }
-            else
-            {
-                if(delayCheck(m_input0_debounce_millis, ParamTHP_Input0DebounceTime_))
-                {
-                    m_input0 = new_input0;
-                    m_input0_debounce_millis = 0;
-                    logInfoP(m_input0 ? "P0=1" : "P0=0");
-                    send = true;
-                }
-            }            
+            m_input0_debounce_millis = millis();
         }
         else
         {
-            m_input0_debounce_millis = 0;
-
-            if(ParamTHP_Input0SendCycle_)
-                if(delayCheck(m_input0_last_send_millis, ParamTHP_Input0SendCycle_ * 60000) || m_input0_last_send_millis == 0)
-                    send = true;
-        }
-        if(send)
-        {
-            KoTHP_Input0_.value(m_input0 ? ParamTHP_Input0ActionClosed_ : ParamTHP_Input0ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
-            m_input0_last_send_millis = millis();
-        }
-
-
-        send = false;
-        if(new_input1 != m_input1)
-        {
-            if(!m_input1_debounce_millis)
+            if(delayCheck(m_input0_debounce_millis, ParamTHP_Input0DebounceTime_))
             {
-                m_input1_debounce_millis = millis();
+                m_input0 = new_input0;
+                m_input0_debounce_millis = 0;
+                logInfoP(m_input0 ? "P0=1" : "P0=0");
+                send = true;
             }
-            else
-            {
-                if(delayCheck(m_input1_debounce_millis, ParamTHP_Input1DebounceTime_))
-                {
-                    m_input1 = new_input1;
-                    m_input1_debounce_millis = 0;
-                    logInfoP(m_input1 ? "P1=1" : "P1=0");
-                    send = true;
-                }
-            }            
-        }
-        else
-        {
-            m_input1_debounce_millis = 0;
+        }            
+    }
+    else
+    {
+        m_input0_debounce_millis = 0;
 
-            if(ParamTHP_Input1SendCycle_)
-                if(delayCheck(m_input1_last_send_millis, ParamTHP_Input1SendCycle_ * 60000) || m_input1_last_send_millis == 0)
-                    send = true;
-        }
-        if(send)
-        {
-            KoTHP_Input1_.value(m_input1 ? ParamTHP_Input1ActionClosed_ : ParamTHP_Input1ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
-            m_input1_last_send_millis = millis();
-        }
+        if(ParamTHP_Input0SendCycle_)
+            if(delayCheck(m_input0_last_send_millis, ParamTHP_Input0SendCycle_ * 60000) || m_input0_last_send_millis == 0)
+                send = true;
+    }
+    if(send)
+    {
+        KoTHP_Input0_.value(m_input0 ? ParamTHP_Input0ActionClosed_ : ParamTHP_Input0ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+        m_input0_last_send_millis = millis();
     }
 
-    float temperature = m_hwSensors->GetTemperature(_channelIndex);
+
+    send = false;
+    if(new_input1 != m_input1)
+    {
+        if(!m_input1_debounce_millis)
+        {
+            m_input1_debounce_millis = millis();
+        }
+        else
+        {
+            if(delayCheck(m_input1_debounce_millis, ParamTHP_Input1DebounceTime_))
+            {
+                m_input1 = new_input1;
+                m_input1_debounce_millis = 0;
+                logInfoP(m_input1 ? "P1=1" : "P1=0");
+                send = true;
+            }
+        }            
+    }
+    else
+    {
+        m_input1_debounce_millis = 0;
+
+        if(ParamTHP_Input1SendCycle_)
+            if(delayCheck(m_input1_last_send_millis, ParamTHP_Input1SendCycle_ * 60000) || m_input1_last_send_millis == 0)
+                send = true;
+    }
+    if(send)
+    {
+        KoTHP_Input1_.value(m_input1 ? ParamTHP_Input1ActionClosed_ : ParamTHP_Input1ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+        m_input1_last_send_millis = millis();
+    }
+}
+
+void Sensorchannel::loop_temperature(float temperature)
+{
     if(!isnan(temperature))
     {
         uint8_t send_cycle = ParamTHP_SensorTemperatureSendCycle_;
@@ -236,8 +261,10 @@ void Sensorchannel::loop()
             }
         }
     }
+}
 
-    float humidity = m_hwSensors->GetHumidity(_channelIndex);
+void Sensorchannel::loop_humidity(float humidity)
+{
     if(!isnan(humidity))
     {
         uint8_t send_cycle = ParamTHP_SensorHumiditySendCycle_;
@@ -299,11 +326,12 @@ void Sensorchannel::loop()
             }
         }
     }
+}
 
-    if(!isnan(humidity) &&!isnan(temperature))
+void Sensorchannel::loop_abshumidity(float abshumidity) 
+{
+    if(!isnan(abshumidity))
     {
-        float abshumidity = CalcAbsHumidity(humidity, temperature);
-
         uint8_t send_cycle = ParamTHP_SensorAbsHumiditySendCycle_;
         uint32_t send_millis = send_cycle * 60000;
         bool sendnow = false;
@@ -362,11 +390,16 @@ void Sensorchannel::loop()
                 m_abshumidity_alarmL_last_send_millis = millis();
             }
         }
+    }
+}
 
-        float dewpoint = CalcDewPoint(humidity, temperature);
-        send_cycle = ParamTHP_SensorDewPointSendCycle_;
-        send_millis = send_cycle * 60000;
-        sendnow = false;
+void Sensorchannel::loop_dewpoint(float dewpoint)
+{
+    if(!isnan(dewpoint))
+    {
+        uint8_t send_cycle = ParamTHP_SensorDewPointSendCycle_;
+        uint32_t send_millis = send_cycle * 60000;
+        bool sendnow = false;
         if(send_cycle)
         {
             sendnow = millis() - m_dewpoint_last_send_millis > send_millis || m_dewpoint_last_send_millis == 0;
@@ -423,8 +456,10 @@ void Sensorchannel::loop()
             }
         }
     }
+}
 
-    float pressure = m_hwSensors->GetPressure(_channelIndex);
+void Sensorchannel::loop_pressure(float pressure)
+{
     uint32_t send_cycle = ParamTHP_SensorPressureSendCycle_;
     uint32_t send_millis = send_cycle * 60000;
     bool sendnow = false;

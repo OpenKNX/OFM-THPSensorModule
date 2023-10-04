@@ -65,6 +65,13 @@ class Sensorchannel : public OpenKNX::Channel
         float CalcAbsHumidity(float relative_humidity, float temperature);
 
         const std::string name() override;
+
+        void loop_binaryinput();
+        void loop_temperature(float temperature);
+        void loop_humidity(float humidity);
+        void loop_abshumidity(float abshumidity);
+        void loop_dewpoint(float dewpoint);
+        void loop_pressure(float pressure);
     
     public:
         Sensorchannel();
