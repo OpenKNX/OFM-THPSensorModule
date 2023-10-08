@@ -25,7 +25,6 @@ bool HWSensorchannel_DS18B20::Loop()
             case 0:
                 if(millis() - m_lastexec > POLL_INTERVALL)
                 {
-                    logDebugP("s0");
                     m_Wire->convert_temperature(m_address, false, false);   // ~6ms
                     m_state = 1;
                     m_lastexec = millis();
@@ -33,11 +32,15 @@ bool HWSensorchannel_DS18B20::Loop()
             break;
 
             case 1:
-                if(millis() - m_lastexec > 750)
+                if(millis() - m_lastexec > 1000)
                 {
-                    logDebugP("s1");
                     float stemp = m_Wire->temperature(m_address);     // 10ms
-                    SetTemperature(stemp);
+                    if(stemp > -200)
+                        SetTemperature(stemp);
+                    else
+                    {
+                        logDebugP("CRC-Error0");
+                    }
                     m_state = 0;
                     m_lastexec = millis();
                 }
@@ -45,7 +48,7 @@ bool HWSensorchannel_DS18B20::Loop()
         }
     }
     else
-    {/*
+    {
         // sensor 2
         switch(m_state2)
         {
@@ -62,12 +65,17 @@ bool HWSensorchannel_DS18B20::Loop()
                 if(millis() - m_lastexec2 > 750)
                 {
                     float stemp = m_Wire2->temperature(m_address2);     // 10ms
-                    SetHumidity(stemp); // For Temp2, the Humidty KO and Params are used
+                    if(stemp > -200)
+                        SetHumidity(stemp);
+                    else
+                    {
+                        logDebugP("CRC-Error1");
+                    }
                     m_state2 = 0;
                     m_lastexec2 = millis();
                 }
             break;
-        }*/
+        }
     }
 
 

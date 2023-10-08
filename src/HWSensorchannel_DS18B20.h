@@ -4,7 +4,7 @@
 #include "HWSensorchannel.h"
 #include "one_wire.h"
 
-#define POLL_INTERVALL 1000
+#define POLL_INTERVALL 2000
 
 
 class HWSensorchannel_DS18B20 : public HWSensorchannel
