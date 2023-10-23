@@ -28,6 +28,7 @@ class THPSensorModule : public OpenKNX::Module
     void writeFlash() override;
     uint16_t flashSize() override;
     static THPSensorModule *instance();
+    bool processCommand(const std::string cmd, bool diagnoseKo) override;
 
   private:
     static THPSensorModule *_instance;

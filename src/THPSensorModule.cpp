@@ -138,3 +138,19 @@ void THPSensorModule::writeFlash()
         _Sensorchannels[lIndex]->save();
     }
 }
+
+bool THPSensorModule::processCommand(const std::string cmd, bool diagnoseKo)
+{
+    if(diagnoseKo)
+        return false;
+    
+    if(cmd == "sensors")
+    {
+        for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
+        {
+            //openknx.logger.log(_Sensorchannels[lIndex]->getValueString());            
+        }
+        return true;
+    }
+    return false;
+}
