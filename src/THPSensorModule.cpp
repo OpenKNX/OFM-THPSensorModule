@@ -22,7 +22,7 @@ const std::string THPSensorModule::name()
 
 const std::string THPSensorModule::version()
 {
-    return "0.2dev";
+    return MODULE_THPSensorModule_Version;
 }
 
 void THPSensorModule::setup()
