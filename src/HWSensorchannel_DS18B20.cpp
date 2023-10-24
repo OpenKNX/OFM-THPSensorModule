@@ -6,9 +6,9 @@ HWSensorchannel_DS18B20::HWSensorchannel_DS18B20()
     
 }
 
-void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1)
+void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number)
 {
-    HWSensorchannel::Setup(pin0, pin1);
+    HWSensorchannel::Setup(pin0, pin1, channel_number);
     m_Wire = new One_wire(pin0);
     m_Wire2 = new One_wire(pin1);
     init();
@@ -17,7 +17,7 @@ void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1)
 bool HWSensorchannel_DS18B20::Loop()
 {
     // proceed with the "older" one
-    if(m_lastexec < m_lastexec2)
+    if(true || m_lastexec < m_lastexec2)
     {
         // sensor 1
         switch(m_state)
@@ -32,10 +32,15 @@ bool HWSensorchannel_DS18B20::Loop()
             break;
 
             case 1:
-                if(millis() - m_lastexec > 750)
+                if(millis() - m_lastexec > 1000)
                 {
                     float stemp = m_Wire->temperature(m_address);     // 10ms
-                    SetTemperature(stemp);
+                    if(stemp > -200)
+                        SetTemperature(stemp);
+                    else
+                    {
+                        logDebugP("CRC-Error0");
+                    }
                     m_state = 0;
                     m_lastexec = millis();
                 }
@@ -60,7 +65,12 @@ bool HWSensorchannel_DS18B20::Loop()
                 if(millis() - m_lastexec2 > 750)
                 {
                     float stemp = m_Wire2->temperature(m_address2);     // 10ms
-                    SetHumidity(stemp); // For Temp2, the Humidty KO and Params are used
+                    if(stemp > -200)
+                        SetHumidity(stemp);
+                    else
+                    {
+                        logDebugP("CRC-Error1");
+                    }
                     m_state2 = 0;
                     m_lastexec2 = millis();
                 }

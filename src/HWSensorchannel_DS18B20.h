@@ -4,7 +4,7 @@
 #include "HWSensorchannel.h"
 #include "one_wire.h"
 
-#define POLL_INTERVALL 1000
+#define POLL_INTERVALL 2000
 
 
 class HWSensorchannel_DS18B20 : public HWSensorchannel
@@ -21,7 +21,7 @@ class HWSensorchannel_DS18B20 : public HWSensorchannel
 
     public:
         HWSensorchannel_DS18B20();
-        void Setup(uint8_t pin0, uint8_t pin1);
+        void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number);
         bool Loop();
 
     private:

@@ -8,10 +8,11 @@ HWSensorchannel::HWSensorchannel()
     mutex_init(&mx3);
 }
 
-void HWSensorchannel::Setup(uint8_t pin0, uint8_t pin1)
+void HWSensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number)
 {
     m_pin0 = pin0;
     m_pin1 = pin1;
+    _channelIndex = channel_number;
 }
 
 float HWSensorchannel::GetTemperature()
@@ -61,6 +62,7 @@ float HWSensorchannel::GetPressure()
 
 void HWSensorchannel::SetTemperature(float temperature)
 {
+    logDebugP("Temp value %f", temperature);
     mutex_enter_blocking(&mx1);
     m_temperature = temperature;
     mutex_exit(&mx1);
@@ -78,4 +80,9 @@ void HWSensorchannel::SetPressure(float pressure)
     mutex_enter_blocking(&mx3);
     m_pressure = pressure;
     mutex_exit(&mx3);
+}
+
+const std::string HWSensorchannel::name()
+{
+    return "HWSens";
 }

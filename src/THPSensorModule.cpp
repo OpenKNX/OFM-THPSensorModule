@@ -1,5 +1,7 @@
 #include "THPSensorModule.h"
 
+#include "ModuleVersion.h"
+
 THPSensorModule *THPSensorModule::_instance = nullptr;
 
 THPSensorModule::THPSensorModule(const uint8_t* gpioPins)
@@ -20,7 +22,7 @@ const std::string THPSensorModule::name()
 
 const std::string THPSensorModule::version()
 {
-    return "0.2dev";
+    return MODULE_THPSensorModule_Version;
 }
 
 void THPSensorModule::setup()
@@ -62,12 +64,13 @@ void THPSensorModule::loop()
     }
 }
 
+#ifdef OPENKNX_DUALCORE
 void THPSensorModule::loop1()
 {   
     // second core
-    //_HWSensors.Loop();
+    _HWSensors.Loop();
 }
-
+#endif
 
 
 void THPSensorModule::processInputKo(GroupObject &ko)
@@ -134,4 +137,20 @@ void THPSensorModule::writeFlash()
     {
         _Sensorchannels[lIndex]->save();
     }
+}
+
+bool THPSensorModule::processCommand(const std::string cmd, bool diagnoseKo)
+{
+    if(diagnoseKo)
+        return false;
+    
+    if(cmd == "sensors")
+    {
+        for (uint8_t lIndex = 0; lIndex < THP_ChannelCount; lIndex++)
+        {
+            //openknx.logger.log(_Sensorchannels[lIndex]->getValueString());            
+        }
+        return true;
+    }
+    return false;
 }

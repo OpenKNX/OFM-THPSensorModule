@@ -4,7 +4,7 @@
 #include "HWSensors.h"
 
 #ifndef OPENKNX_DUALCORE
-#pragma warn "THPSensorModule needs OPENKNX_DUALCORE"
+#pragma message "THPSensorModule needs OPENKNX_DUALCORE"
 #endif
 
 
@@ -14,7 +14,9 @@ class THPSensorModule : public OpenKNX::Module
   public:
     THPSensorModule(const uint8_t* gpioPins);
     void loop() override;
+    #ifdef OPENKNX_DUALCORE
     void loop1() override;
+    #endif
     void setup() override;
     const std::string name() override;
     const std::string version() override;
@@ -26,6 +28,7 @@ class THPSensorModule : public OpenKNX::Module
     void writeFlash() override;
     uint16_t flashSize() override;
     static THPSensorModule *instance();
+    bool processCommand(const std::string cmd, bool diagnoseKo) override;
 
   private:
     static THPSensorModule *_instance;

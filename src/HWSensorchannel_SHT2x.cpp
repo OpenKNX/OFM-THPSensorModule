@@ -6,9 +6,9 @@ HWSensorchannel_SHT2x::HWSensorchannel_SHT2x()
     
 }
 
-void HWSensorchannel_SHT2x::Setup(uint8_t pin0, uint8_t pin1)
+void HWSensorchannel_SHT2x::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number)
 {
-    HWSensorchannel::Setup(pin0, pin1);
+    HWSensorchannel::Setup(pin0, pin1, channel_number);
     if(m_pin0 == 13 || m_pin0 == 17 || m_pin0 == 21 || m_pin0 == 25 || m_pin0 == 29)
     {
         m_Wire = &Wire;
@@ -21,12 +21,6 @@ void HWSensorchannel_SHT2x::Setup(uint8_t pin0, uint8_t pin1)
 
 bool HWSensorchannel_SHT2x::Loop()
 {
-    //Serial.print("HWSensorchannel_SHT2x::Loop ");
-    //Serial.print(m_pin0);
-    //Serial.print(" ");
-    //Serial.println(m_state);
-
-
     switch(m_state)
     {
         case 0:
@@ -121,14 +115,14 @@ uint8_t HWSensorchannel_SHT2x::crc8(const uint8_t *data, int len)
 
 boolean HWSensorchannel_SHT2x::readTempHumidity1(void)
 {
-    //Serial.println("HWSensorchannel_SHT2x::readTempHumidity1");
+    logTraceP("HWSensorchannel_SHT2x::readTempHumidity1");
     writeCommand(SHT21__RH_MEASUREMENT_NHM);
     return true;
 }
 
 boolean HWSensorchannel_SHT2x::readTempHumidity2(void)
 {
-    //Serial.println("HWSensorchannel_SHT2x::readTempHumidity2");
+    logTraceP("HWSensorchannel_SHT2x::readTempHumidity2");
     uint8_t readbuffer[3];
 
     m_Wire->requestFrom(SHT21_I2C_ADDR, (uint8_t)3);
@@ -144,14 +138,13 @@ boolean HWSensorchannel_SHT2x::readTempHumidity2(void)
 
     if (readbuffer[2] != crc8(readbuffer, 2))
     {
-        Serial.println("HWSensorchannel_SHT2x::readTempHumidity2: CRC Error");
+        logDebugP("HWSensorchannel_SHT2x::readTempHumidity2: CRC Error");
         return false;
     }
 
     double shum = result;
     shum *= 100;
     shum /= 0xFFFF;
-    Serial.println(shum);
     SetHumidity(shum);
 
     writeCommand(SHT21__T_MEASUREMENT_NHM);
@@ -162,13 +155,13 @@ boolean HWSensorchannel_SHT2x::readTempHumidity2(void)
 
 boolean HWSensorchannel_SHT2x::readTempHumidity3(void)
 {
-    //Serial.println("HWSensorchannel_SHT2x::readTempHumidity3: ");
+    logTraceP("HWSensorchannel_SHT2x::readTempHumidity3: ");
     uint8_t readbuffer[3];
 
     m_Wire->requestFrom(SHT21_I2C_ADDR, (uint8_t)3);
     if (m_Wire->available() != 3)
     {
-        Serial.println("HWSensorchannel_SHT2x::readTempHumidity3: no data");
+        logDebugP("HWSensorchannel_SHT2x::readTempHumidity3: no data");
         return false;
     }
     for (uint8_t i=0; i<3; i++)
@@ -181,7 +174,7 @@ boolean HWSensorchannel_SHT2x::readTempHumidity3(void)
 
         if (readbuffer[2] != crc8(readbuffer, 2))
     {
-        Serial.println("HWSensorchannel_SHT2x::readTempHumidity3: CRC Error");
+        logDebugP("HWSensorchannel_SHT2x::readTempHumidity3: CRC Error");
         return false;
     }
 
@@ -190,10 +183,6 @@ boolean HWSensorchannel_SHT2x::readTempHumidity3(void)
     stemp /= 0xffff;
     stemp = -45 + stemp;
     SetTemperature(stemp);
-    //Serial.print("#");
-    //Serial.print(stemp);
-    //Serial.println("#");
-
 
     return true;
 }
