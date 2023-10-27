@@ -115,9 +115,9 @@ void Sensorchannel::loop()
 
         loop_temperature(temperature);
         loop_humidity(humidity);
-        //loop_abshumidity(abshumidity);
-        //loop_dewpoint(dewpoint);
-        //loop_pressure(pressure);
+        loop_abshumidity(abshumidity);
+        loop_dewpoint(dewpoint);
+        loop_pressure(pressure);
         
     }
 }
