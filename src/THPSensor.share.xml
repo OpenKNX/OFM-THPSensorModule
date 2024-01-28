@@ -92,8 +92,9 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <ChannelIndependentBlock>
-            </ChannelIndependentBlock>
+            <Channel Name="MainChannel" Text="Sensor-Kanäle" Number="%TT%" Id="%AID%_CH-%TT%" Icon="thermometer" HelpContext="Empty">
+              <op:include href="THPSensor.templ.xml" xpath="//ApplicationProgram/Dynamic/ChannelIndependentBlock/*" type="template" prefix="THP" IsInner="true" />
+            </Channel>
           </Dynamic>
         </ApplicationProgram>
       </ApplicationPrograms>
