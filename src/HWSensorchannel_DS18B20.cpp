@@ -17,7 +17,7 @@ void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_
 bool HWSensorchannel_DS18B20::Loop()
 {
     // proceed with the "older" one
-    if(true || m_lastexec < m_lastexec2)
+    if(m_lastexec < m_lastexec2)
     {
         // sensor 1
         switch(m_state)
