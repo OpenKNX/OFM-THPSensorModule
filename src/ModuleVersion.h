@@ -1,15 +1,16 @@
-#define ModuleVersion 1
-#define ModuleRevision 1
+#include "versions.h"
+
+// Change the following 3 lines and adopt to your module names
+#define ModuleVersion_ModuleName "THPSensorModule"
+#define ModuleVersion_knxprod_h THP_ModuleVersion
+#define ModuleVersion_version_h MODULE_THPSensorModule_ETS
 
 // ATTENTION: This file is evaluated during build, by OpenKNXproducer and some build scripts.
-// Do not add any other information than the module version of this OFM.
+// No changes needed behind this point
 #define VALUE_TO_STRING(x) #x
 #define VALUE(x) VALUE_TO_STRING(x)
 
-#ifndef LOG_ModuleVersion
-    #pragma message "\n\n<op:verify File=\"../lib/OFM-THPSensorModule/src/ModuleVersion.h\" ModuleVersion=\"" VALUE(ModuleVersion) "\" />\n\n"
-    #pragma GCC error "\n\nPlease use OpenKNXproducer v2.3.4 or higher and rebuild your knxprod with correct op:verify entry\n\n"
-#elif THP_ModuleVersion != ModuleVersion
-    #pragma message "\n\n\nYou need to >>> INCREASE YOUR <<< ETS ApplicationVersion and manually synchronize op:verify of the THP Module to ModuleVersion " VALUE(ModuleVersion) "\n\n( see https://github.com/OpenKNX/OpenKNX/wiki/Versionierung-von-Modulen-(OFM)#fehler-vom-compiler )\n\n\n"
+#if ModuleVersion_knxprod_h != ModuleVersion_version_h
+    #pragma message "\n\n\nYou need to >>> INCREASE YOUR <<< ETS ApplicationVersion and manually synchronize op:verify of " ModuleVersion_ModuleName " to " VALUE(ModuleVersion_version_h) "\n\n(see https://github.com/OpenKNX/OpenKNX/wiki/Versionierung-von-Modulen-(OFM)#fehler-vom-compiler )\n\n\n"
     #pragma GCC error "\n\nETS Application Version problem (see next message)\n\n"
 #endif
