@@ -4,11 +4,11 @@
     "dependencies":
     [
         {
-            "name": "external-repo",
+            "name": "OneWireNg",
             "version": "https://github.com/pstolarz/OneWireNg.git#0.13.3"
         },
         {
-            "name": "external-repo",
+            "name": "Arduino-Temperature-Control-Library",
             "version": "https://github.com/milesburton/Arduino-Temperature-Control-Library.git#v4.0.3"
         }
     ],
