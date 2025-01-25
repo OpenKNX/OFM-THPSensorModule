@@ -1,9 +1,17 @@
 {
     "name": "OFM-THPSensorModule",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "dependencies":
-    {
-    },
+    [
+        {
+            "name": "external-repo",
+            "version": "https://github.com/pstolarz/OneWireNg.git#0.13.3"
+        },
+        {
+            "name": "external-repo",
+            "version": "https://github.com/milesburton/Arduino-Temperature-Control-Library.git#v4.0.3"
+        }
+    ],
     "homepage": "https://openknx.de",
     "authors": {
         "name": "OpenKNX",

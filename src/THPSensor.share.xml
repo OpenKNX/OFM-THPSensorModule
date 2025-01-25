@@ -36,6 +36,7 @@
                   <Enumeration Text="Deaktiviert" Value="0" Id="%AID%_PT-Sensortype_EN-0" />
                   <Enumeration Text="SHT3x" Value="1" Id="%AID%_PT-Sensortype_EN-1" />
                   <Enumeration Text="SHT2x" Value="2" Id="%AID%_PT-Sensortype_EN-2" />
+                  <Enumeration Text="SHT4x" Value="5" Id="%AID%_PT-Sensortype_EN-5" />
                   <Enumeration Text="BME280" Value="3" Id="%AID%_PT-Sensortype_EN-3" />
                   <Enumeration Text="2x DS18B20" Value="4" Id="%AID%_PT-Sensortype_EN-4" />
                   <Enumeration Text="2x Binäreingang" Value="99" Id="%AID%_PT-Sensortype_EN-99" />
@@ -76,6 +77,13 @@
                   <Enumeration Text="70ms" Value="70" Id="%AID%_PT-DebounceTime_EN-70" />
                   <Enumeration Text="80ms" Value="80" Id="%AID%_PT-DebounceTime_EN-80" />
                   <Enumeration Text="90ms" Value="90" Id="%AID%_PT-DebounceTime_EN-90" />
+                </TypeRestriction>
+              </ParameterType>
+              <ParameterType Id="%AID%_PT-OnOffNull" Name="OnOffNull">
+                <TypeRestriction Base="Value" SizeInBit="2">
+                  <Enumeration Text="Aus (0)" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Ein (1)" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Inaktiv" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>

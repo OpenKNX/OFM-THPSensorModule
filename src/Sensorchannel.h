@@ -71,6 +71,8 @@ class Sensorchannel : public OpenKNX::Channel
         void loop_abshumidity(float abshumidity);
         void loop_dewpoint(float dewpoint);
         void loop_pressure(float pressure);
+
+        Dpt humKoDpt();
     
     public:
         Sensorchannel();

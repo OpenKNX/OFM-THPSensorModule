@@ -64,13 +64,11 @@ void THPSensorModule::loop()
     }
 }
 
-#ifdef OPENKNX_DUALCORE
 void THPSensorModule::loop1()
 {   
     // second core
     _HWSensors.Loop();
 }
-#endif
 
 
 void THPSensorModule::processInputKo(GroupObject &ko)

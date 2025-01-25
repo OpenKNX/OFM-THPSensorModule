@@ -106,7 +106,7 @@ boolean HWSensorchannel_BME280::readTempHumidity3(void)
 {
     //Serial.println("HWSensorchannel_BME280::readTempHumidity3: ");
 
-    SetPressure(m_bme280->getPressure());
+    SetPressure(m_bme280->getPressure()*100);
     return true;
 }
 

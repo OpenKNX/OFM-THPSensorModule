@@ -70,6 +70,7 @@ void HWSensorchannel::SetTemperature(float temperature)
 
 void HWSensorchannel::SetHumidity(float humidity)
 {
+    logDebugP("Hum value %f", humidity);
     mutex_enter_blocking(&mx2);
     m_humidity = humidity;
     mutex_exit(&mx2);

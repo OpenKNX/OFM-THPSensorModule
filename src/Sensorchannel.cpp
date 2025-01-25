@@ -27,76 +27,14 @@ void Sensorchannel::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number, HW
     // if save data are in flash, this will be overwritten
     KoTHP_SensorTempMinValue_.valueNoSend((float)1000, TempKODPT);
     KoTHP_SensorTempMaxValue_.valueNoSend((float)-1000, TempKODPT);
-    KoTHP_SensorHumMinValue_.valueNoSend((float)1000, HumKODPT);
-    KoTHP_SensorHumMaxValue_.valueNoSend((float)-1000, HumKODPT);
+    KoTHP_SensorHumMinValue_.valueNoSend((float)1000, humKoDpt());
+    KoTHP_SensorHumMaxValue_.valueNoSend((float)-1000, humKoDpt());
     KoTHP_SensorAbsHumMinValue_.valueNoSend((float)1000, AbsHumKODPT);
     KoTHP_SensorAbsHumMaxValue_.valueNoSend((float)-1000, AbsHumKODPT);
     KoTHP_SensorDewPointMinValue_.valueNoSend((float)1000, DewPointKODPT);
     KoTHP_SensorDewPointMaxValue_.valueNoSend((float)-1000, DewPointKODPT);
     KoTHP_SensorPressMinValue_.valueNoSend((float)1000, PressKODPT);
     KoTHP_SensorPressMaxValue_.valueNoSend((float)-1000, PressKODPT);
-
-    
-    // Debug
-
-    logDebugP("Setup");
-    logDebugP("ParamTHP_Sensortype_                       : %i", ParamTHP_Sensortype_                       );
-    
-    logDebugP("Temperature Parameters:");
-    logDebugP("ParamTHP_SensorTemperatureSendChangeAmount_: %f", ParamTHP_SensorTemperatureSendChangeAmount_);
-    logDebugP("ParamTHP_SensorTemperatureSendCycle_       : %i", ParamTHP_SensorTemperatureSendCycle_       );
-    logDebugP("ParamTHP_SensorTemperatureAlign_           : %f", ParamTHP_SensorTemperatureAlign_           );
-    logDebugP("ParamTHP_SensorTemperatureWarnL_           : %f", ParamTHP_SensorTemperatureWarnL_           );
-    logDebugP("ParamTHP_SensorTemperatureWarnH_           : %f", ParamTHP_SensorTemperatureWarnH_           );
-    logDebugP("ParamTHP_SensorTemperatureMinMax_          : %i", ParamTHP_SensorTemperatureMinMax_          );
-	/*logDebugP("Humidity Parameters:");
-    logDebugP("ParamTHP_SensorHumiditySendChangeAmount_   : %f", ParamTHP_SensorHumiditySendChangeAmount_   );
-    logDebugP("ParamTHP_SensorHumiditySendCycle_          : %i", ParamTHP_SensorHumiditySendCycle_          );
-    logDebugP("ParamTHP_SensorHumidityAlign_              : %f", ParamTHP_SensorHumidityAlign_              );
-    logDebugP("ParamTHP_SensorHumidityWarnL_              : %f", ParamTHP_SensorHumidityWarnL_              );
-    logDebugP("ParamTHP_SensorHumidityWarnH_              : %f", ParamTHP_SensorHumidityWarnH_              );
-    logDebugP("ParamTHP_SensorHumidityMinMax_             : %i", ParamTHP_SensorHumidityMinMax_             );
-    logDebugP("ParamTHP_SensorHumiditySend_               : %i", ParamTHP_SensorHumiditySend_               );
-    logDebugP("Absolute Humidity Parameters:");
-    logDebugP("ParamTHP_SensorAbsHumiditySendChangeAmount_: %f", ParamTHP_SensorAbsHumiditySendChangeAmount_);
-    logDebugP("ParamTHP_SensorAbsHumiditySendCycle_       : %i", ParamTHP_SensorAbsHumiditySendCycle_       );
-    logDebugP("ParamTHP_SensorAbsHumidityAlign_           : %f", ParamTHP_SensorAbsHumidityAlign_           );
-    logDebugP("ParamTHP_SensorAbsHumidityWarnL_           : %f", ParamTHP_SensorAbsHumidityWarnL_           );
-    logDebugP("ParamTHP_SensorAbsHumidityWarnH_           : %f", ParamTHP_SensorAbsHumidityWarnH_           );
-    logDebugP("ParamTHP_SensorAbsHumidityMinMax_          : %i", ParamTHP_SensorAbsHumidityMinMax_          );
-    logDebugP("Dew Point Parameters:");
-    logDebugP("ParamTHP_SensorDewPointSendChangeAmount_   : %f", ParamTHP_SensorDewPointSendChangeAmount_   );
-    logDebugP("ParamTHP_SensorDewPointSendCycle_          : %i", ParamTHP_SensorDewPointSendCycle_          );
-    logDebugP("ParamTHP_SensorDewPointAlign_              : %f", ParamTHP_SensorDewPointAlign_              );
-    logDebugP("ParamTHP_SensorDewPointWarnL_              : %f", ParamTHP_SensorDewPointWarnL_              );
-    logDebugP("ParamTHP_SensorDewPointWarnH_              : %f", ParamTHP_SensorDewPointWarnH_              );
-    logDebugP("ParamTHP_SensorDewPointMinMax_             : %i", ParamTHP_SensorDewPointMinMax_             );
-	logDebugP("Pressure Parameters:");
-    logDebugP("ParamTHP_SensorPressureSendChangeAmount_   : %f", ParamTHP_SensorPressureSendChangeAmount_   );
-    logDebugP("ParamTHP_SensorPressureSendCycle_          : %i", ParamTHP_SensorPressureSendCycle_          );
-    logDebugP("ParamTHP_SensorPressureAlign_              : %f", ParamTHP_SensorPressureAlign_              );
-    logDebugP("ParamTHP_SensorPressureWarnL_              : %f", ParamTHP_SensorPressureWarnL_              );
-    logDebugP("ParamTHP_SensorPressureWarnH_              : %f", ParamTHP_SensorPressureWarnH_              );
-    logDebugP("ParamTHP_SensorPressureMinMax_             : %i", ParamTHP_SensorPressureMinMax_             );
-	logDebugP("Binary Input 0 Parameters:");
-    logDebugP("ParamTHP_Input0DebounceTime_               : %i", ParamTHP_Input0DebounceTime_               );
-    logDebugP("ParamTHP_Input0ActionOpen_                 : %i", ParamTHP_Input0ActionOpen_                 );
-    logDebugP("ParamTHP_Input0ActionClosed_               : %i", ParamTHP_Input0ActionClosed_               );
-    logDebugP("ParamTHP_Input0SendCycle_                  : %i", ParamTHP_Input0SendCycle_                  );
-    logDebugP("Binary Input 1 Parameters:");
-    logDebugP("ParamTHP_Input1DebounceTime_               : %i", ParamTHP_Input1DebounceTime_               );
-    logDebugP("ParamTHP_Input1ActionOpen_                 : %i", ParamTHP_Input1ActionOpen_                 );
-    logDebugP("ParamTHP_Input1ActionClosed_               : %i", ParamTHP_Input1ActionClosed_               );
-    logDebugP("ParamTHP_Input1SendCycle_                  : %i", ParamTHP_Input1SendCycle_                  );
-    logDebugP("Temperature2 Parameters:");
-    logDebugP("ParamTHP_SensorTemperature2SendChangeAmount: %f", ParamTHP_SensorTemperature2SendChangeAmount_);
-    logDebugP("ParamTHP_SensorTemperature2SendCycle_      : %i", ParamTHP_SensorTemperature2SendCycle_       );
-    logDebugP("ParamTHP_SensorTemperature2Align_          : %f", ParamTHP_SensorTemperature2Align_           );
-    logDebugP("ParamTHP_SensorTemperature2WarnL_          : %f", ParamTHP_SensorTemperature2WarnL_           );
-    logDebugP("ParamTHP_SensorTemperature2WarnH_          : %f", ParamTHP_SensorTemperature2WarnH_           );
-    logDebugP("ParamTHP_SensorTemperature2MinMax_         : %i", ParamTHP_SensorTemperature2MinMax_          );
-    */
-    logDebugP("-------------------------------------------");
 }
 
 void Sensorchannel::loop()
@@ -118,7 +56,7 @@ void Sensorchannel::loop()
         loop_abshumidity(abshumidity);
         loop_dewpoint(dewpoint);
         loop_pressure(pressure);
-        
+
     }
 }
 
@@ -156,7 +94,13 @@ void Sensorchannel::loop_binaryinput()
     }
     if(send)
     {
-        KoTHP_Input0_.value(m_input0 ? ParamTHP_Input0ActionClosed_ : ParamTHP_Input0ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+        if(m_input0) // closed
+            if(!(ParamTHP_Input0ActionClosed_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
+                KoTHP_Input0_.value((bool)ParamTHP_Input0ActionClosed_, Dpt(1,1));
+        else
+            if(!(ParamTHP_Input0ActionOpen_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
+                KoTHP_Input0_.value((bool)ParamTHP_Input0ActionOpen_, Dpt(1,1));
+        
         m_input0_last_send_millis = millis();
     }
 
@@ -189,7 +133,13 @@ void Sensorchannel::loop_binaryinput()
     }
     if(send)
     {
-        KoTHP_Input1_.value(m_input1 ? ParamTHP_Input1ActionClosed_ : ParamTHP_Input1ActionOpen_, Dpt(1,1)); // new value = 1 (Geschlossen (Closed))
+        if(m_input1) // closed
+            if(!(ParamTHP_Input1ActionClosed_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
+                KoTHP_Input1_.value((bool)ParamTHP_Input1ActionClosed_, Dpt(1,1));
+        else
+            if(!(ParamTHP_Input1ActionOpen_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
+                KoTHP_Input1_.value((bool)ParamTHP_Input1ActionOpen_, Dpt(1,1));
+
         m_input1_last_send_millis = millis();
     }
 }
@@ -287,24 +237,24 @@ void Sensorchannel::loop_humidity(float humidity)
         
         if(sendnow)
         {
-            KoTHP_SensorHum_.value(humidity + ParamTHP_SensorHumidityAlign_, HumKODPT);
+            KoTHP_SensorHum_.value(humidity + ParamTHP_SensorHumidityAlign_, humKoDpt());
             m_humidity_last_send_millis = millis();
             m_humidity_last_send_value = humidity;
         }
         else
         {
-            KoTHP_SensorHum_.valueNoSend(humidity + ParamTHP_SensorHumidityAlign_, HumKODPT);
+            KoTHP_SensorHum_.valueNoSend(humidity + ParamTHP_SensorHumidityAlign_, humKoDpt());
         }
 
         if(ParamTHP_SensorHumidityMinMax_)   // Min Max values enabled
         {
-            if(humidity + ParamTHP_SensorHumidityAlign_ > (float)KoTHP_SensorHumMaxValue_.value(HumKODPT))
+            if(humidity + ParamTHP_SensorHumidityAlign_ > (float)KoTHP_SensorHumMaxValue_.value(humKoDpt()))
             {
-                KoTHP_SensorHumMaxValue_.valueNoSend(humidity, HumKODPT);
+                KoTHP_SensorHumMaxValue_.valueNoSend(humidity, humKoDpt());
             }
-            if(humidity + ParamTHP_SensorHumidityAlign_ < (float)KoTHP_SensorHumMinValue_.value(HumKODPT))
+            if(humidity + ParamTHP_SensorHumidityAlign_ < (float)KoTHP_SensorHumMinValue_.value(humKoDpt()))
             {
-                KoTHP_SensorHumMinValue_.valueNoSend(humidity, HumKODPT);
+                KoTHP_SensorHumMinValue_.valueNoSend(humidity, humKoDpt());
             }
         }
 
@@ -538,9 +488,9 @@ void Sensorchannel::processInputKo(GroupObject& ko)
             KoTHP_SensorTempMinValue_.valueNoSend(setvalue, TempKODPT);
         break;
         case THP_KoSensorHumMinMaxReset_:
-            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorHum_)).value(HumKODPT);
-            knx.getGroupObject(AbsKO(THP_KoSensorHumMinValue_)).valueNoSend(setvalue, HumKODPT);
-            knx.getGroupObject(AbsKO(THP_KoSensorHumMaxValue_)).valueNoSend(setvalue, HumKODPT);
+            setvalue = knx.getGroupObject(AbsKO(THP_KoSensorHum_)).value(humKoDpt());
+            knx.getGroupObject(AbsKO(THP_KoSensorHumMinValue_)).valueNoSend(setvalue, humKoDpt());
+            knx.getGroupObject(AbsKO(THP_KoSensorHumMaxValue_)).valueNoSend(setvalue, humKoDpt());
         break;
         case THP_KoSensorAbsHumMinMaxReset_:
             setvalue = knx.getGroupObject(AbsKO(THP_KoSensorAbsHum_)).value(AbsHumKODPT);
@@ -603,8 +553,8 @@ void Sensorchannel::save()
     openknx.flash.writeFloat((float)KoTHP_SensorTempMaxValue_.value(TempKODPT));
     openknx.flash.writeFloat((float)KoTHP_SensorTempMinValue_.value(TempKODPT));
 
-    openknx.flash.writeFloat((float)KoTHP_SensorHumMaxValue_.value(HumKODPT));
-    openknx.flash.writeFloat((float)KoTHP_SensorHumMinValue_.value(HumKODPT));
+    openknx.flash.writeFloat((float)KoTHP_SensorHumMaxValue_.value(humKoDpt()));
+    openknx.flash.writeFloat((float)KoTHP_SensorHumMinValue_.value(humKoDpt()));
 
     openknx.flash.writeFloat((float)KoTHP_SensorAbsHumMaxValue_.value(AbsHumKODPT));
     openknx.flash.writeFloat((float)KoTHP_SensorAbsHumMinValue_.value(AbsHumKODPT));
@@ -621,8 +571,8 @@ void Sensorchannel::restore()
     KoTHP_SensorTempMaxValue_.valueNoSend(openknx.flash.readFloat(), TempKODPT);
     KoTHP_SensorTempMinValue_.valueNoSend(openknx.flash.readFloat(), TempKODPT);
 
-    KoTHP_SensorHumMaxValue_.valueNoSend(openknx.flash.readFloat(), HumKODPT);
-    KoTHP_SensorHumMinValue_.valueNoSend(openknx.flash.readFloat(), HumKODPT);
+    KoTHP_SensorHumMaxValue_.valueNoSend(openknx.flash.readFloat(), humKoDpt());
+    KoTHP_SensorHumMinValue_.valueNoSend(openknx.flash.readFloat(), humKoDpt());
 
     KoTHP_SensorAbsHumMaxValue_.valueNoSend(openknx.flash.readFloat(), AbsHumKODPT);
     KoTHP_SensorAbsHumMinValue_.valueNoSend(openknx.flash.readFloat(), AbsHumKODPT);
@@ -632,4 +582,9 @@ void Sensorchannel::restore()
 
     KoTHP_SensorPressMaxValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
     KoTHP_SensorPressMinValue_.valueNoSend(openknx.flash.readFloat(), PressKODPT);
+}
+
+Dpt Sensorchannel::humKoDpt()
+{
+    return ParamTHP_Sensortype_ == 4?TempKODPT:HumKODPT;  // select the correct Dpt based on Sensortype (4 := 2xDS18B20 => humidity is Temp2)
 }

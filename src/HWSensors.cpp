@@ -1,6 +1,7 @@
 #include "HWSensors.h"
 #include "HWSensorchannel_SHT3x.h"
 #include "HWSensorchannel_SHT2x.h"
+#include "HWSensorchannel_SHT4x.h"
 #include "HWSensorchannel_DS18B20.h"
 #include "HWSensorchannel_BME280.h"
 
@@ -35,6 +36,8 @@ HWSensorchannel* HWSensors::CreateHWSensorchannel(uint8_t sensortype)
             return new HWSensorchannel_BME280();
         case 4:
             return new HWSensorchannel_DS18B20();
+        case 5:
+            return new HWSensorchannel_SHT4x();
         default:
             return nullptr;
     }

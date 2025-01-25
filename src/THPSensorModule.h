@@ -14,9 +14,11 @@ class THPSensorModule : public OpenKNX::Module
   public:
     THPSensorModule(const uint8_t* gpioPins);
     void loop() override;
-    #ifdef OPENKNX_DUALCORE
+#ifdef OPENKNX_DUALCORE
     void loop1() override;
-    #endif
+#else
+    void loop1();
+#endif
     void setup() override;
     const std::string name() override;
     const std::string version() override;
