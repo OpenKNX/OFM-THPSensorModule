@@ -95,11 +95,15 @@ void Sensorchannel::loop_binaryinput()
     if(send)
     {
         if(m_input0) // closed
+        {
             if(!(ParamTHP_Input0ActionClosed_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
                 KoTHP_Input0_.value((bool)ParamTHP_Input0ActionClosed_, Dpt(1,1));
+        }
         else
+        {
             if(!(ParamTHP_Input0ActionOpen_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
                 KoTHP_Input0_.value((bool)ParamTHP_Input0ActionOpen_, Dpt(1,1));
+        }
         
         m_input0_last_send_millis = millis();
     }
@@ -133,12 +137,17 @@ void Sensorchannel::loop_binaryinput()
     }
     if(send)
     {
+        logDebugP("BI2: %d %d %d",m_input1,ParamTHP_Input1ActionClosed_, ParamTHP_Input1ActionOpen_);
         if(m_input1) // closed
+        {
             if(!(ParamTHP_Input1ActionClosed_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
                 KoTHP_Input1_.value((bool)ParamTHP_Input1ActionClosed_, Dpt(1,1));
+        }
         else
+        {
             if(!(ParamTHP_Input1ActionOpen_ > 1)) // if not greater as 1 => 0 or 1 (2 is "nothing")
                 KoTHP_Input1_.value((bool)ParamTHP_Input1ActionOpen_, Dpt(1,1));
+        }
 
         m_input1_last_send_millis = millis();
     }
