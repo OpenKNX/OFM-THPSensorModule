@@ -11,14 +11,20 @@ void HWSensorchannel_DS18B20::Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_
 {
     HWSensorchannel::Setup(pin0, pin1, channel_number);
 
-    new (&m_ow) OneWireNg_CurrentPlatform(pin0, false);
-    new (&m_ow2) OneWireNg_CurrentPlatform(pin1, false);
+    OneWireNg_PicoRP2040PIO _ow0(pin0, false);
+    OneWireNg_PicoRP2040PIO _ow1(pin1, false);
 
-    DSTherm drv(m_ow);
-    drv.writeScratchpadAll(0, 0, DSTherm::RES_12_BIT);
+    DSTherm drv0(_ow0);
+    drv0.writeScratchpadAll(0, 0, DSTherm::RES_12_BIT);
 
-    DSTherm drv2(m_ow2);
-    drv2.writeScratchpadAll(0, 0, DSTherm::RES_12_BIT);
+    DSTherm drv1(_ow1);
+    drv1.writeScratchpadAll(0, 0, DSTherm::RES_12_BIT);
+
+    drv0.~DSTherm();
+    drv1.~DSTherm();
+
+    _ow0.~OneWireNg_PicoRP2040PIO();
+    _ow1.~OneWireNg_PicoRP2040PIO();
 }
 
 bool HWSensorchannel_DS18B20::Loop()
@@ -32,8 +38,14 @@ bool HWSensorchannel_DS18B20::Loop()
             case 0:
                 if(new_millis - m_lastexec > POLL_INTERVALL)
                 {
-                    DSTherm drv(m_ow);
-                    drv.convertTempAll(0, false);
+                    OneWireNg_PicoRP2040PIO _ow0(m_pin0, false);
+                    DSTherm drv0(_ow0);
+
+                    drv0.convertTempAll(0, false);
+
+                    drv0.~DSTherm();
+                    _ow0.~OneWireNg_PicoRP2040PIO();
+
                     m_state = 1;
                     m_lastexec = new_millis;
                 }
@@ -42,9 +54,11 @@ bool HWSensorchannel_DS18B20::Loop()
             case 1:
                 if(new_millis - m_lastexec > 750)
                 {
-                    DSTherm drv(m_ow);
+                    OneWireNg_PicoRP2040PIO _ow0(m_pin0, false);
+                    DSTherm drv0(_ow0);
+
                     static Placeholder<DSTherm::Scratchpad> scrpd;
-                    OneWireNg::ErrorCode ec = drv.readScratchpadSingle(scrpd);
+                    OneWireNg::ErrorCode ec = drv0.readScratchpadSingle(scrpd);
                     if (ec == OneWireNg::EC_SUCCESS)
                     {
                         long temp = scrpd->getTemp2();
@@ -54,6 +68,14 @@ bool HWSensorchannel_DS18B20::Loop()
                     {
                         logDebugP("CRC-Error 0");
                     }
+                    else
+                    {
+                        logDebugP("Onewire Error 0x%x",ec);
+                    }
+
+                    drv0.~DSTherm();
+                    _ow0.~OneWireNg_PicoRP2040PIO();
+
                     m_state = 0;
                     m_lastexec = new_millis;
                 }
@@ -68,8 +90,14 @@ bool HWSensorchannel_DS18B20::Loop()
             case 0:
                 if(new_millis - m_lastexec2 > POLL_INTERVALL)
                 {
-                    DSTherm drv(m_ow2);
-                    drv.convertTempAll(0, false);
+                    OneWireNg_PicoRP2040PIO _ow1(m_pin1, false);
+                    DSTherm drv1(_ow1);
+
+                    drv1.convertTempAll(0, false);
+
+                    drv1.~DSTherm();
+                    _ow1.~OneWireNg_PicoRP2040PIO();
+
                     m_state2 = 1;
                     m_lastexec2 = new_millis;
                 }
@@ -78,9 +106,11 @@ bool HWSensorchannel_DS18B20::Loop()
             case 1:
                 if(new_millis - m_lastexec2 > 750)
                 {
-                    DSTherm drv(m_ow2);
+                    OneWireNg_PicoRP2040PIO _ow1(m_pin1, false);
+                    DSTherm drv1(_ow1);
+
                     static Placeholder<DSTherm::Scratchpad> scrpd;
-                    OneWireNg::ErrorCode ec = drv.readScratchpadSingle(scrpd);
+                    OneWireNg::ErrorCode ec = drv1.readScratchpadSingle(scrpd);
                     if (ec == OneWireNg::EC_SUCCESS)
                     {
                         long temp = scrpd->getTemp2();
@@ -90,6 +120,14 @@ bool HWSensorchannel_DS18B20::Loop()
                     {
                         logDebugP("CRC-Error 1");
                     }
+                    else
+                    {
+                        logDebugP("Onewire Error 0x%x",ec);
+                    }
+
+                    drv1.~DSTherm();
+                    _ow1.~OneWireNg_PicoRP2040PIO();
+
                     m_state2 = 0;
                     m_lastexec2 = new_millis;
                 }

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "pico/stdio.h"
 
-#include "OneWireNg_CurrentPlatform.h"
+#include "platform/OneWireNg_PicoRP2040PIO.h"
 #include "drivers/DSTherm.h"
 #include "utils/Placeholder.h"
 #include "platform/Platform_Delay.h"
@@ -20,8 +20,6 @@
 class HWSensorchannel_DS18B20 : public HWSensorchannel
 {
     private:
-        Placeholder<OneWireNg_CurrentPlatform> m_ow;
-        Placeholder<OneWireNg_CurrentPlatform> m_ow2;
         bool m_first_sensor = true;
         uint8_t m_state = 0;
         uint8_t m_state2 = 0;

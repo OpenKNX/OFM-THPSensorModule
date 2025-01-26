@@ -36,7 +36,7 @@ HWSensorchannel* HWSensors::CreateHWSensorchannel(uint8_t sensortype)
             return new HWSensorchannel_BME280();
         case 4:
         {
-            if(m_num_of_onewirechannels < 1)
+            if(true/*m_num_of_onewirechannels < 1*/)
             {
                 m_num_of_onewirechannels++;
                 return new HWSensorchannel_DS18B20();

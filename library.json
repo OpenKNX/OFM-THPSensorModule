@@ -5,7 +5,7 @@
     [
         {
             "name": "OneWireNg",
-            "version": "https://github.com/pstolarz/OneWireNg.git#0.13.3"
+            "version": "https://github.com/pstolarz/OneWireNg.git#pio_driver_deinit"
         },
         {
             "name": "Arduino-Temperature-Control-Library",
