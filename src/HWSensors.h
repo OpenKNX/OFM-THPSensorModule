@@ -11,6 +11,7 @@ class HWSensors
     //members
     HWSensorchannel *m_HWSensorchannels[THP_ChannelCount];
     uint8_t m_Loop_i = 0;
+    uint8_t m_num_of_onewirechannels = 0;
 
 
     //constructors
