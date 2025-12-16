@@ -20,8 +20,11 @@
 class HWSensorchannel_DS18B20 : public HWSensorchannel
 {
     private:
-        Placeholder<OneWireNg_CurrentPlatform> m_ow;
-        Placeholder<OneWireNg_CurrentPlatform> m_ow2;
+        OneWireNg_CurrentPlatform* m_ow = nullptr;
+        DSTherm* m_drv = nullptr;
+        Placeholder<DSTherm::Scratchpad> m_scrpd;
+        //Placeholder<OneWireNg_CurrentPlatform> m_ow2;
+        
         bool m_first_sensor = true;
         uint8_t m_state = 0;
         uint8_t m_state2 = 0;
