@@ -20,6 +20,8 @@
 class HWSensorchannel_DS18B20 : public HWSensorchannel
 {
     private:
+        OneWireNg_PicoRP2040PIO* m_ow0 = nullptr;
+        OneWireNg_PicoRP2040PIO* m_ow1 = nullptr;
         bool m_first_sensor = true;
         uint8_t m_state = 0;
         uint8_t m_state2 = 0;

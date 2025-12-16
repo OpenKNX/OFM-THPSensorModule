@@ -38,24 +38,23 @@ bool HWSensorchannel_DS18B20::Loop()
             case 0:
                 if(new_millis - m_lastexec > POLL_INTERVALL)
                 {
-                    OneWireNg_PicoRP2040PIO _ow0(m_pin0, false);
-                    DSTherm drv0(_ow0);
+                    //logDebugP("sensor %d, state %d state2 %d", m_first_sensor, m_state, m_state2);
+                    m_ow0 = new OneWireNg_PicoRP2040PIO(m_pin0, false);
+                    DSTherm drv0(*m_ow0);
 
                     drv0.convertTempAll(0, false);
-
-                    drv0.~DSTherm();
-                    _ow0.~OneWireNg_PicoRP2040PIO();
 
                     m_state = 1;
                     m_lastexec = new_millis;
                 }
+                return false;
             break;
 
             case 1:
                 if(new_millis - m_lastexec > 750)
                 {
-                    OneWireNg_PicoRP2040PIO _ow0(m_pin0, false);
-                    DSTherm drv0(_ow0);
+                    //logDebugP("sensor %d, state %d state2 %d", m_first_sensor, m_state, m_state2);
+                    DSTherm drv0(*m_ow0);
 
                     static Placeholder<DSTherm::Scratchpad> scrpd;
                     OneWireNg::ErrorCode ec = drv0.readScratchpadSingle(scrpd);
@@ -74,11 +73,13 @@ bool HWSensorchannel_DS18B20::Loop()
                     }
 
                     drv0.~DSTherm();
-                    _ow0.~OneWireNg_PicoRP2040PIO();
+                    m_ow0->~OneWireNg_PicoRP2040PIO();
 
                     m_state = 0;
                     m_lastexec = new_millis;
+                    m_first_sensor = false;
                 }
+                return false;
             break;
         }
     }
@@ -101,6 +102,7 @@ bool HWSensorchannel_DS18B20::Loop()
                     m_state2 = 1;
                     m_lastexec2 = new_millis;
                 }
+                return false;
             break;
 
             case 1:
@@ -130,12 +132,17 @@ bool HWSensorchannel_DS18B20::Loop()
 
                     m_state2 = 0;
                     m_lastexec2 = new_millis;
+                    m_first_sensor = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             break;
         }
     }
-    m_first_sensor = !m_first_sensor;
 
-    return true;
+    return false;     // should never be reached
 }
 
