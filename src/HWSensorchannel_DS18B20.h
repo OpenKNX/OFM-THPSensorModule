@@ -31,6 +31,9 @@ class HWSensorchannel_DS18B20 : public HWSensorchannel
         uint32_t m_lastexec = 0;
         uint32_t m_lastexec2 = 0;
 
+        void pollSensor(uint8_t pin);
+        float readSensor(uint8_t pin);
+
     public:
         HWSensorchannel_DS18B20();
         void Setup(uint8_t pin0, uint8_t pin1, uint8_t channel_number);
