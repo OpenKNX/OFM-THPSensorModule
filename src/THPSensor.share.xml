@@ -100,7 +100,7 @@
             </ComObjectRefs>
           </Static>
           <Dynamic>
-            <Channel Name="MainChannel" Text="Sensor-Kanäle" Number="%TT%" Id="%AID%_CH-%TT%" Icon="thermometer" HelpContext="Empty">
+            <Channel Name="MainChannel" Text="Sensor-Kanäle" Number="%PREFIX%" Id="%AID%_CH-%TT%" Icon="thermometer" HelpContext="Empty">
               <op:include href="THPSensor.templ.xml" xpath="//ApplicationProgram/Dynamic/ChannelIndependentBlock/*" type="template" prefix="THP" IsInner="true" />
             </Channel>
           </Dynamic>

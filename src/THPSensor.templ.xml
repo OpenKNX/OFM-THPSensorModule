@@ -411,7 +411,7 @@
                     <ParameterRefRef RefId="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06501" />
                   </when>
                 </choose>
-                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="10%CC%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
                     <choose ParamRefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101">
                       <when test="1 2 3 4 5"><!-- Temperature -->
                         <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
