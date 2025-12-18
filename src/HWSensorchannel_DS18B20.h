@@ -20,13 +20,14 @@
 class HWSensorchannel_DS18B20 : public HWSensorchannel
 {
     private:
-        Placeholder<OneWireNg_CurrentPlatform> m_ow;
-        Placeholder<OneWireNg_CurrentPlatform> m_ow2;
         bool m_first_sensor = true;
         uint8_t m_state = 0;
         uint8_t m_state2 = 0;
         uint32_t m_lastexec = 0;
         uint32_t m_lastexec2 = 0;
+
+        void pollSensor(uint8_t pin);
+        float readSensor(uint8_t pin);
 
     public:
         HWSensorchannel_DS18B20();

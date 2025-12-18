@@ -35,17 +35,7 @@ HWSensorchannel* HWSensors::CreateHWSensorchannel(uint8_t sensortype)
         case 3:
             return new HWSensorchannel_BME280();
         case 4:
-        {
-            if(m_num_of_onewirechannels < 1)
-            {
-                m_num_of_onewirechannels++;
-                return new HWSensorchannel_DS18B20();
-            }
-            else
-            {
-                logError("HWSensors", "Only one DS18B20 channel supported, channel deactivated");
-            }
-        }
+            return new HWSensorchannel_DS18B20();
         case 5:
             return new HWSensorchannel_SHT4x();
         default:
