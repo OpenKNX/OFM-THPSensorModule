@@ -268,7 +268,7 @@
           </Static>
           <Dynamic>
             <ChannelIndependentBlock>
-              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+              <ParameterBlock Id="%AID%_PB-2" Name="Sensor_%ZZ%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" ShowInComObjectTree="true">
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101" />
                 <ParameterRefRef RefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201" />
                 <choose ParamRefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101">
