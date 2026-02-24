@@ -37,7 +37,7 @@
                 <Parameter Id="%AID%_UP-%TT%%CC%025" Name="SensorHumidityWarnL_%C%" Offset="10" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Unterschreiten von" SuffixText="%" Value="30" />
                 <Parameter Id="%AID%_UP-%TT%%CC%026" Name="SensorHumidityWarnH_%C%" Offset="14" BitOffset="0" ParameterType="%AID%_PT-ValueDpt9" Text="   bei Überschreiten von" SuffixText="%" Value="80" />
                 <Parameter Id="%AID%_UP-%TT%%CC%027" Name="SensorHumidityMinMax_%C%" Offset="0" BitOffset="2" ParameterType="%AID%_PT-OnOffYesNo" Text="Min/Max Werte erfassen" Value="0" />
-                <Parameter Id="%AID%_UP-%TT%%CC%029" Name="SensorHumiditySend_%C%" Offset="19" BitOffset="0" ParameterType="%AID%_PT-DptSelect" Text="Wert senden als" Value="9" />
+                <Parameter Id="%AID%_UP-%TT%%CC%029" Name="SensorHumiditySend_%C%" Offset="18" BitOffset="0" ParameterType="%AID%_PT-DptSelect" Text="Wert senden als" Value="9" />
                 <!-- alt usage temp sense 2 -->
                 <Parameter Id="%AID%_UP-%TT%%CC%066" Name="SensorTemperature2SendChange_%C%" Offset="0" BitOffset="0" ParameterType="%AID%_PT-OnOffYesNo" Text="Senden bei Änderung" Value="0" />
                 <Parameter Id="%AID%_UP-%TT%%CC%067" Name="SensorTemperature2SendChangeAmount_%C%" Offset="1" BitOffset="0" ParameterType="%AID%_PT-TempOnChange" Text="     von mehr als" SuffixText="K" Value="0.1" />
@@ -411,7 +411,7 @@
                     <ParameterRefRef RefId="%AID%_UP-%TT%%CC%065_R-%TT%%CC%06501" />
                   </when>
                 </choose>
-                <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201">
+                <!-- <Channel Id="%AID%_CH-10%CC%" Name="Sensor_%ZZ%" Number="%PREFIX%" Text="Sensor %ZZ%: {{0:unbenannt}}" TextParameterRefId="%AID%_P-%TT%%CC%002_R-%TT%%CC%00201"> -->
                     <choose ParamRefId="%AID%_P-%TT%%CC%001_R-%TT%%CC%00101">
                       <when test="1 2 3 4 5"><!-- Temperature -->
                         <choose ParamRefId="%AID%_UP-%TT%%CC%014_R-%TT%%CC%01401">
@@ -533,7 +533,7 @@
                         <ComObjectRefRef RefId="%AID%_O-%TT%%CC%031_R-%TT%%CC%03101" />
                       </when>
                     </choose>
-                </Channel>
+                <!-- </Channel> -->
               </ParameterBlock>
             </ChannelIndependentBlock>
           </Dynamic>
